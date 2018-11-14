@@ -28,6 +28,8 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
+import fr.cnrs.iees.uit.UitException;
+
 /**
  * Various ways of computing a distance
  * @author Jacques Gignoux - 07-08-2018 
@@ -63,6 +65,8 @@ public class Distance {
 
 	/** squared euclidian distance in nD using Point */
 	public static double squaredEuclidianDistance(Point p1, Point p2) {
+		if (p1.dim()!=p2.dim())
+			throw new UitException("squaredEuclidianDistance: Arguments of different dimensions");
 		double dist = 0.0;
 		for (int i=0; i<p1.dim(); i++)
 			dist += sqr(p1.coordinate(i)-p2.coordinate(i));

@@ -30,33 +30,58 @@ package fr.cnrs.iees.uit.space;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.cnrs.iees.uit.UitException;
+
 class SphereTest {
+	
+	private Sphere s1, s2;
+	
+	@BeforeEach
+	private void init() {
+		Point p = Point.newPoint(1,1,1);
+		s1 = new SphereImpl(p,1);
+		p = Point.newPoint(3,2);
+		s2 = new SphereImpl(p,1);
+	}
 
 	@Test
 	void testCentre() {
-		fail("Not yet implemented");
+		assertEquals(s1.centre(),Point.newPoint(1,1,1));
 	}
 
 	@Test
 	void testRadius() {
-		fail("Not yet implemented");
+		assertEquals(s2.radius(),1);
 	}
 
 	@Test
 	void testSize() {
-		fail("Not yet implemented");
+		assertEquals(s2.size(),Math.PI);
+		assertEquals(s1.size(),Math.PI*4/3);
 	}
 
 	@Test
 	void testContainsPoint() {
-		fail("Not yet implemented");
+		assertTrue(s1.contains(Point.newPoint(0.9,0.8,0.8)));
+		assertFalse(s1.contains(Point.newPoint(0,0,0)));
+		try {
+			s1.contains(Point.newPoint(1,1));
+			fail("Wrong dimension exception not thrown");
+		}
+		catch (UitException e) {
+			// OK - exception was thrown.
+		}
 	}
 
 	@Test
 	void testContainsBox() {
-		fail("Not yet implemented");
+		Box b = Box.boundingBox(s1);
+		assertFalse(s1.contains(b));
+		b = new BoxImpl(Point.newPoint(0.5,0.5,0.5),Point.newPoint(1.5,1.5,1.5));
+		assertTrue(s1.contains(b));
 	}
 
 	@Test
