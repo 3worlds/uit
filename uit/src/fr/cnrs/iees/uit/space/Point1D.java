@@ -34,6 +34,7 @@ package fr.cnrs.iees.uit.space;
  * @author Jacques Gignoux - 10-09-2018 
  *
  */
+//Tested OK on version 0.0.1 on 21/11/2018
 public class Point1D implements Point {
 
 	private double x = 0.0;

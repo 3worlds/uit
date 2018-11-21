@@ -37,7 +37,7 @@ import fr.cnrs.iees.uit.UitException;
 
 class SphereTest {
 	
-	private Sphere s1, s2;
+	private Sphere s1, s2, s3;
 	
 	@BeforeEach
 	private void init() {
@@ -45,6 +45,7 @@ class SphereTest {
 		s1 = new SphereImpl(p,1);
 		p = Point.newPoint(3,2);
 		s2 = new SphereImpl(p,1);
+		s3 = new SphereImpl(p,2);
 	}
 
 	@Test
@@ -86,7 +87,10 @@ class SphereTest {
 
 	@Test
 	void testOverlapsSphere() {
-		fail("Not yet implemented");
+		Sphere s = new SphereImpl(Point.newPoint(1,1),1);
+		assertFalse(s.overlaps(s2));
+		assertTrue(s.overlaps(s3));
+		assertTrue(s3.overlaps(s2));
 	}
 
 	@Test
@@ -96,27 +100,37 @@ class SphereTest {
 
 	@Test
 	void testInSphere() {
-		fail("Not yet implemented");
+		Box b = Box.boundingBox(s1);
+		Sphere s = Sphere.inSphere(b);
+		assertTrue(s.equals(s1));
 	}
 
 	@Test
 	void testOutSphere() {
-		fail("Not yet implemented");
+		Box b = Box.boundingBox(s2);
+		Sphere s = Sphere.outSphere(b);
+		assertEquals(s.centre(),s2.centre());
+		assertEquals(s.radius(),s2.radius()*Math.sqrt(2));
 	}
 
 	@Test
 	void testDim() {
-		fail("Not yet implemented");
+		assertEquals(s1.dim(),3);
+		assertEquals(s2.dim(),2);
 	}
 
 	@Test
 	void testEquals()  {
-		fail("Not yet implemented");
+		Sphere s = new SphereImpl(s2.centre().clone(),s2.radius());
+		assertTrue(s.equals(s2));
+		assertFalse(s.equals(s3));
 	}
 
 	@Test
 	void testToString()  {
-		fail("Not yet implemented");
+		assertEquals(s1.toString(),"[[1.0,1.0,1.0],1.0]");
+		assertEquals(s2.toString(),"[[3.0,2.0],1.0]");
+		assertEquals(s3.toString(),"[[3.0,2.0],2.0]");
 	}
 
 }

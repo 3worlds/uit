@@ -36,6 +36,7 @@ import fr.cnrs.iees.uit.UitException;
  * @author Jacques Gignoux - 07-08-2018 
  *
  */
+// Tested OK on version 0.0.1 on 21/11/2018
 public interface Point extends Dimensioned, Cloneable {
 	
 	/** @return i<sup>th</sup> coordinate of the point*/ 

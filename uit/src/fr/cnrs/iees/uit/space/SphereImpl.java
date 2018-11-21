@@ -35,6 +35,7 @@ import fr.cnrs.iees.uit.UitException;
  * @author Jacques Gignoux - 06-09-2018 
  *
  */
+//Tested OK on version 0.0.1 on 21/11/2018
 public class SphereImpl implements Sphere {
 	
 	private Point centre = null;
@@ -74,4 +75,22 @@ public class SphereImpl implements Sphere {
 		throw new UitException("sphere volume not implemented for dim>3");
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (Sphere.class.isAssignableFrom(obj.getClass())) {
+			Sphere s = (Sphere) obj;
+			if (s.dim()!=dim())
+				return false;
+			return (s.centre().equals(centre) && (s.radius()==radius));
+		}
+		return false;
+	}
+
+
+	@Override
+	public String toString() {
+		return "["+centre.toString()+","+radius+"]";
+	}
+
+	
 }

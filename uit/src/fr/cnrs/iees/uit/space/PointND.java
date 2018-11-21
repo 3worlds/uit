@@ -33,6 +33,7 @@ package fr.cnrs.iees.uit.space;
  * @author Jacques Gignoux - 07-08-2018 
  *
  */
+//Tested OK on version 0.0.1 on 21/11/2018
 public class PointND implements Point {
 	
 	private double[] x = null;

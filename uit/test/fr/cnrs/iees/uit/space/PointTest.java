@@ -134,7 +134,10 @@ class PointTest {
 
 	@Test
 	void testToString()  {
-		fail("Not yet implemented");
+		assertEquals(p1.toString(),"[1.0]");
+		assertEquals(p2.toString(),"[2.0,18.5]");
+		assertEquals(p3.toString(),"[3.5,45.0,68.7]");
+		assertEquals(p4.toString(),"[4500.0,5200.0,8754.0,846.0,957.0]");
 	}
 
 }

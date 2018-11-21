@@ -32,9 +32,13 @@ import fr.cnrs.iees.uit.UitException;
 
 /**
  * Various ways of computing a distance
+ * 
+ * NOTE: given the effect of rounding errors on number comparisons, it would be worth implementing
+ * a precision for comparisons / computations.
  * @author Jacques Gignoux - 07-08-2018 
  *
  */
+// tested OK with version 0.0.1 on 21/11/2018
 public class Distance {
 	
 	
@@ -93,15 +97,53 @@ public class Distance {
 		return Math.sqrt(squaredEuclidianDistance(p1,p2));
 	}
 
-	/**  distance of a point to the closest edge in a box 
-	 *  CAUTION: no check on dimension of p and b - must be the same */
-	public static double distanceToClosestEdge(Point p, Box b) {
-		double dist = Double.MAX_VALUE;
-		for (int i=0; i<p.dim(); i++) {
-			dist = Math.min(dist, distance1D(p.coordinate(i),b.lowerBound(i)));
-			dist = Math.min(dist, distance1D(p.coordinate(i),b.upperBound(i)));
+	// helper for distanceToClosestEdge(Point,Box) - recursive
+	private static double distanceToClosestEdge(boolean in, int dim, double dist, Point p, Box b) {
+		if (in) { // coming from in
+			if ((p.coordinate(dim)<b.lowerBound(dim))||(p.coordinate(dim)>b.upperBound(dim))) {
+				// now out
+				double d = Math.min(Distance.distance1D(p.coordinate(dim),b.lowerBound(dim)), 
+						Distance.distance1D(p.coordinate(dim),b.upperBound(dim)));
+				dist = d; 
+				in = false;
+			}
+			else { 
+				// now in
+				double d = Math.min(Distance.distance1D(p.coordinate(dim),b.lowerBound(dim)), 
+						Distance.distance1D(p.coordinate(dim),b.upperBound(dim)));
+				dist = Math.min(d, dist);
+				in = true;
+			}
 		}
-		return dist;
+		else { // coming from out
+			if ((p.coordinate(dim)<b.lowerBound(dim))||(p.coordinate(dim)>b.upperBound(dim))) {
+				// now out
+				double d = Math.min(Distance.distance1D(p.coordinate(dim),b.lowerBound(dim)), 
+						Distance.distance1D(p.coordinate(dim),b.upperBound(dim)));
+				dist = Math.sqrt(dist*dist+d*d);
+				in = false;
+			}
+			else { 
+				// now in: dist = previous dist, no change
+				in = true;
+			}
+		}
+		if (dim==p.dim()-1)
+			return dist;
+		else 
+			return distanceToClosestEdge(in,dim+1,dist,p,b);
+	}
+	
+	/**  distance of a point to the closest edge in a box  */
+	public static double distanceToClosestEdge(Point p, Box b) {
+		if (p.dim()!=b.dim())
+			throw new UitException("distanceToClosestEdge: Arguments of different dimensions");
+		double dist = Math.min(Distance.distance1D(p.coordinate(0),b.lowerBound(0)), 
+				Distance.distance1D(p.coordinate(0),b.upperBound(0)));
+		if ((p.coordinate(0)<b.lowerBound(0))||(p.coordinate(0)>b.upperBound(0)))
+			return distanceToClosestEdge(false,1,dist,p,b);
+		else
+			return distanceToClosestEdge(true,1,dist,p,b);
 	}
 	
 }

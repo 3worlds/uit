@@ -28,12 +28,16 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
+import fr.cnrs.iees.uit.UitException;
+
 /**
  * <p>A generalised sphere in <em>n</em>-dimensional space (also called 
  * <a href="https://en.wikipedia.org/wiki/N-sphere"><em>n</em>-sphere</a>. Basically, it represents a
  * set of points within a constant distance of a central point.
  * Immutable.</p>
  */
+//Tested OK on version 0.0.1 on 21/11/2018
+// but with one unimplemented method (overlaps(Box))
 public interface Sphere extends Dimensioned {
 	
 	/**
@@ -85,7 +89,22 @@ public interface Sphere extends Dimensioned {
 	 * @return {@code true} if this Sphere overlaps the Box
 	 */
 	public default boolean overlaps(Box b) {
-		// TODO
+		if (b.dim()!=dim())
+			throw new UitException("overlaps: Arguments of different dimensions");
+		// if the centre is within the box, there is overlap
+		if (b.contains(centre()))
+			return true;
+		// if the centre is off the border from more than radius in any coordinate
+		// axis direction (= perpendicular distance), then there is no overlap
+		for (int i=0; i<dim(); i++)
+			if (Distance.distance1D(centre().coordinate(i), b.lowerBound(i))>radius() ||
+				Distance.distance1D(centre().coordinate(i), b.upperBound(i))>radius())
+				return false;
+		// this is the hard case where the centre is not within the box and the 
+		// perpendicular distance in all directions is smaller than the radius - there may
+		// be overlap
+		// TODO - check that any of the corners is inside the sphere. Pb: we do not have
+		// all corners, only the two extremes.
 		return false;
 	}
 	
@@ -96,8 +115,10 @@ public interface Sphere extends Dimensioned {
 	 * @return an instance of a Sphere
 	 */
 	public static Sphere inSphere(Box b) {
-		// TODO
-		return null;
+		double smallSide = b.sideLength(0);
+		for (int i=1; i<b.dim(); i++)
+			smallSide = Math.min(smallSide, b.sideLength(i));
+		return new SphereImpl(b.centre(),smallSide/2);
 	}
 	
 	/**
@@ -107,8 +128,8 @@ public interface Sphere extends Dimensioned {
 	 * @return an instance of a Sphere
 	 */
 	public static Sphere outSphere(Box b) {
-		// TODO
-		return null;
+		double radius = Distance.euclidianDistance(b.centre(), b.lowerBounds());
+		return new SphereImpl(b.centre(),radius);
 	}
 	
 	
