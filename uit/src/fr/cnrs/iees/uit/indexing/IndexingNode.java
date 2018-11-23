@@ -55,8 +55,9 @@ public abstract class IndexingNode<T,N> {
 	 * 
 	 * @param item the item to store
 	 * @param loc the location (in space) where it should go
+	 * @return true if the item was inserted
 	 */
-	public abstract void insert(T item, Point loc);
+	public abstract boolean insert(T item, Point loc);
 	
 	/**
 	 * Will throw an Exception if more than one item is present in the node.

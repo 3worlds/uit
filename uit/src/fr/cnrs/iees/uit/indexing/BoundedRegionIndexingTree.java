@@ -28,9 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import fr.cnrs.iees.uit.space.Box;
 
 

@@ -102,8 +102,8 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 
 	@Override
 	public void insert(T item, Point at) {
-        root.insert(item, at);
-        nItems++;
+        if (root.insert(item, at))
+        	nItems++;
         if (DYNAMIC_MAX_OBJECTS && nItems % 100 == 0)
             adjustMaxObjects();
 	}
@@ -120,6 +120,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
     		}
     }
 
+    // maybe this should not be public? it's a helper method
 	@Override
 	public Iterable<RegionIndexingNode<T>> getNodesWithin(Box limits) {
 		List<RegionIndexingNode<T>> nodes = new ArrayList<RegionIndexingNode<T>>();
@@ -127,7 +128,12 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		return nodes;
 	}
 
-	@Override
+	// MAJOR FLAW HERE
+	// This method is completely wrong, but on the other hand it is probably completely useless
+	// since in some cases (eg points at the edge of regions) more than one node could be
+	// returned, and this method always returns the first one
+	// SO leave it for now, but this method probably has to go.
+	@Override	
 	public RegionIndexingNode<T> getNearestNode(Point at) {
 		if (root==null)
 			return null;
@@ -136,12 +142,13 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		// infinite loop looking for [1.3259620779235943,1.7358619279229224] within box (0,0)by(4,4) 
 		// I suspect the items have not been partitioned properly due to either a < instead of a <= or > instead of >=
 		while ((!stop) && node.region().contains(at)) {
-			if (node.children!=null)
+			if (node.children!=null) {
 				for (int i=0; i<node.children.length; i++)
 					if (node.children[i].region().contains(at)) {
 						node = node.children[i];
 						break;
 					}
+			}
 			else
 				stop =true;
 		}
@@ -190,6 +197,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		return theItem;
 	}
 
+	// This is flawed because getNearestNode is flawed
 	@Override
 	public boolean remove(T item, Point at) {
 		RegionIndexingNode<T> n = getNearestNode(at);

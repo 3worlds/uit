@@ -95,6 +95,7 @@ class BoxTest {
 	@Test
 	void testContainsBox() {
 		assertTrue(b2.contains(b1));
+		assertTrue(b1.contains(b1));
 	}
 
 	@Test

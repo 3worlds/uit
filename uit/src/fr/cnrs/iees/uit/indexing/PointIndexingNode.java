@@ -53,9 +53,10 @@ public class PointIndexingNode<T> extends IndexingNode<T,PointIndexingNode<T>> {
 	}
 
 	@Override
-	public void insert(T item, Point loc) {
+	public boolean insert(T item, Point loc) {
 		location = loc;
 		this.item = item;
+		return true;
 	}
 	
 	public T item() {

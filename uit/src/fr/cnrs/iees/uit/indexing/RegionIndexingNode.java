@@ -121,17 +121,24 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 	
 	// recursive
 	@Override
-	public void insert(T item, Point loc) {
-		// insert the item here or in my children
-		// if list of items is full, expand to child nodes
-		if (items.size() >= LEAF_MAX_ITEMS)
-			makeChildren();
-		// if there are child nodes, put the item in the proper child
-		if (children!=null)
-			insertInChild(item, this,loc);
-		// otherwise, put it in this list
+	public boolean insert(T item, Point loc) {
+		// do not insert same item twice at the same location
+		if (!items.containsKey(item)) {
+			// insert the item here or in my children
+			// if list of items is full, expand to child nodes
+			if (items.size() >= LEAF_MAX_ITEMS)
+				makeChildren();
+			// if there are child nodes, put the item in the proper child
+			if (children!=null)
+				return insertInChild(item, this,loc);
+			// otherwise, put it in this list
+			else {
+				items.put(item,loc);
+				return true;
+			}
+		}
 		else
-			items.put(item,loc);
+			return false;
 	}
 	
 	// returns the index of the child node containing the point loc 
@@ -153,12 +160,12 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 	}
 
 	// inserts item T in the proper (existing) child node of node 'node' - recursive
-	private void insertInChild(T item, RegionIndexingNode<T> node, Point loc) {
+	private boolean insertInChild(T item, RegionIndexingNode<T> node, Point loc) {
 		while (node.children!=null) {
 			int i = node.childIndex(loc);
 			node = node.children[i];
 		}
-		node.insert(item,loc);
+		return node.insert(item,loc);
 	}
 		
     // index computation for children - veery tricky - carefully checked, OK.
