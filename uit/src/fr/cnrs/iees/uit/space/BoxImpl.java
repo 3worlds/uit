@@ -36,22 +36,38 @@ import fr.cnrs.iees.uit.UitException;
  * @author Jacques Gignoux - 07-08-2018 
  *
  */
+//Tested OK with version 0.0.1 on 23/11/2018
 public class BoxImpl implements Box {
 	
 	private Point upper = null;
 	private Point lower = null;
 	
-	public BoxImpl(Point lower, Point upper) {
+	/**
+	 * This constructor is unsafe because the Points passed as arguments must satisfy the condition that
+	 * every coordinate of the lower Point is strictly lower than the matching coordinate
+	 * of the upper Point. Hence the protected visibility. To build a box with any points, use the static methods
+	 * Box.boundingBox() and Box.boundingCube() instead.
+	 * @param lower
+	 * @param upper
+	 */
+	protected BoxImpl(Point lower, Point upper, boolean check) {
 		super();
 		this.upper = upper;
 		this.lower = lower;
-		if (lower.dim()!=upper.dim())
-			throw new UitException("Error creating Box: upper and lower bounds must have the same dimension");
-		for (int i=0; i<upper.dim(); i++)
-			if (upper.coordinate(i)<lower.coordinate(i))
-				throw new UitException("Error creating Box: upper bouds smaller than lower bounds");
+		if (check) {
+			if (lower.dim()!=upper.dim())
+				throw new UitException("Error creating Box: upper and lower bounds must have the same dimension");
+			for (int i=0; i<upper.dim(); i++)
+				if (upper.coordinate(i)<lower.coordinate(i))
+					throw new UitException("Error creating Box: upper bouds smaller than lower bounds");
+		}
 	}
-
+	
+	public BoxImpl(Point lower, Point upper) {
+		this(lower,upper,true);
+	}
+	
+	
 	@Override
 	public final int dim() {
 		return upper.dim();

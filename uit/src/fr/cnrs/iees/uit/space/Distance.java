@@ -134,7 +134,33 @@ public class Distance {
 			return distanceToClosestEdge(in,dim+1,dist,p,b);
 	}
 	
-	/**  distance of a point to the closest edge in a box  */
+	/**
+	 * <p>Computes the distance of a {@link Point} to the closest edge of a {@link Box}.</p>
+	 * <p>This is not as trivial as it seems. Each edge is a finite segment in its dimension, so that if
+	 * the distance is computed as a perpendicular distance (the intuitive way) only if this
+	 * perpendicular line can be drawn between that point and the segment that represents the 
+	 * box edge. In other words,</p>
+	 * <ul> 
+	 * <li>If the point is inside the box, then it returns the
+	 * <strong>perpendicular distance</strong> to the closest edge.</li>
+	 * <li>If the point is outside the box but a perpendicular distance can be drawn to
+	 * one or more edges (meaning that in some dimensions the point falls within the box):
+	 *   <ul>
+	 *   <li>"Inner" distances are ignored.</li>
+	 *   <li>The returned distance is the <strong>square root of the sum of the squared perpendicular 
+	 * "outer" distances</strong>.</li>
+	 *   </ul>
+	 * </li> 
+	 * <li>
+	 * If the point is outside the box so that all its components in all dimensions are
+	 * also outside the box, the returned distance is <strong>square root of the sum of the squared perpendicular 
+	 * distances to all edges.</strong>.
+	 * </li>
+	 * </ul>
+	 * @param p the point
+	 * @param b the box
+	 * @return
+	 */
 	public static double distanceToClosestEdge(Point p, Box b) {
 		if (p.dim()!=b.dim())
 			throw new UitException("distanceToClosestEdge: Arguments of different dimensions");

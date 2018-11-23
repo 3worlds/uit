@@ -45,6 +45,7 @@ import fr.cnrs.iees.uit.UitException;
  * @author Jacques Gignoux - 07-08-2018 
  *
  */
+// Tested OK with version 0.0.1 on 23/11/2018
 public interface Box extends Dimensioned {
 	
 	/**
@@ -76,22 +77,26 @@ public interface Box extends Dimensioned {
 	public abstract double upperBound(int i);
 
 	/**
-	 * 
+	 * <p>Tests for strict overlapping, i.e. boxes with a common edge are considered not 
+	 * overlapping. In topological terms, returns true if the closed sets represented by
+	 * the boxes overlap.</p>
 	 * @param other a box to test for overlap with this one
 	 * @return {@code true} if this Box overlaps the one passed as argument
 	 */
 	public default boolean overlaps(Box other) {
 		for (int i=0; i<dim(); i++) {
-			if (upperBound(i)<other.lowerBound(i))
+			if (upperBound(i)<=other.lowerBound(i))
 				return false;
-			if (lowerBound(i)>other.upperBound(i))
+			if (lowerBound(i)>=other.upperBound(i))
 				return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * 
+	 * <p>Tests for wide containement, i.e. a point is considered inside the box if
+	 * it lies on the box edges. In topological terms, returns true if the point
+	 * is in the open set represented by this box.</p>
 	 * @param p a Point to test for falling into this box
 	 * @return {@code true} if this box contains the point passed as argument
 	 */

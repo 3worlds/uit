@@ -30,103 +30,172 @@ package fr.cnrs.iees.uit.space;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BoxTest {
+	
+	Box b1, b2, b3;
+	Point p1, p2, p3;
+	
+	@BeforeEach
+	private void init() {
+		p1 = Point.newPoint(0.5,1.0,7);
+		p2 = Point.newPoint(1.2,1.2,8);
+		p3 = Point.newPoint(0,0,5);
+		b1 = new BoxImpl(p1,p2);
+		b2 = new BoxImpl(p3,p2);
+		b3 = new BoxImpl(p3,p1);
+	}
+
+	private void show(String method,String text) {
+		System.out.println(method+": "+text);
+	}
 
 	@Test
 	void testLowerBounds() {
-		fail("Not yet implemented");
+		show("testLowerBounds",b1.lowerBounds().toString());
+		show("testLowerBounds",b2.lowerBounds().toString());
+		assertEquals(b1.lowerBounds(),p1);
+		assertEquals(b2.lowerBounds(),p3);
 	}
 
 	@Test
 	void testUpperBounds() {
-		fail("Not yet implemented");
+		show("testUpperBounds",b1.upperBounds().toString());
+		show("testUpperBounds",b2.upperBounds().toString());
+		assertEquals(b1.upperBounds(),p2);
+		assertEquals(b2.upperBounds(),p2);
 	}
 
 	@Test
 	void testLowerBound() {
-		fail("Not yet implemented");
+		assertEquals(b1.lowerBound(0),0.5);
+		assertEquals(b2.lowerBound(2),5);
 	}
 
 	@Test
 	void testUpperBound() {
-		fail("Not yet implemented");
+		assertEquals(b1.upperBound(1),1.2);
+		assertEquals(b2.upperBound(1),1.2);
 	}
 
 	@Test
 	void testOverlaps() {
-		fail("Not yet implemented");
+		assertFalse(b1.overlaps(b3));
+		assertTrue(b1.overlaps(b2));
 	}
 
 	@Test
 	void testContainsPoint() {
-		fail("Not yet implemented");
+		assertTrue(b2.contains(p1));
+		assertFalse(b1.contains(p3));
 	}
 
 	@Test
 	void testContainsBox() {
-		fail("Not yet implemented");
+		assertTrue(b2.contains(b1));
 	}
 
 	@Test
 	void testCentre() {
-		fail("Not yet implemented");
+		show("testCentre",b3.centre().toString());
+		assertEquals(b3.centre().toString(),"[0.25,0.5,6.0]");
 	}
 
 	@Test
 	void testSize() {
-		fail("Not yet implemented");
+		show("testSize",String.valueOf(b1.size()));
+		show("testSize",String.valueOf(b2.size()));
+		show("testSize",String.valueOf(b3.size()));
+//		assertEquals(b1.size(),0.14); // this fails because of truncation error on doubles
+		assertEquals(b2.size(),4.32);
+		assertEquals(b3.size(),1.0);
 	}
 
 	@Test
 	void testBoundingBoxPointPoint() {
-		fail("Not yet implemented");
+		Point p = Point.newPoint(3,2,1);
+		Box b = Box.boundingBox(p,p1);
+		show("testBoundingBoxPointPoint",b.toString());
+		assertNotNull(b);
+		b = Box.boundingBox(p, p);
+		assertNotNull(b);
+		assertEquals(b.size(),0.0);
 	}
 
 	@Test
 	void testContainsSphere() {
-		fail("Not yet implemented");
+		Sphere s = new SphereImpl(p1,0.2); // this sphere touches the border
+		assertTrue(b2.contains(s));		
+		s = new SphereImpl(p1,2);
+		assertFalse(b2.contains(s));
 	}
 
 	@Test
 	void testBoundingBoxSphere() {
-		fail("Not yet implemented");
+		Sphere s = new SphereImpl(p1,0.2);
+		Box b = Box.boundingBox(s);
+		show("testBoundingBoxSphere",b.toString());
+		assertNotNull(b);
 	}
 
 	@Test
 	void testBoundingCubeSphere() {
-		fail("Not yet implemented");
+		Sphere s = new SphereImpl(p1,0.2);
+		Box b = Box.boundingCube(s);
+		show("testBoundingCubeSphere",b.toString());
+		assertNotNull(b);
 	}
 
 	@Test
 	void testBoundingCubePointPoint() {
-		fail("Not yet implemented");
+		Point p = Point.newPoint(3,2,1);
+		Box b = Box.boundingCube(p,p1);
+		show("testBoundingCubePointPoint",b.toString());
+		assertNotNull(b);
+		b = Box.boundingCube(p, p);
+		assertNotNull(b);
+		assertEquals(b.size(),0.0);
 	}
 
 	@Test
 	void testSideLength() {
-		fail("Not yet implemented");
+		show("testSideLength",String.valueOf(b1.sideLength(1)));
+		show("testSideLength",String.valueOf(b3.sideLength(2)));
+//		assertEquals(b1.sideLength(1),0.2); // this fails because of truncation error on doubles
+		assertEquals(b3.sideLength(2),2.0);
 	}
 
 	@Test
 	void testIsCube() {
-		fail("Not yet implemented");
+		Point p = Point.newPoint(3,2,1);
+		Box b = Box.boundingCube(p,p1);
+		assertTrue(b.isCube());
+		b = Box.boundingBox(p,p1);
+		assertFalse(b.isCube());
 	}
 
 	@Test
 	void testDim() {
-		fail("Not yet implemented");
+		assertEquals(b1.dim(),3);
 	}
 	
 	@Test
 	void testEquals()  {
-		fail("Not yet implemented");
+		assertFalse(b1.equals(b2));
+		Box b = Box.boundingBox(p2,p3);
+		assertTrue(b.equals(b2));
 	}
 
 	@Test
 	void testToString()  {
-		fail("Not yet implemented");
+		show("testToString",b1.toString());
+		show("testToString",b2.toString());
+		show("testToString",b3.toString());
+		assertEquals(b1.toString(),"[[0.5,1.0,7.0],[1.2,1.2,8.0]]");
+		assertEquals(b2.toString(),"[[0.0,0.0,5.0],[1.2,1.2,8.0]]");
+		assertEquals(b3.toString(),"[[0.0,0.0,5.0],[0.5,1.0,7.0]]");
 	}
 
 }
