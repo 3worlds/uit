@@ -35,17 +35,23 @@ import org.junit.jupiter.api.Test;
 
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Point;
+import fr.cnrs.iees.uit.space.Sphere;
+import fr.cnrs.iees.uit.space.SphereImpl;
 
 class BoundedRegionIndexingTreeTest {
 
 	private Box limits;
-	private RegionIndexingTree<Integer> tree;
+	private RegionIndexingTree<Integer> tree, tree2;
 	
 	@BeforeEach
 	private void init() {
 		limits = Box.boundingBox(Point.newPoint(0,0,0,0),Point.newPoint(10,10,8,12));
+		// extreme (4D, not square) testing
 		tree = new BoundedRegionIndexingTree<>(limits);
 		tree.setOptimisation(true);
+		// a simpler (2D) case 
+		Box b = Box.boundingBox(Point.newPoint(0,0),Point.newPoint(16,16));
+		tree2 = new BoundedRegionIndexingTree<>(b);
 	}
 	
 	@Test
@@ -140,6 +146,32 @@ class BoundedRegionIndexingTreeTest {
 		p = Point.newPoint(4,2,6,10); 		tree.insert(38, p); // same as 35
 	}
 
+	private void fillTree2() {
+		Point p = Point.newPoint(4,4);	tree2.insert(1, p);
+		p = Point.newPoint(12,4);		tree2.insert(2, p);
+		p = Point.newPoint(4,12);		tree2.insert(3, p);
+		p = Point.newPoint(12,12);		tree2.insert(4, p);
+		p = Point.newPoint(10,14);		tree2.insert(5, p);
+		p = Point.newPoint(14,14);		tree2.insert(6, p);
+		p = Point.newPoint(14,10);		tree2.insert(7, p);
+		p = Point.newPoint(10,10);		tree2.insert(8, p);
+		p = Point.newPoint(9,13);		tree2.insert(9, p);
+		p = Point.newPoint(13,13);		tree2.insert(10, p);
+		p = Point.newPoint(9,9);		tree2.insert(11, p);
+		p = Point.newPoint(13,9);		tree2.insert(12, p);
+		p = Point.newPoint(8.5,11.5);	tree2.insert(13, p);
+		p = Point.newPoint(9.5,11.5);	tree2.insert(14, p);
+		p = Point.newPoint(8.5,10.5);	tree2.insert(15, p);
+		p = Point.newPoint(9.5,10.5);	tree2.insert(16, p);
+		p = Point.newPoint(10.5,9.5);	tree2.insert(17, p);
+		p = Point.newPoint(11.5,9.5);	tree2.insert(18, p);
+		p = Point.newPoint(10.5,8.5);	tree2.insert(19, p);
+		p = Point.newPoint(11.5,9.5);	tree2.insert(20, p);
+		p = Point.newPoint(11.5,9.6);	tree2.insert(21, p);
+		p = Point.newPoint(11.5,9.5);	tree2.insert(22, p);
+//		System.out.println(tree2.toString());
+	}
+	
 	@Test
 	void testInsert() {		
 		tree.setOptimisation(false); // will use a default of max. 10 items per node
@@ -311,32 +343,41 @@ class BoundedRegionIndexingTreeTest {
 		Box b = Box.boundingBox(Point.newPoint(0,0,0,0), Point.newPoint(5,5,4,6));
 		Iterable<RegionIndexingNode<Integer>> nodes = tree.getNodesWithin(b);
 		// there should be only one node in this list
-		assertEquals(showList(nodes),1);
+		assertEquals(showList("testGetNodesWithin",nodes),1);
 		// this is another (small) region contained within first quadrant, first quadrant is returned
 		b = Box.boundingBox(Point.newPoint(0,0,0,0), Point.newPoint(0.1,0.1,0.1,0.1));
 		nodes = tree.getNodesWithin(b);
-		assertEquals(showList(nodes),1);
+		assertEquals(showList("testGetNodesWithin",nodes),1);
 		// this is a large region containing 2 quadrants
 		b = Box.boundingBox(Point.newPoint(0,0,0,0), Point.newPoint(5,5,4,12));
 		nodes = tree.getNodesWithin(b);
-		assertEquals(showList(nodes),2);
+		assertEquals(showList("testGetNodesWithin",nodes),2);
 		// this is a small region overlapping all quadrants, all nodes are returned
 		b = Box.boundingBox(Point.newPoint(4,4,3,5), Point.newPoint(6,6,5,7));
 		nodes = tree.getNodesWithin(b);
-		assertEquals(showList(nodes),16);
+		assertEquals(showList("testGetNodesWithin",nodes),16);
 	}
 
 	@Test
 	void testGetNearestNode() {
+		fillTree2();
+		Point p = Point.newPoint(12,4);
+		assertEquals(tree2.getNearestNode(p).toString(),"region=[[8.0,0.0]-[16.0,8.0]], items={2@[12.0,4.0]}\n");
+		p = Point.newPoint(4,12);
+		assertEquals(tree2.getNearestNode(p).toString(),"region=[[0.0,8.0]-[8.0,16.0]], items={3@[4.0,12.0]}\n");
+		p = Point.newPoint(4,13);
+		assertEquals(tree2.getNearestNode(p).toString(),"region=[[0.0,8.0]-[8.0,16.0]], items={3@[4.0,12.0]}\n");
+		p = Point.newPoint(12,12);	
+		// here, the region returned correctly contains point (12,12), but not point 4 which was the target.
+		assertEquals(tree2.getNearestNode(p).toString(),"region=[[10.0,10.0]-[12.0,12.0]], items={8@[10.0,10.0]}\n");
+		p = Point.newPoint(10.5,9.5);
+		assertEquals(tree2.getNearestNode(p).toString(),"region=[[10.0,8.0]-[12.0,10.0]], items={17@[10.5,9.5],18@[11.5,9.5],19@[10.5,8.5],20@[11.5,9.5],21@[11.5,9.6],22@[11.5,9.5]}\n");
+	}
+	
+	@Test
+	void testGetAllItems() {
 		fillTree();
-		// the central point of the region - returns the first quadrant found
-		// maybe this is not a very safe behaviour...
-		Point p = Point.newPoint(5,5,4,6);
-		RegionIndexingNode<Integer> node = tree.getNearestNode(p);
-		assertEquals(node.toString(),"region=[[0.0,0.0,0.0,0.0]-[5.0,5.0,4.0,6.0]], items={1@[4.0,4.0,3.0,5.0],18@[0.0,0.0,0.0,0.0]}\n");
-		p = Point.newPoint(2,1,6,11); // this goes wrong - does not return the correct node
-		node = tree.getNearestNode(p);
-//		System.out.println(node);
+		assertEquals(showList("testGetAllItems",tree.getAllItems()),38);
 	}
 
 	@Test
@@ -355,8 +396,38 @@ class BoundedRegionIndexingTreeTest {
 
 	@Test
 	void testRemove() {
-		fillTree();
-		
+		fillTree2();
+		// this is easy
+		assertTrue(tree2.remove(2, Point.newPoint(12,4)));
+		// this is less easy
+		assertTrue(tree2.remove(4, Point.newPoint(12,12)));
+		// remove everything else
+		assertTrue(tree2.remove(1, Point.newPoint(4,4)));
+		assertTrue(tree2.remove(3, Point.newPoint(4,12)));
+		assertTrue(tree2.remove(5, Point.newPoint(10,14)));
+		assertTrue(tree2.remove(6, Point.newPoint(14,14)));
+		assertTrue(tree2.remove(7, Point.newPoint(14,10)));
+		assertTrue(tree2.remove(8, Point.newPoint(10,10)));
+		assertTrue(tree2.remove(9, Point.newPoint(9,13)));
+		assertTrue(tree2.remove(10, Point.newPoint(13,13)));
+		assertEquals(tree2.size(),12);
+//		System.out.println(tree2.toShortString());
+		assertTrue(tree2.remove(11, Point.newPoint(9,9)));
+		assertTrue(tree2.remove(12, Point.newPoint(13,9)));
+		assertTrue(tree2.remove(13, Point.newPoint(8.5,11.5)));
+		assertTrue(tree2.remove(14, Point.newPoint(9.5,11.5)));
+		assertTrue(tree2.remove(15, Point.newPoint(8.5,10.5)));
+		assertTrue(tree2.remove(16, Point.newPoint(9.5,10.5)));
+		assertTrue(tree2.remove(17, Point.newPoint(10.5,9.5)));
+		assertTrue(tree2.remove(18, Point.newPoint(11.5,9.5)));
+		assertTrue(tree2.remove(19, Point.newPoint(10.5,8.5)));
+		assertTrue(tree2.remove(20, Point.newPoint(11.5,9.5)));
+		assertEquals(tree2.size(),2);
+//		System.out.println(tree2.toShortString());
+		assertTrue(tree2.remove(21, Point.newPoint(11.5,9.6)));
+		assertTrue(tree2.remove(22, Point.newPoint(11.5,9.5)));
+		assertEquals(tree2.size(),0);
+//		System.out.println(tree2.toShortString());
 	}
 
 	@Test
@@ -367,9 +438,9 @@ class BoundedRegionIndexingTreeTest {
 	}
 	
 	// utility for below
-	private int showList(Iterable<?> list) {
+	private int showList(String message,Iterable<?> list) {
 		int count=0;
-		System.out.print("list = {");
+		System.out.print(message+": list = {");
 		for (Object i:list) {
 			System.out.print(i+" ");
 			count++;
@@ -384,28 +455,40 @@ class BoundedRegionIndexingTreeTest {
 		// this is one of the tree's boxes. it contains items 1 and 18
 		Box b = Box.boundingBox(Point.newPoint(0.0,0.0,0.0,0.0), Point.newPoint(5.0,5.0,4.0,6.0));
 		Iterable<Integer> items = tree.getItemsWithin(b);
-		assertEquals(showList(items),2);
+		assertEquals(showList("testGetItemsWithinBox",items),2);
 		// this is a small region overlapping all quadrants, nodes 1-17 are in there.
 		b = Box.boundingBox(Point.newPoint(4,4,3,5), Point.newPoint(6,6,5,7));
 		items = tree.getItemsWithin(b);
-		assertEquals(showList(items),17);
+		assertEquals(showList("testGetItemsWithinBox",items),17);
 		// removing a small slice of the above, 8 points are lost
 		b = Box.boundingBox(Point.newPoint(4,4,3,5), Point.newPoint(6,6,5,6.9));
 		items = tree.getItemsWithin(b);
-		assertEquals(showList(items),9);
+		assertEquals(showList("testGetItemsWithinBox",items),9);
 		// that box should only contain 17
 		b = Box.boundingBox(Point.newPoint(4.1,4.1,3.1,5.1), Point.newPoint(5.9,5.9,4.9,6.9));
 		items = tree.getItemsWithin(b);
-		assertEquals(showList(items),1);
+		assertEquals(showList("testGetItemsWithinBox",items),1);
 		// this box is empty
 		b = Box.boundingBox(Point.newPoint(0,0,0,0.1), Point.newPoint(1,1,1,1));
 		items = tree.getItemsWithin(b);
-		assertEquals(showList(items),0);
+		assertEquals(showList("testGetItemsWithinBox",items),0);
 	}
 
 	@Test
 	void testGetItemsWithinSphere() {
-		fail("Not yet implemented");
+		fillTree();
+		// this is a small region overlapping all quadrants, only node 17 is in there.
+		Sphere s = new SphereImpl(Point.newPoint(5,5,4,6),1);
+		Iterable<Integer> items = tree.getItemsWithin(s);
+		assertEquals(showList("testGetItemsWithinSphere",items),1);
+		// this is a larger region overlapping all quadrants, nodes 1-17 are in there.
+		s = new SphereImpl(Point.newPoint(5,5,4,6),2);
+		items = tree.getItemsWithin(s);
+		assertEquals(showList("testGetItemsWithinSphere",items),17);
+		// this sphere is empty
+		s = new SphereImpl(Point.newPoint(0.5,0.5,0.5,0.5), 0.1);
+		items = tree.getItemsWithin(s);
+		assertEquals(showList("testGetItemsWithinSphere",items),0);
 	}
 
 	@Test

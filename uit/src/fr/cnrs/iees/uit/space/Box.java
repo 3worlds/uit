@@ -108,6 +108,20 @@ public interface Box extends Dimensioned {
 	}
 	
 	/**
+	 * Tests if a point is on the border of a Box
+	 * @param p
+	 * @return
+	 */
+	public default boolean isPointOnBorder(Point p) {
+		if (contains(p)) {
+			for (int i=0; i<dim(); i++)
+				if ((p.coordinate(i)==upperBound(i)) || (p.coordinate(i)==lowerBound(i)))
+					return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * 
 	 * @param b a Box to test for fully being contained into this one
 	 * @return {@code true} if this box contains the Box passed as argument

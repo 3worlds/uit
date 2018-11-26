@@ -59,19 +59,21 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	 */
 	public abstract void insert(T item, Point at);
 
-	/**
-	 * <p>Get all nodes contained in or overlapping a n-dimensional {@linkplain Box}.</p>
-	 * @param limits Box in which to search nodes
-	 * @return the list of nodes within the Box
-	 */
-	public abstract Iterable<N> getNodesWithin(Box limits);
+//	/**
+//	 * <p>Get all nodes contained in or overlapping a n-dimensional {@linkplain Box}.</p>
+//	 * @param limits Box in which to search nodes
+//	 * @return the list of nodes within the Box
+//	 */
+//	// this is a helper method and shouldnt be public
+//	public abstract Iterable<N> getNodesWithin(Box limits);
 	
-	/**
-	 * Get the node closest to location
-	 * @param at the location
-	 * @return the closest node
-	 */
-	public abstract N getNearestNode(Point at);
+//	/**
+//	 * Get the node closest to location
+//	 * @param at the location
+//	 * @return the closest node
+//	 */
+//	FLAW - this is a bad idea - it shouldnt be public but should be a utility for descendants
+//	public abstract N getNearestNode(Point at);
 	
 	/**
 	 * Get the item closest to location
@@ -81,7 +83,7 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	public abstract T getNearestItem(Point at);
 	
 	/**
-	 * Remove item at location
+	 * Remove item at location and adapts the tree structure to the removal if needed.
 	 * @param item the item to remove
 	 * @param at the location
 	 * @return true if item successfully removed
@@ -101,5 +103,11 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	 * @return the list of items contained in the Sphere
 	 */
 	public abstract Iterable<T> getItemsWithin(Sphere limits);
+	
+	/**
+	 * Get all items of this tree in a flat list
+	 * @return
+	 */
+	public abstract Iterable<T> getAllItems();
 	
 }

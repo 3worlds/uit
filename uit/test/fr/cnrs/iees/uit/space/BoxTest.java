@@ -51,6 +51,13 @@ class BoxTest {
 	private void show(String method,String text) {
 		System.out.println(method+": "+text);
 	}
+	
+	@Test
+	void testIsPointOnBorder() {
+		assertTrue(b1.isPointOnBorder(p1));
+		assertFalse(b1.isPointOnBorder(p3));
+		assertFalse(b2.isPointOnBorder(p1));
+	}
 
 	@Test
 	void testLowerBounds() {

@@ -47,6 +47,7 @@ import fr.cnrs.iees.uit.space.Box;
  * @param <T> the type of objects indexed
  * @param <N> the type of {@linkplain IndexingNode node} used to build this tree
  */
+// Tested OK with version 0.0.1 on 24/11/2018
 public abstract class AbstractIndexingTree<T,N extends IndexingNode<T,N>> implements IndexingTree<T,N> {
 	
 	/** the tree dimension */
@@ -83,6 +84,11 @@ public abstract class AbstractIndexingTree<T,N extends IndexingNode<T,N>> implem
 	@Override
 	public final N root() {
 		return root;
+	}
+	
+	@Override
+	public Iterable<T> getAllItems() {
+		return root.items();
 	}
 		
 }

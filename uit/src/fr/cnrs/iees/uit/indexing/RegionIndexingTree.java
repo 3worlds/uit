@@ -31,6 +31,7 @@ package fr.cnrs.iees.uit.indexing;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.cnrs.iees.uit.UitException;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Distance;
 import fr.cnrs.iees.uit.space.Point;
@@ -62,6 +63,7 @@ import fr.ens.biologie.optimisation.QuickListOfLists;
  *
  * @param <T> type of content to index
  */
+// Tested OK (but see warnings on some methods) with version 0.0.1 on 26/11/2018
 public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,RegionIndexingNode<T>> {
 
 	private boolean DYNAMIC_MAX_OBJECTS = false;
@@ -121,20 +123,18 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
     }
 
     // maybe this should not be public? it's a helper method
-	@Override
-	public Iterable<RegionIndexingNode<T>> getNodesWithin(Box limits) {
+	protected Iterable<RegionIndexingNode<T>> getNodesWithin(Box limits) {
 		List<RegionIndexingNode<T>> nodes = new ArrayList<RegionIndexingNode<T>>();
 		collectOverlappingNodes(limits,root,nodes);
 		return nodes;
 	}
 
-	// MAJOR FLAW HERE
-	// This method is completely wrong, but on the other hand it is probably completely useless
-	// since in some cases (eg points at the edge of regions) more than one node could be
-	// returned, and this method always returns the first one
-	// SO leave it for now, but this method probably has to go.
-	@Override	
-	public RegionIndexingNode<T> getNearestNode(Point at) {
+	// CAUTION. This method is only a helper method. It should not be made public.
+	// It will return the node containing the point, but for points on borders
+	// it may not be the box in which an item is to be found.
+	// So this is safe as long as algos using it are able to jump out if distance to edge = 0
+	// Use with caution.
+	protected RegionIndexingNode<T> getNearestNode(Point at) {
 		if (root==null)
 			return null;
 		RegionIndexingNode<T> node = root;
@@ -196,16 +196,69 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		}
 		return theItem;
 	}
-
-	// This is flawed because getNearestNode is flawed
+	
+	// helper methods for remove() (below)
+	//
+	// recurse parents until the point is not on a border anymore
+	private RegionIndexingNode<T> findContainingParent(RegionIndexingNode<T> node, Point at) {
+		if (node!=null)
+			if (node.region().isPointOnBorder(at))
+				return findContainingParent(node.parent,at);
+		return node;
+	}
+	// remove children when they are all empty to adjust tree structure to item content
+	private void shrinkNode(RegionIndexingNode<T> node) {
+		boolean shrink = true;
+		if (node.children!=null) {
+			for (RegionIndexingNode<T> c:node.children)
+				shrink = shrink && (c.children==null) && (c.items.isEmpty()) ;
+			if (shrink) {
+				node.children = null;
+				if (node.items.isEmpty())
+					if (node.parent!=null)
+						shrinkNode(node.parent);
+			}
+		}
+	}
+	// recurse children to find the proper node
+	private boolean removeFromChild(T item, RegionIndexingNode<T> node, Point at) {
+		if (node.items.containsKey(item)) {
+			if (node.items.remove(item,at)) {
+				nItems--;
+				if (node.items.isEmpty())
+					shrinkNode(node.parent);
+				return true; // end recursion
+			}
+		}
+		else if (node.children!=null) {
+			for (RegionIndexingNode<T> n:node.children)
+				if (n.region().contains(at))
+					if (removeFromChild(item,n,at))
+						return true;
+		}
+		// all other cases: item must be outside tree.
+		return false; // end recursion
+	}
+	
 	@Override
 	public boolean remove(T item, Point at) {
 		RegionIndexingNode<T> n = getNearestNode(at);
-		if (n.items.containsValue(item)) {
-			nItems--;
-			return n.items.remove(at,item);
+		// this is ok in most cases
+		if (n.items.containsKey(item)) {
+			if (n.items.remove(item,at)) {
+				nItems--;
+				if (n.items.isEmpty())
+					shrinkNode(n.parent);
+				return true;
+			}
+			else 
+				return false;
 		}
-		return false;
+		// this applies to nodes on the border of the returned 'nearest' node
+		else {
+			n = findContainingParent(n,at);
+			return removeFromChild(item,n.parent,at);
+		}
 	}
 	
 	@Override
@@ -217,7 +270,6 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
         RegionIndexingNode.LEAF_MAX_ITEMS = Math.max(7,(int)Math.pow(nItems, MAX_OBJ_TARGET_EXPONENT));
     }
 
-    // TODO: not checked
     @Override
 	public Iterable<T> getItemsWithin(Box limits) {
     	// get all nodes overlapping limits (including children)
@@ -238,7 +290,6 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		return result;
 	}
 
-    // TODO: not checked
     // works exactly as above
 	@Override
 	public Iterable<T> getItemsWithin(Sphere limits) {
@@ -295,7 +346,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		sb.append(nodeToString(root,0,true));
 		return sb.toString();
 	}
-	
+		
 }
 
 
