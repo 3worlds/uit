@@ -72,13 +72,4 @@ public class ExpandingRegionIndexingTree<T> extends RegionIndexingTree<T> {
         	throw new UitException("CRITICAL - Problem in indexing tree expansion");
 	}
 
-	// TESTING
-	// OK works.
-//    public static void main(String[] args) {
-//    	RegionIndexingTree<Integer> q = new ExpandingRegionIndexingTree<>(4);
-//    	for (int i=1; i<1000; i++) 
-//    		q.insert(i,Point.newPoint(Math.random()*10, Math.random()*10, Math.random()*8, Math.random()*12));
-//    	System.out.println(q.toShortString());
-//    }
-
 }
