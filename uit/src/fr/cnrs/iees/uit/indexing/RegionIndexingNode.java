@@ -31,11 +31,11 @@ package fr.cnrs.iees.uit.indexing;
 import java.util.HashMap;
 import java.util.Map;
 
+import au.edu.anu.rscs.aot.collections.QuickListOfLists;
 import fr.cnrs.iees.uit.UitException;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.BoxImpl;
 import fr.cnrs.iees.uit.space.Point;
-import fr.ens.biologie.optimisation.QuickListOfLists;
 
 /**
  * <p>{@linkplain IndexingNode} used in region-based {@linkplain IndexingTree}</p>

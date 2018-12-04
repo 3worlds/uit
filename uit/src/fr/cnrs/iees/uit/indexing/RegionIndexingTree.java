@@ -31,13 +31,12 @@ package fr.cnrs.iees.uit.indexing;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.cnrs.iees.uit.UitException;
+import au.edu.anu.rscs.aot.collections.QuickListOfLists;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Distance;
 import fr.cnrs.iees.uit.space.Point;
 import fr.cnrs.iees.uit.space.Sphere;
 import fr.cnrs.iees.uit.space.SphereImpl;
-import fr.ens.biologie.optimisation.QuickListOfLists;
 
 /**
  * <p>Implementation of a region-based <em>k</em>-d tree.</p>
