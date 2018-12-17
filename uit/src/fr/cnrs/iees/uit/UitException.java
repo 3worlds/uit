@@ -33,12 +33,13 @@ package fr.cnrs.iees.uit;
  * @author Jacques Gignoux - 04-10-2018 
  *
  */
+//NB: this was previously AotException
+//Policy is to make an exception at least for each library
+//The general advice for exceptions is to throw early and catch late.
+
 public class UitException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5911525855011647174L;
 
 	public UitException(String message) {
 		super("[" + message + "]");
