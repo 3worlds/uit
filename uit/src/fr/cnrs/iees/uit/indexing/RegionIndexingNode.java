@@ -58,7 +58,7 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 	private Box region;
 	
 	/** the list of (Point,item) pairs stored in this node */
-	protected Map<T, Point> items = new HashMap<T,Point>();
+	protected Map<T, Point> items = new HashMap<>();
 	
 	private int dim;
 	

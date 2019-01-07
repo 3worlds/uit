@@ -273,7 +273,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	public Iterable<T> getItemsWithin(Box limits) {
     	// get all nodes overlapping limits (including children)
 		Iterable<RegionIndexingNode<T>> blist = getNodesWithin(limits);
-		List<T> extraItems = new ArrayList<T>();
+		List<T> extraItems = new ArrayList<>();
 		QuickListOfLists<T> result = new QuickListOfLists<T>();
 		// search node list for items
 		for (RegionIndexingNode<T> n:blist)
@@ -293,7 +293,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	@Override
 	public Iterable<T> getItemsWithin(Sphere limits) {
 		Iterable<RegionIndexingNode<T>> blist = getNodesWithin(Box.boundingBox(limits));
-		List<T> extraItems = new ArrayList<T>();
+		List<T> extraItems = new ArrayList<>();
 		QuickListOfLists<T> result = new QuickListOfLists<T>();
 		for (RegionIndexingNode<T> n:blist)
 			if (!n.items.isEmpty())
