@@ -1,5 +1,5 @@
 <!--===================================================================================
- ant and ivy scripts for project <uit> version 0.0.2 (Tue Feb 19 09:46:32 CET 2019)
+ ant and ivy scripts for project <uit> version 0.0.1 (Thu Oct 18 16:13:22 CEST 2018)
  author: Jacques Gignoux <jacques.gignoux@upmc.fr>
 
  CAUTION: this file is generated - DO NOT EDIT!
@@ -12,7 +12,7 @@
 
 	<info	organisation="fr.cnrs.iees"
 			module="uit"
-			revision="0.0.2"
+			revision="0.0.1"
 			status="integration">
 		<license name="gpl3" url="https://www.gnu.org/licenses/gpl-3.0.txt"/>
 		<description>This module implements a kd-tree, i.e. a generalisation of a QuadTree to any dimension. It can be used to improve performance when searching objects in a large space.</description>
