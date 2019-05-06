@@ -384,14 +384,14 @@ class BoundedRegionIndexingTreeTest {
 	void testGetNearestItem() {
 		fillTree();
 		Point p = Point.newPoint(5,5,4,6); // 17
-		assertEquals(tree.getNearestItem(p),new Integer(17));
+		assertEquals(tree.getNearestItem(p),Integer.valueOf(17));
 		p = Point.newPoint(1,2,6,9); // 30
-		assertEquals(tree.getNearestItem(p),new Integer(30));
+		assertEquals(tree.getNearestItem(p),Integer.valueOf(30));
 		p = Point.newPoint(1,2,6,9.01); // very close to 30
-		assertEquals(tree.getNearestItem(p),new Integer(30));
+		assertEquals(tree.getNearestItem(p),Integer.valueOf(30));
 		p = Point.newPoint(6,6,3,6); // halfway between 13 and 14
 		// returns 13 but should rather return both items...
-		assertEquals(tree.getNearestItem(p),new Integer(13));
+		assertEquals(tree.getNearestItem(p),Integer.valueOf(13));
 	}
 
 	@Test
