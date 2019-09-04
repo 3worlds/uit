@@ -55,7 +55,7 @@ public class VersionSettings {
 	 * 
 	 */
 	protected static String[][] DEPS = { 
-		{"fr.ens.biologie", "generics", "[0.1.0,)", null},
+		{"fr.ens.biologie", "generics", "[0.1.10,)", null},
 		{"org.graphstream", "gs-ui", "1.3", null}
 	};
 	

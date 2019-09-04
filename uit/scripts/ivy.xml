@@ -30,7 +30,7 @@
 	</publications>
 
 	<dependencies>
-		<dependency org="fr.ens.biologie" name="generics" rev="[0.1.0,)"/>
+		<dependency org="fr.ens.biologie" name="generics" rev="[0.1.10,)"/>
 		<dependency org="org.graphstream" name="gs-ui" rev="1.3"/>
 	</dependencies>
 
