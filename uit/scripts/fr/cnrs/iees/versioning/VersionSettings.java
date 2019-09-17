@@ -56,7 +56,7 @@ public class VersionSettings {
 	 */
 	protected static String[][] DEPS = { 
 		{"fr.ens.biologie", "generics", "[0.1.10,)", null},
-		{"org.graphstream", "gs-ui", "1.3", null}
+		//{"org.graphstream", "gs-ui", "1.3", null} // too heavy, removed
 	};
 	
 	/** The name of the main class to put in the jar manifest, if any. This enables users to
