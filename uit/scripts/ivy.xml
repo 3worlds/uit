@@ -11,7 +11,7 @@
 		xmlns:m="http://maven.apache.org/POM/4.0.0"
 		xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
-	<info	organisation="fr.cnrs.iees"
+	<info	organisation="fr.cnrs.iees.uit"
 			module="uit"
 			revision="0.1.0"
 			status="integration">

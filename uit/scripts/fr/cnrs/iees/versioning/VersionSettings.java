@@ -6,7 +6,7 @@ public class VersionSettings {
 	
 	/** The organisation name as will appear in the ivy module specification - it is a good idea
 	 * to keep it consistent with the project src directory (although not required).*/
-	protected static String ORG = "fr.cnrs.iees";
+	protected static String ORG = "fr.cnrs.iees.uit";
 	
 	/** The name of the ivy module (this will be the name of the generated jar file for 
 	 * dependent projects).*/
