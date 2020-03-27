@@ -233,6 +233,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		else if (node.children!=null) {
 			for (RegionIndexingNode<T> n:node.children)
 				if (n.region().contains(at))
+					// FLAW HERE if the point is on the border - ust look for the item, not the point.
 					if (removeFromChild(item,n,at))
 						return true;
 		}
@@ -257,8 +258,11 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		}
 		// this applies to nodes on the border of the returned 'nearest' node
 		else {
-			n = findContainingParent(n,at);
-			return removeFromChild(item,n.parent,at);
+			n = findContainingParent(n,at); // this is a parent already
+//			if (n==null)
+//				return false;
+			return removeFromChild(item,n,at);
+//			return removeFromChild(item,n.parent,at);
 		}
 	}
 
