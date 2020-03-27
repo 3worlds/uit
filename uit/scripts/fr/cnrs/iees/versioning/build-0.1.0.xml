@@ -1,5 +1,5 @@
 <!--===================================================================================
- ant and ivy scripts for project <uit> version 0.1.1 (Fri Mar 27 15:31:31 CET 2020)
+ ant and ivy scripts for project <uit> version 0.1.0 (Mon May 06 15:23:51 CEST 2019)
  author: Jacques Gignoux <jacques.gignoux@upmc.fr>
 
  CAUTION: this file is generated - DO NOT EDIT!
@@ -12,7 +12,7 @@
 	<property name="jarRepo" location="${user.dir}/../lib"/>
 
 	<property name="docRepo" location="${user.dir}/../doc/javadoc"/>	<!-- Use this string as the organisation package -->
-	<property name="org" value="fr.cnrs.iees.uit"/>
+	<property name="org" value="fr.cnrs.iees"/>
 
 	<!-- The project name -->
 	<property name="project" value="uit"/>
@@ -46,8 +46,8 @@
 			<fileset dir="src"/>
 			<manifest>
 				<attribute name="Implementation-Vendor" value="CNRS/ANU"/>
-				<attribute name="Implementation-Title" value="fr.cnrs.iees.uit"/>
-				<attribute name="Implementation-Version" value="0.1.1"/>
+				<attribute name="Implementation-Title" value="fr.cnrs.iees"/>
+				<attribute name="Implementation-Version" value="0.1.0"/>
 				<attribute name="Built-By" value="${user.name}"/>
  			</manifest>
 		</jar>
