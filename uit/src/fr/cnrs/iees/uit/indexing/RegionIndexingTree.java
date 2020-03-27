@@ -3,13 +3,13 @@
  *                                                                        *
  *  Copyright 2018: Jacques Gignoux & Ian D. Davies                       *
  *       jacques.gignoux@upmc.fr                                          *
- *       ian.davies@anu.edu.au                                            * 
+ *       ian.davies@anu.edu.au                                            *
  *                                                                        *
  *  UIT is a generalisation and re-implementation of QuadTree and Octree  *
  *  implementations by Paavo Toivanen as downloaded on 27/8/2018 on       *
  *  <https://dev.solita.fi/2015/08/06/quad-tree.html>                     *
  *                                                                        *
- **************************************************************************                                       
+ **************************************************************************
  *  This file is part of UIT (Universal Indexing Tree).                   *
  *                                                                        *
  *  UIT is free software: you can redistribute it and/or modify           *
@@ -20,7 +20,7 @@
  *  UIT is distributed in the hope that it will be useful,                *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *  GNU General Public License for more details.                          *                         
+ *  GNU General Public License for more details.                          *
  *                                                                        *
  *  You should have received a copy of the GNU General Public License     *
  *  along with UIT.  If not, see <https://www.gnu.org/licenses/gpl.html>. *
@@ -40,7 +40,7 @@ import fr.cnrs.iees.uit.space.SphereImpl;
 
 /**
  * <p>Implementation of a region-based <em>k</em>-d tree.</p>
- * 
+ *
  *  <p><strong> NOTE</strong>: This implementation is a re-coding of the QuadTree and Octtree classes
  *  written by <a href="https://dev.solita.fi/2015/08/06/quad-tree.html"><strong>Paavo Toivanen</strong></a>.
  *  Compared to his work, we have</p>
@@ -50,15 +50,15 @@ import fr.cnrs.iees.uit.space.SphereImpl;
  *  classes the spatial tests used to put newcomers into the proper spatial regions;</li>
  *  <li>implemented a more efficient subclass for the case where the initial root region size is known.</li>
  *  </ul>
- *  
+ *
  *  <p>Among the features inherited from P. Toivanen's work are</p>
  *  <ul>
  *  <li>the possibility to optimise performance by letting the tree re-balance its leaf node item list capacity;</li>
- *  <li>the storage of the item location within the node, which is useful for very dynamic trees (e.g. for use in 
+ *  <li>the storage of the item location within the node, which is useful for very dynamic trees (e.g. for use in
  *  simulation computations).</li>
  *  </ul>
 
- * @author Jacques Gignoux - 07-08-2018 
+ * @author Jacques Gignoux - 07-08-2018
  *
  * @param <T> type of content to index
  */
@@ -77,24 +77,24 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
     protected RegionIndexingTree(int dim) {
     	super(dim);
     }
-    
+
     /**
-     * Constructor to use only when the initial region in which all points will be contained ('domain') is known 
+     * Constructor to use only when the initial region in which all points will be contained ('domain') is known
      * @param domain
      */
     protected RegionIndexingTree(Box domain) {
     	super(domain);
     	root = new RegionIndexingNode<T>(null,domain);
     }
-    
+
     /**
      * <p>Setting this to <strong>true</strong></p> will balance the tree depth and size following P. Tovainen's
      * benchmarking which shows that a relatively general solution exists which enables to keep performance
      * constant when the tree grows. Basically, it adapts the storage capacity of leaf nodes to the tree size
      * so that the average number of searches to find a particular node is kept reasonably low.</p>
-     * 
+     *
      * <p>See the benchmarking details <a href="https://dev.solita.fi/2015/08/06/quad-tree.html"><strong>there</strong></a>.</p>
-     * 
+     *
      * @param o whether optimisation should be enabled (<strong>true</strong>) or not (<strong>false</strong>).
      */
     public void setOptimisation(boolean o) {
@@ -108,7 +108,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
         if (DYNAMIC_MAX_OBJECTS && nItems % 100 == 0)
             adjustMaxObjects();
 	}
-    
+
     // recursive
     private void collectOverlappingNodes(Box limits, RegionIndexingNode<T> node, List<RegionIndexingNode<T>> nodes) {
     	if (node!=null)
@@ -116,7 +116,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
     			if (node.children!=null)
     				for (int i=0; i<node.children.length; i++)
     					collectOverlappingNodes(limits,node.children[i],nodes);
-    			else 
+    			else
     				nodes.add(node);
     		}
     }
@@ -138,7 +138,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 			return null;
 		RegionIndexingNode<T> node = root;
 		boolean stop = false;
-		// infinite loop looking for [1.3259620779235943,1.7358619279229224] within box (0,0)by(4,4) 
+		// infinite loop looking for [1.3259620779235943,1.7358619279229224] within box (0,0)by(4,4)
 		// I suspect the items have not been partitioned properly due to either a < instead of a <= or > instead of >=
 		while ((!stop) && node.region().contains(at)) {
 			if (node.children!=null) {
@@ -153,8 +153,8 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		}
 		return node;
 	}
-	
-	
+
+
 	// CAUTION: not resistant to multiple items at the same location !
 	@Override
 	public T getNearestItem(Point at) {
@@ -165,7 +165,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		T theItem = null;
 		// find the item closest to the point
 		for (T item: node.items.keySet()) {
-			double d = Distance.squaredEuclidianDistance(node.items.get(item), at); 
+			double d = Distance.squaredEuclidianDistance(node.items.get(item), at);
 			if (d<dist2) {
 				theItem = item;
 				dist2 = d;
@@ -173,7 +173,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		}
 		// if the distance of the item to the point is larger than the distance
 		// of the point to the box edges, the item may be in the enclosing box
-		double dist = Math.sqrt(dist2); 
+		double dist = Math.sqrt(dist2);
 		if (dist > Distance.distanceToClosestEdge(at, node.region())) {
 			// search the sphere for items at distance dist from point at
 			// excluding those in node (already tested)
@@ -184,18 +184,18 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 			for (RegionIndexingNode<T> n:list)
 				if (n!=node)
 					for (T it: n.items.keySet()) {
-						double d = Distance.squaredEuclidianDistance(n.items.get(it), at); 
+						double d = Distance.squaredEuclidianDistance(n.items.get(it), at);
 						if (d<dist2) {
 							dist2 = d;
 							item = it;
 						}
 				}
-			if (item!=null) 
+			if (item!=null)
 				return item;
 		}
 		return theItem;
 	}
-	
+
 	// helper methods for remove() (below)
 	//
 	// recurse parents until the point is not on a border anymore
@@ -222,7 +222,8 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	// recurse children to find the proper node
 	private boolean removeFromChild(T item, RegionIndexingNode<T> node, Point at) {
 		if (node.items.containsKey(item)) {
-			if (node.items.remove(item,at)) {
+			if (node.items.remove(item)!=null) {
+//				if (node.items.remove(item,at)) { // this was badly wrong - didnt owrk at all!
 				nItems--;
 				if (node.items.isEmpty())
 					shrinkNode(node.parent);
@@ -238,19 +239,20 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		// all other cases: item must be outside tree.
 		return false; // end recursion
 	}
-	
+
 	@Override
 	public boolean remove(T item, Point at) {
 		RegionIndexingNode<T> n = getNearestNode(at);
 		// this is ok in most cases
 		if (n.items.containsKey(item)) {
-			if (n.items.remove(item,at)) {
+			if (n.items.remove(item)!=null) {
+//			if (n.items.remove(item,at)) { // this was badly wrong - didnt owrk at all!
 				nItems--;
 				if (n.items.isEmpty())
 					shrinkNode(n.parent);
 				return true;
 			}
-			else 
+			else
 				return false;
 		}
 		// this applies to nodes on the border of the returned 'nearest' node
@@ -259,7 +261,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 			return removeFromChild(item,n.parent,at);
 		}
 	}
-	
+
 	@Override
 	public int size() {
 		return nItems;
@@ -305,7 +307,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		result.addList(extraItems);
 		return result;
 	}
-		
+
 	// recursive - called by toString();
 	private String nodeToString(RegionIndexingNode<T> node, int depth, boolean s) {
 		StringBuilder sb = new StringBuilder();
@@ -321,7 +323,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		}
 		return sb.toString();
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -331,7 +333,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	}
 
 	/**
-	 * 
+	 *
 	 * @return a 'short' description of this tree
 	 */
 	public String toShortString() {
@@ -345,7 +347,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		sb.append(nodeToString(root,0,true));
 		return sb.toString();
 	}
-		
+
 }
 
 
