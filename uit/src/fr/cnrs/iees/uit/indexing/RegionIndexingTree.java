@@ -29,7 +29,9 @@
 package fr.cnrs.iees.uit.indexing;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import au.edu.anu.rscs.aot.collections.QuickListOfLists;
 import fr.cnrs.iees.uit.space.Box;
@@ -67,7 +69,9 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 
 	private boolean DYNAMIC_MAX_OBJECTS = false;
     private double MAX_OBJ_TARGET_EXPONENT = 0.333333; // 0.5 a good general solution
-    private int nItems = 0;
+//    private int nItems = 0;
+    // reverse mapping of items to nodes to facilitate removal of items without knowing their location
+    protected Map<T,RegionIndexingNode<T>> itemToNodeMap = new HashMap<>();
 
     /**
      * Constructor to use only when the initial region is unknown and has to be built from the first
@@ -84,7 +88,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
      */
     protected RegionIndexingTree(Box domain) {
     	super(domain);
-    	root = new RegionIndexingNode<T>(null,domain);
+    	root = new RegionIndexingNode<T>(null,domain,this);
     }
 
     /**
@@ -103,9 +107,13 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 
 	@Override
 	public void insert(T item, Point at) {
-        if (root.insert(item, at))
-        	nItems++;
-        if (DYNAMIC_MAX_OBJECTS && nItems % 100 == 0)
+		RegionIndexingNode<T> node = root.insert(item, at);
+        if (node!=null) {
+        	itemToNodeMap.put(item,node);
+//        	nItems++; // not needed anymore
+        }
+//        if (DYNAMIC_MAX_OBJECTS && nItems % 100 == 0)
+        if (DYNAMIC_MAX_OBJECTS && itemToNodeMap.size() % 100 == 0)
             adjustMaxObjects();
 	}
 
@@ -197,14 +205,14 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	}
 
 	// helper methods for remove() (below)
-	//
-	// recurse parents until the point is not on a border anymore
-	private RegionIndexingNode<T> findContainingParent(RegionIndexingNode<T> node, Point at) {
-		if (node!=null)
-			if (node.region().isPointOnBorder(at))
-				return findContainingParent(node.parent,at);
-		return node;
-	}
+//	//
+//	// recurse parents until the point is not on a border anymore
+//	private RegionIndexingNode<T> findContainingParent(RegionIndexingNode<T> node, Point at) {
+//		if (node!=null)
+//			if (node.region().isPointOnBorder(at))
+//				return findContainingParent(node.parent,at);
+//		return node;
+//	}
 	// remove children when they are all empty to adjust tree structure to item content
 	private void shrinkNode(RegionIndexingNode<T> node) {
 		boolean shrink = true;
@@ -212,6 +220,8 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 			for (RegionIndexingNode<T> c:node.children)
 				shrink = shrink && (c.children==null) && (c.items.isEmpty()) ;
 			if (shrink) {
+				for (RegionIndexingNode<T> c:node.children)
+					c.tree = null;
 				node.children = null;
 				if (node.items.isEmpty())
 					if (node.parent!=null)
@@ -219,60 +229,80 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 			}
 		}
 	}
-	// recurse children to find the proper node
-	private boolean removeFromChild(T item, RegionIndexingNode<T> node, Point at) {
-		if (node.items.containsKey(item)) {
-			if (node.items.remove(item)!=null) {
-//				if (node.items.remove(item,at)) { // this was badly wrong - didnt owrk at all!
-				nItems--;
-				if (node.items.isEmpty())
-					shrinkNode(node.parent);
-				return true; // end recursion
-			}
-		}
-		else if (node.children!=null) {
-			for (RegionIndexingNode<T> n:node.children)
-				if (n.region().contains(at))
-					// FLAW HERE if the point is on the border - ust look for the item, not the point.
-					if (removeFromChild(item,n,at))
-						return true;
-		}
-		// all other cases: item must be outside tree.
-		return false; // end recursion
-	}
+//	// recurse children to find the proper node
+//	private boolean removeFromChild(T item, RegionIndexingNode<T> node, Point at) {
+//		if (node.items.containsKey(item)) {
+//			if (node.items.remove(item)!=null) {
+////				if (node.items.remove(item,at)) { // this was badly wrong - didnt owrk at all!
+////				nItems--;
+//				if (node.items.isEmpty())
+//					shrinkNode(node.parent);
+//				return true; // end recursion
+//			}
+//		}
+//		else if (node.children!=null) {
+//			for (RegionIndexingNode<T> n:node.children)
+//				if (n.region().contains(at))
+//					// FLAW HERE if the point is on the border - ust look for the item, not the point.
+//					if (removeFromChild(item,n,at))
+//						return true;
+//		}
+//		// all other cases: item must be outside tree.
+//		return false; // end recursion
+//	}
+
+//	@Override
+//	@Deprecated
+//	public boolean remove(T item, Point at) {
+//		RegionIndexingNode<T> n = getNearestNode(at);
+//		// this is ok in most cases
+//		if (n.items.containsKey(item)) {
+//			if (n.items.remove(item)!=null) {
+////			if (n.items.remove(item,at)) { // this was badly wrong - didnt owrk at all!
+////				nItems--;
+//				if (n.items.isEmpty())
+//					shrinkNode(n.parent);
+//				return true;
+//			}
+//			else
+//				return false;
+//		}
+//		// this applies to nodes on the border of the returned 'nearest' node
+//		else {
+//			n = findContainingParent(n,at); // this is a parent already
+////			if (n==null)
+////				return false;
+//			return removeFromChild(item,n,at);
+////			return removeFromChild(item,n.parent,at);
+//		}
+//	}
 
 	@Override
-	public boolean remove(T item, Point at) {
-		RegionIndexingNode<T> n = getNearestNode(at);
-		// this is ok in most cases
-		if (n.items.containsKey(item)) {
-			if (n.items.remove(item)!=null) {
-//			if (n.items.remove(item,at)) { // this was badly wrong - didnt owrk at all!
-				nItems--;
-				if (n.items.isEmpty())
-					shrinkNode(n.parent);
-				return true;
-			}
-			else
-				return false;
+	public boolean remove(T item) {
+		if (itemToNodeMap.containsKey(item)) {
+			// remove the item in its node list
+			RegionIndexingNode<T> n = itemToNodeMap.get(item);
+			n.items.remove(item);
+			if (n.items.isEmpty())
+				shrinkNode(n.parent);
+			// remove it from list here.
+			itemToNodeMap.remove(item);
+			return true;
 		}
-		// this applies to nodes on the border of the returned 'nearest' node
-		else {
-			n = findContainingParent(n,at); // this is a parent already
-//			if (n==null)
-//				return false;
-			return removeFromChild(item,n,at);
-//			return removeFromChild(item,n.parent,at);
-		}
+		return false;
 	}
+
+
 
 	@Override
 	public int size() {
-		return nItems;
+//		return nItems;
+		return itemToNodeMap.size();
 	}
 
     private void adjustMaxObjects() {
-        RegionIndexingNode.LEAF_MAX_ITEMS = Math.max(7,(int)Math.pow(nItems, MAX_OBJ_TARGET_EXPONENT));
+//        RegionIndexingNode.LEAF_MAX_ITEMS = Math.max(7,(int)Math.pow(nItems, MAX_OBJ_TARGET_EXPONENT));
+        RegionIndexingNode.LEAF_MAX_ITEMS = Math.max(7,(int)Math.pow(itemToNodeMap.size(), MAX_OBJ_TARGET_EXPONENT));
     }
 
     @Override

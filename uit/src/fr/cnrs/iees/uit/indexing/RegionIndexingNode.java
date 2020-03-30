@@ -3,13 +3,13 @@
  *                                                                        *
  *  Copyright 2018: Jacques Gignoux & Ian D. Davies                       *
  *       jacques.gignoux@upmc.fr                                          *
- *       ian.davies@anu.edu.au                                            * 
+ *       ian.davies@anu.edu.au                                            *
  *                                                                        *
  *  UIT is a generalisation and re-implementation of QuadTree and Octree  *
  *  implementations by Paavo Toivanen as downloaded on 27/8/2018 on       *
  *  <https://dev.solita.fi/2015/08/06/quad-tree.html>                     *
  *                                                                        *
- **************************************************************************                                       
+ **************************************************************************
  *  This file is part of UIT (Universal Indexing Tree).                   *
  *                                                                        *
  *  UIT is free software: you can redistribute it and/or modify           *
@@ -20,7 +20,7 @@
  *  UIT is distributed in the hope that it will be useful,                *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *  GNU General Public License for more details.                          *                         
+ *  GNU General Public License for more details.                          *
  *                                                                        *
  *  You should have received a copy of the GNU General Public License     *
  *  along with UIT.  If not, see <https://www.gnu.org/licenses/gpl.html>. *
@@ -39,14 +39,14 @@ import fr.cnrs.iees.uit.space.Point;
 
 /**
  * <p>{@linkplain IndexingNode} used in region-based {@linkplain IndexingTree}</p>
- * 
+ *
  *  <p><strong> NOTE</strong>: This implementation is a re-coding of the inner Quad class in
  *  the QuadTree class
  *  written by <a href="https://dev.solita.fi/2015/08/06/quad-tree.html"><strong>Paavo Toivanen</strong></a>.
- *  
+ *
  *  @see {@linkplain RegionIndexingTree} for more detail on the code adaptation.
  *
- * @author Jacques Gignoux - 30-08-2018 
+ * @author Jacques Gignoux - 30-08-2018
  *
  * @param <T> the type of object stored in this tree
  */
@@ -56,26 +56,29 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 	protected static int LEAF_MAX_ITEMS = 10;
 
 	private Box region;
-	
+
 	/** the list of (Point,item) pairs stored in this node */
 	protected Map<T, Point> items = new HashMap<>();
-	
+
 	private int dim;
-	
+
+	protected RegionIndexingTree<T> tree = null;
+
 	/**
-	 * 
+	 *
 	 * @param parent a parent node (if null, this is the root node of the tree)
 	 * @param region the portion of space represented by this node
 	 */
-	public RegionIndexingNode(RegionIndexingNode<T> parent, Box region) {
+	public RegionIndexingNode(RegionIndexingNode<T> parent, Box region, RegionIndexingTree<T> tree) {
 		super();
 		this.parent = parent;
 		this.region = region;
 		dim = region.dim();
+		this.tree = tree;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return the portion of space represented by this node
 	 */
 	protected Box region() {
@@ -95,7 +98,7 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 			return this;
 		}
 		// if there is no parent, make one (NB this means I am the root and this parent is going to replace me)
-		else { 
+		else {
 			if (parent==null) {
 				// work out the new region boundaries
 				double[] newlows = new double[dim];
@@ -110,7 +113,8 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 					if (loc.coordinate(i)>region.upperBound(i))
 						newups[i] = region.upperBound(i)+region.sideLength(i);
 				}
-				parent = new RegionIndexingNode<T>(null,new BoxImpl(Point.newPoint(newlows),Point.newPoint(newups)));
+				parent = new RegionIndexingNode<T>(null,
+					new BoxImpl(Point.newPoint(newlows),Point.newPoint(newups)),tree);
 				parent.makeChildren(); // this creates empty children in the parent
 				// place me in my parent's children
 				parent.children[parent.childIndex(region.centre())] = this;
@@ -118,10 +122,11 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 			return parent;
 		}
 	}
-	
+
 	// recursive
 	@Override
-	public boolean insert(T item, Point loc) {
+//	public boolean insert(T item, Point loc) {
+	public RegionIndexingNode<T> insert(T item, Point loc) {
 		// do not insert same item twice at the same location
 		if (!items.containsKey(item)) {
 			// insert the item here or in my children
@@ -134,16 +139,16 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 			// otherwise, put it in this list
 			else {
 				items.put(item,loc);
-				return true;
+				return this;
 			}
 		}
 		else
-			return false;
+			return null;
 	}
-	
-	// returns the index of the child node containing the point loc 
+
+	// returns the index of the child node containing the point loc
 	private int childIndex(Point loc) {
-		int[] ix = new int[dim]; 
+		int[] ix = new int[dim];
 		int index=0;
 		for (int i=0; i<dim; i++) {
 			double prop = (loc.coordinate(i)-region.lowerBound(i))
@@ -160,14 +165,15 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 	}
 
 	// inserts item T in the proper (existing) child node of node 'node' - recursive
-	private boolean insertInChild(T item, RegionIndexingNode<T> node, Point loc) {
+//	private boolean insertInChild(T item, RegionIndexingNode<T> node, Point loc) {
+	private RegionIndexingNode<T> insertInChild(T item, RegionIndexingNode<T> node, Point loc) {
 		while (node.children!=null) {
 			int i = node.childIndex(loc);
 			node = node.children[i];
 		}
 		return node.insert(item,loc);
 	}
-		
+
     // index computation for children - veery tricky - carefully checked, OK.
     private void recurseMin(int depth, int itbase, double[][] result) {
     	int itmax = 1<<(dim-depth-1);
@@ -195,7 +201,7 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
     	if (depth<dim-1)
     		recurseMax(depth+1,itbase+itmax,result);
     }
-	
+
     // create children nodes according to dimension and region
     // moves contained items to them
 	@SuppressWarnings("unchecked")
@@ -210,12 +216,14 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
     	for (int i=0; i<(1<<dim); i++) {
     		Point lower = Point.newPoint(mins[i]);
     		Point upper = Point.newPoint(maxs[i]);
-    		Box reg = new BoxImpl(lower, upper); 
-    		children[i] = new RegionIndexingNode<T>(this,reg);
+    		Box reg = new BoxImpl(lower, upper);
+    		children[i] = new RegionIndexingNode<T>(this,reg,tree);
     	}
     	// spread the extant items into the child nodes
     	for (Map.Entry<T,Point> e:items.entrySet()) {
-    		children[childIndex(e.getValue())].insert(e.getKey(),e.getValue());
+    		RegionIndexingNode<T> newNode = children[childIndex(e.getValue())];
+    		newNode.insert(e.getKey(),e.getValue());
+    		tree.itemToNodeMap.put(e.getKey(),newNode); // this will replace the former mapping
     	}
     	// empty the item list now they have been put in the child nodes
     	items.clear();
@@ -238,7 +246,7 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 			for (int i=0; i<node.children.length; i++)
 				getAllItems(list,node.children[i]);
 	}
-	
+
 	@Override
 	public final Iterable<T> items() {
 		QuickListOfLists<T> list = new QuickListOfLists<T>();
@@ -250,10 +258,10 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 	public final void clear() {
 		items.clear();
 	}
-	
+
 	// for debugging
 	/**
-	 * 
+	 *
 	 * @return a short String description of this node
 	 */
 	protected String toShortString() {
@@ -264,12 +272,12 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 			sb.append(item.toString())
 				.append(sep);
 		}
-		if (sb.charAt(sb.length()-1)==sep) 
+		if (sb.charAt(sb.length()-1)==sep)
 			sb.deleteCharAt(sb.length()-1);
 		sb.append("}\n");
 		return sb.toString();
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb=new StringBuilder();
@@ -286,7 +294,7 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 				.append(items.get(item).toString())
 				.append(sep);
 		}
-		if (sb.charAt(sb.length()-1)==sep) 
+		if (sb.charAt(sb.length()-1)==sep)
 			sb.deleteCharAt(sb.length()-1);
 		sb.append("}\n");
 		return sb.toString();
