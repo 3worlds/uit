@@ -55,7 +55,7 @@ public abstract class IndexingNode<T,N> {
 	 *
 	 * @param item the item to store
 	 * @param loc the location (in space) where it should go
-	 * @return true if the item was inserted
+	 * @return the node where the item was inserted, null if not inserted
 	 */
 	public abstract N insert(T item, Point loc);
 

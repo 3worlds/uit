@@ -125,7 +125,6 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 
 	// recursive
 	@Override
-//	public boolean insert(T item, Point loc) {
 	public RegionIndexingNode<T> insert(T item, Point loc) {
 		// do not insert same item twice at the same location
 		if (!items.containsKey(item)) {
@@ -165,7 +164,6 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 	}
 
 	// inserts item T in the proper (existing) child node of node 'node' - recursive
-//	private boolean insertInChild(T item, RegionIndexingNode<T> node, Point loc) {
 	private RegionIndexingNode<T> insertInChild(T item, RegionIndexingNode<T> node, Point loc) {
 		while (node.children!=null) {
 			int i = node.childIndex(loc);

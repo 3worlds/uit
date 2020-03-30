@@ -60,14 +60,6 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	public abstract void insert(T item, Point at);
 
 //	/**
-//	 * <p>Get all nodes contained in or overlapping a n-dimensional {@linkplain Box}.</p>
-//	 * @param limits Box in which to search nodes
-//	 * @return the list of nodes within the Box
-//	 */
-//	// this is a helper method and shouldnt be public
-//	public abstract Iterable<N> getNodesWithin(Box limits);
-
-//	/**
 //	 * Get the node closest to location
 //	 * @param at the location
 //	 * @return the closest node
@@ -88,7 +80,6 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	 * @param at the location
 	 * @return true if item successfully removed
 	 */
-//	public abstract boolean remove(T item, Point at); // this should be deprecated
 	public abstract boolean remove(T item);
 
 	/**

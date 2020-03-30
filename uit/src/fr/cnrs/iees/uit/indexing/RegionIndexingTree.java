@@ -69,8 +69,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 
 	private boolean DYNAMIC_MAX_OBJECTS = false;
     private double MAX_OBJ_TARGET_EXPONENT = 0.333333; // 0.5 a good general solution
-//    private int nItems = 0;
-    // reverse mapping of items to nodes to facilitate removal of items without knowing their location
+   // reverse mapping of items to nodes to facilitate removal of items without knowing their location
     protected Map<T,RegionIndexingNode<T>> itemToNodeMap = new HashMap<>();
 
     /**
@@ -108,10 +107,8 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	@Override
 	public void insert(T item, Point at) {
 		RegionIndexingNode<T> node = root.insert(item, at);
-        if (node!=null) {
+        if (node!=null)
         	itemToNodeMap.put(item,node);
-//        	nItems++; // not needed anymore
-        }
 //        if (DYNAMIC_MAX_OBJECTS && nItems % 100 == 0)
         if (DYNAMIC_MAX_OBJECTS && itemToNodeMap.size() % 100 == 0)
             adjustMaxObjects();
@@ -205,14 +202,6 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	}
 
 	// helper methods for remove() (below)
-//	//
-//	// recurse parents until the point is not on a border anymore
-//	private RegionIndexingNode<T> findContainingParent(RegionIndexingNode<T> node, Point at) {
-//		if (node!=null)
-//			if (node.region().isPointOnBorder(at))
-//				return findContainingParent(node.parent,at);
-//		return node;
-//	}
 	// remove children when they are all empty to adjust tree structure to item content
 	private void shrinkNode(RegionIndexingNode<T> node) {
 		boolean shrink = true;
@@ -229,53 +218,6 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 			}
 		}
 	}
-//	// recurse children to find the proper node
-//	private boolean removeFromChild(T item, RegionIndexingNode<T> node, Point at) {
-//		if (node.items.containsKey(item)) {
-//			if (node.items.remove(item)!=null) {
-////				if (node.items.remove(item,at)) { // this was badly wrong - didnt owrk at all!
-////				nItems--;
-//				if (node.items.isEmpty())
-//					shrinkNode(node.parent);
-//				return true; // end recursion
-//			}
-//		}
-//		else if (node.children!=null) {
-//			for (RegionIndexingNode<T> n:node.children)
-//				if (n.region().contains(at))
-//					// FLAW HERE if the point is on the border - ust look for the item, not the point.
-//					if (removeFromChild(item,n,at))
-//						return true;
-//		}
-//		// all other cases: item must be outside tree.
-//		return false; // end recursion
-//	}
-
-//	@Override
-//	@Deprecated
-//	public boolean remove(T item, Point at) {
-//		RegionIndexingNode<T> n = getNearestNode(at);
-//		// this is ok in most cases
-//		if (n.items.containsKey(item)) {
-//			if (n.items.remove(item)!=null) {
-////			if (n.items.remove(item,at)) { // this was badly wrong - didnt owrk at all!
-////				nItems--;
-//				if (n.items.isEmpty())
-//					shrinkNode(n.parent);
-//				return true;
-//			}
-//			else
-//				return false;
-//		}
-//		// this applies to nodes on the border of the returned 'nearest' node
-//		else {
-//			n = findContainingParent(n,at); // this is a parent already
-////			if (n==null)
-////				return false;
-//			return removeFromChild(item,n,at);
-////			return removeFromChild(item,n.parent,at);
-//		}
-//	}
 
 	@Override
 	public boolean remove(T item) {
@@ -292,16 +234,12 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		return false;
 	}
 
-
-
 	@Override
 	public int size() {
-//		return nItems;
 		return itemToNodeMap.size();
 	}
 
     private void adjustMaxObjects() {
-//        RegionIndexingNode.LEAF_MAX_ITEMS = Math.max(7,(int)Math.pow(nItems, MAX_OBJ_TARGET_EXPONENT));
         RegionIndexingNode.LEAF_MAX_ITEMS = Math.max(7,(int)Math.pow(itemToNodeMap.size(), MAX_OBJ_TARGET_EXPONENT));
     }
 
