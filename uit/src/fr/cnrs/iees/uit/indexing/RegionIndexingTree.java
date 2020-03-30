@@ -226,7 +226,8 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 			RegionIndexingNode<T> n = itemToNodeMap.get(item);
 			n.items.remove(item);
 			if (n.items.isEmpty())
-				shrinkNode(n.parent);
+				if (n.parent!=null)
+					shrinkNode(n.parent);
 			// remove it from list here.
 			itemToNodeMap.remove(item);
 			return true;
