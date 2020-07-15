@@ -1,5 +1,5 @@
 <!--===================================================================================
- ant and ivy scripts for project <uit> version 0.2.1 (Wed Jul 15 14:25:10 CEST 2020)
+ ant and ivy scripts for project <uit> version 0.2.0 (Mon Mar 30 12:05:33 CEST 2020)
  author: Jacques Gignoux <jacques.gignoux@upmc.fr>
 
  CAUTION: this file is generated - DO NOT EDIT!
@@ -47,7 +47,7 @@
 			<manifest>
 				<attribute name="Implementation-Vendor" value="CNRS/ANU"/>
 				<attribute name="Implementation-Title" value="fr.cnrs.iees.uit"/>
-				<attribute name="Implementation-Version" value="0.2.1"/>
+				<attribute name="Implementation-Version" value="0.2.0"/>
 				<attribute name="Built-By" value="${user.name}"/>
  			</manifest>
 		</jar>
