@@ -3,13 +3,13 @@
  *                                                                        *
  *  Copyright 2018: Jacques Gignoux & Ian D. Davies                       *
  *       jacques.gignoux@upmc.fr                                          *
- *       ian.davies@anu.edu.au                                            * 
+ *       ian.davies@anu.edu.au                                            *
  *                                                                        *
  *  UIT is a generalisation and re-implementation of QuadTree and Octree  *
  *  implementations by Paavo Toivanen as downloaded on 27/8/2018 on       *
  *  <https://dev.solita.fi/2015/08/06/quad-tree.html>                     *
  *                                                                        *
- **************************************************************************                                       
+ **************************************************************************
  *  This file is part of UIT (Universal Indexing Tree).                   *
  *                                                                        *
  *  UIT is free software: you can redistribute it and/or modify           *
@@ -20,7 +20,7 @@
  *  UIT is distributed in the hope that it will be useful,                *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *  GNU General Public License for more details.                          *                         
+ *  GNU General Public License for more details.                          *
  *                                                                        *
  *  You should have received a copy of the GNU General Public License     *
  *  along with UIT.  If not, see <https://www.gnu.org/licenses/gpl.html>. *
@@ -36,9 +36,9 @@ import org.junit.jupiter.api.Test;
 import fr.cnrs.iees.uit.UitException;
 
 class SphereTest {
-	
+
 	private Sphere s1, s2, s3;
-	
+
 	@BeforeEach
 	private void init() {
 		Point p = Point.newPoint(1,1,1);
@@ -132,5 +132,12 @@ class SphereTest {
 		assertEquals(s2.toString(),"[[3.0,2.0],1.0]");
 		assertEquals(s3.toString(),"[[3.0,2.0],2.0]");
 	}
+
+	@Test
+	void testValueOf() {
+		assertEquals(Sphere.valueOf(" [[1.0,1.0,1.0],1.0] "),s1);
+		assertEquals(Sphere.valueOf("              "),null);
+	}
+
 
 }

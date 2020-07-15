@@ -3,13 +3,13 @@
  *                                                                        *
  *  Copyright 2018: Jacques Gignoux & Ian D. Davies                       *
  *       jacques.gignoux@upmc.fr                                          *
- *       ian.davies@anu.edu.au                                            * 
+ *       ian.davies@anu.edu.au                                            *
  *                                                                        *
  *  UIT is a generalisation and re-implementation of QuadTree and Octree  *
  *  implementations by Paavo Toivanen as downloaded on 27/8/2018 on       *
  *  <https://dev.solita.fi/2015/08/06/quad-tree.html>                     *
  *                                                                        *
- **************************************************************************                                       
+ **************************************************************************
  *  This file is part of UIT (Universal Indexing Tree).                   *
  *                                                                        *
  *  UIT is free software: you can redistribute it and/or modify           *
@@ -20,7 +20,7 @@
  *  UIT is distributed in the hope that it will be useful,                *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *  GNU General Public License for more details.                          *                         
+ *  GNU General Public License for more details.                          *
  *                                                                        *
  *  You should have received a copy of the GNU General Public License     *
  *  along with UIT.  If not, see <https://www.gnu.org/licenses/gpl.html>. *
@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
 import fr.cnrs.iees.uit.UitException;
 
 class PointTest {
-	
+
 	Point p1;
 	Point p2;
 	Point p3;
@@ -115,7 +115,7 @@ class PointTest {
 		assertEquals(p3.dim(),3);
 		assertEquals(p4.dim(),5);
 	}
-	
+
 	@Test
 	void testEquals() {
 		assertTrue(p1.equals(p1));
@@ -138,6 +138,12 @@ class PointTest {
 		assertEquals(p2.toString(),"[2.0,18.5]");
 		assertEquals(p3.toString(),"[3.5,45.0,68.7]");
 		assertEquals(p4.toString(),"[4500.0,5200.0,8754.0,846.0,957.0]");
+	}
+
+	@Test
+	void testValueOf() {
+		assertEquals(Point.valueOf("	[2.0,18.5] "),p2);
+		assertEquals(Point.valueOf(""),null);
 	}
 
 }

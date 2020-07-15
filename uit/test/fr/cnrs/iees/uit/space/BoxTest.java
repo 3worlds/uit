@@ -3,13 +3,13 @@
  *                                                                        *
  *  Copyright 2018: Jacques Gignoux & Ian D. Davies                       *
  *       jacques.gignoux@upmc.fr                                          *
- *       ian.davies@anu.edu.au                                            * 
+ *       ian.davies@anu.edu.au                                            *
  *                                                                        *
  *  UIT is a generalisation and re-implementation of QuadTree and Octree  *
  *  implementations by Paavo Toivanen as downloaded on 27/8/2018 on       *
  *  <https://dev.solita.fi/2015/08/06/quad-tree.html>                     *
  *                                                                        *
- **************************************************************************                                       
+ **************************************************************************
  *  This file is part of UIT (Universal Indexing Tree).                   *
  *                                                                        *
  *  UIT is free software: you can redistribute it and/or modify           *
@@ -20,7 +20,7 @@
  *  UIT is distributed in the hope that it will be useful,                *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *  GNU General Public License for more details.                          *                         
+ *  GNU General Public License for more details.                          *
  *                                                                        *
  *  You should have received a copy of the GNU General Public License     *
  *  along with UIT.  If not, see <https://www.gnu.org/licenses/gpl.html>. *
@@ -34,10 +34,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BoxTest {
-	
+
 	Box b1, b2, b3;
 	Point p1, p2, p3;
-	
+
 	@BeforeEach
 	private void init() {
 		p1 = Point.newPoint(0.5,1.0,7);
@@ -51,7 +51,7 @@ class BoxTest {
 	private void show(String method,String text) {
 		System.out.println(method+": "+text);
 	}
-	
+
 	@Test
 	void testIsPointOnBorder() {
 		assertTrue(b1.isPointOnBorder(p1));
@@ -135,7 +135,7 @@ class BoxTest {
 	@Test
 	void testContainsSphere() {
 		Sphere s = new SphereImpl(p1,0.2); // this sphere touches the border
-		assertTrue(b2.contains(s));		
+		assertTrue(b2.contains(s));
 		s = new SphereImpl(p1,2);
 		assertFalse(b2.contains(s));
 	}
@@ -188,7 +188,7 @@ class BoxTest {
 	void testDim() {
 		assertEquals(b1.dim(),3);
 	}
-	
+
 	@Test
 	void testEquals()  {
 		assertFalse(b1.equals(b2));
@@ -204,6 +204,12 @@ class BoxTest {
 		assertEquals(b1.toString(),"[[0.5,1.0,7.0],[1.2,1.2,8.0]]");
 		assertEquals(b2.toString(),"[[0.0,0.0,5.0],[1.2,1.2,8.0]]");
 		assertEquals(b3.toString(),"[[0.0,0.0,5.0],[0.5,1.0,7.0]]");
+	}
+
+	@Test
+	void testValueOf() {
+		assertEquals(Box.valueOf("  [[0.5,1.0,7.0],[1.2,1.2,8.0]] "),b1);
+		assertEquals(Box.valueOf("              "),null);
 	}
 
 }

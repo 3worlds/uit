@@ -3,13 +3,13 @@
  *                                                                        *
  *  Copyright 2018: Jacques Gignoux & Ian D. Davies                       *
  *       jacques.gignoux@upmc.fr                                          *
- *       ian.davies@anu.edu.au                                            * 
+ *       ian.davies@anu.edu.au                                            *
  *                                                                        *
  *  UIT is a generalisation and re-implementation of QuadTree and Octree  *
  *  implementations by Paavo Toivanen as downloaded on 27/8/2018 on       *
  *  <https://dev.solita.fi/2015/08/06/quad-tree.html>                     *
  *                                                                        *
- **************************************************************************                                       
+ **************************************************************************
  *  This file is part of UIT (Universal Indexing Tree).                   *
  *                                                                        *
  *  UIT is free software: you can redistribute it and/or modify           *
@@ -20,7 +20,7 @@
  *  UIT is distributed in the hope that it will be useful,                *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *  GNU General Public License for more details.                          *                         
+ *  GNU General Public License for more details.                          *
  *                                                                        *
  *  You should have received a copy of the GNU General Public License     *
  *  along with UIT.  If not, see <https://www.gnu.org/licenses/gpl.html>. *
@@ -32,52 +32,52 @@ import fr.cnrs.iees.uit.UitException;
 
 /**
  * <p>A rectangular box in a <em>n</em>-dimensional space, aligned on coordinate axes.</p>
- * 
+ *
  * <p>This was designed to manipulate the concept of a finite block of space independent of
  * the space dimension. If dim=1, this will represent a segment, if dim=2 a rectangle, if dim=3
  * a rectangular cuboid.<p>
- * 
- * <p>The assumption of alignment with the coordinate axes allows important optimisations and 
+ *
+ * <p>The assumption of alignment with the coordinate axes allows important optimisations and
  * should not be released</p>
- * 
+ *
  * <p>Immutable.</p>
- * 
- * @author Jacques Gignoux - 07-08-2018 
+ *
+ * @author Jacques Gignoux - 07-08-2018
  *
  */
 // Tested OK with version 0.0.1 on 23/11/2018
 public interface Box extends Dimensioned {
-	
+
 	/**
 	 * <p>In two dimensions, this would be the coordinates of the lower left corner of the box.</p>
-	 * 
-	 * @return  the lower bounds of this Box. 
+	 *
+	 * @return  the lower bounds of this Box.
 	 */
 	public abstract Point lowerBounds();
-	
+
 	/**
 	 * <p>In two dimensions, this would be the coordinates of the upper right corner of the box.</p>
-	 * 
-	 * @return  the upper bounds of this Box. 
+	 *
+	 * @return  the upper bounds of this Box.
 	 */
 	public abstract Point upperBounds();
 
 	/**
-	 * 
+	 *
 	 * @param i the index of the coordinate requested
 	 * @return the i<sup>th</sup> coordinate of the lower bound of this box
 	 */
 	public abstract double lowerBound(int i);
-	
+
 	/**
-	 * 
+	 *
 	 * @param i the index of the coordinate requested
 	 * @return the i<sup>th</sup> coordinate of the upper bound of this box
 	 */
 	public abstract double upperBound(int i);
 
 	/**
-	 * <p>Tests for strict overlapping, i.e. boxes with a common edge are considered not 
+	 * <p>Tests for strict overlapping, i.e. boxes with a common edge are considered not
 	 * overlapping. In topological terms, returns true if the closed sets represented by
 	 * the boxes overlap.</p>
 	 * @param other a box to test for overlap with this one
@@ -92,7 +92,7 @@ public interface Box extends Dimensioned {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * <p>Tests for wide containement, i.e. a point is considered inside the box if
 	 * it lies on the box edges. In topological terms, returns true if the point
@@ -106,7 +106,7 @@ public interface Box extends Dimensioned {
 				return false;
 		return true;
 	}
-	
+
 	/**
 	 * Tests if a point is on the border of a Box
 	 * @param p
@@ -120,35 +120,35 @@ public interface Box extends Dimensioned {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param b a Box to test for fully being contained into this one
 	 * @return {@code true} if this box contains the Box passed as argument
 	 */
 	public default boolean contains(Box b) {
 		return contains(b.lowerBounds()) && contains(b.upperBounds());
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return the centroid of this Box.
 	 */
 	public default Point centre() {
 		int dim = lowerBounds().dim();
 		double[] c = new double[dim];
 		for (int i=0; i<dim; i++)
-			c[i] = (lowerBound(i)+upperBound(i))/2;  
+			c[i] = (lowerBound(i)+upperBound(i))/2;
 		return Point.newPoint(c);
 	}
-	
+
 	/** @return the length / surface / volume / hypervolume (according to dimension) of this box */
 	public abstract double size();
-	
+
 	/**
 	 * Build the smallest Box containing two points. Use this method to build a Box without checking if the
 	 * Points suitably contain lower and upper values only.
-	 * 
+	 *
 	 * @param A a Point
 	 * @param B another Point
 	 * @return the smallest Box containing points A and B.
@@ -165,15 +165,15 @@ public interface Box extends Dimensioned {
 		}
 		return new BoxImpl(Point.newPoint(lows),Point.newPoint(ups));
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param s a Sphere to test for fully being contained into this one
 	 * @return {@code true} if this box contains the Sphere passed as argument
 	 */
 	public default boolean contains(Sphere s) {
 		for (int i=0; i<dim(); i++)
-			if ((s.centre().coordinate(i)-s.radius()<lowerBound(i)) || 
+			if ((s.centre().coordinate(i)-s.radius()<lowerBound(i)) ||
 				(s.centre().coordinate(i)+s.radius()>upperBound(i)))
 				return false;
 		return true;
@@ -181,29 +181,29 @@ public interface Box extends Dimensioned {
 
 	/**
 	 * Build the smallest Box containing a Sphere.
-	 * 
+	 *
 	 * @param s the Sphere to wrap into a Box
 	 * @return the smallest Box containing Sphere s
 	 */
 	public static Box boundingBox(Sphere s) {
 		return boundingBox(Point.add(s.centre(),-s.radius()),Point.add(s.centre(),s.radius()));
 	}
-	
+
 	/**
 	 * Build the smallest <em>(hyper)cubic</em> Box containing a Sphere. By <em>cubic</em> we mean a Box
 	 * having the same side length in all dimensions.
-	 * 
+	 *
 	 * @param s the Sphere to wrap into a Box
 	 * @return the smallest Box containing Sphere s
 	 */
 	public static Box boundingCube(Sphere s) {
 		return boundingBox(s);
 	}
-	
+
 	/**
 	 * Build the smallest <em>(hyper)cubic</em> Box containing two points. By <em>cubic</em> we mean a Box
 	 * having the same side length in all dimensions.
-	 * 
+	 *
 	 * @param A a Point
 	 * @param B another Point
 	 * @return the smallest cubic Box containing points A and B.
@@ -215,16 +215,16 @@ public interface Box extends Dimensioned {
 			maxSide = Math.max(maxSide, b.upperBound(i)-b.lowerBound(i));
 		return new BoxImpl(b.lowerBounds(),Point.add(b.lowerBounds(),maxSide));
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param i the index of the requested side length
 	 * @return the length of the side of the box in i<sup>th</sup> dimension
 	 */
 	public default double sideLength(int i) {
 		return (upperBound(i)-lowerBound(i));
 	}
-	
+
 	/**
 	 * A hypercube is a generalisation of a cube to n>3 dimensions. NB: this method always returns {@code true}
 	 * in dimension 1.
@@ -236,5 +236,20 @@ public interface Box extends Dimensioned {
 				return false;
 		return true;
 	}
-	
+
+	/** reads a Box value from a String - assumes the Box has been saved with the toString()
+	 * method of a Box implementation */
+	public static Box valueOf(String s) {
+		if (s.trim().isEmpty())
+			return null;
+		// remove '[' and ']'
+		s = s.trim().substring(1,s.trim().length()-1);
+		// get the two points
+		String slower = s.substring(0,s.indexOf("],["));
+		String supper = s.substring(s.indexOf("],[")+3);
+		Point lower = Point.valueOf(slower+"]");
+		Point upper = Point.valueOf("["+supper);
+		// make the box
+		return boundingBox(lower,upper);
+	}
 }
