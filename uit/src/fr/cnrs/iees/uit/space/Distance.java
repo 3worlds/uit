@@ -84,6 +84,7 @@ public class Distance {
 	
 	/** euclidian distance in 2D */
 	public static double euclidianDistance(double x1, double y1, double x2, double y2) {
+//		return Math.hypot(x2-x1,y2-y1); // possible alternative with no inner overflow error
 		return Math.sqrt(squaredEuclidianDistance(x1,y1,x2,y2));
 	}
 
