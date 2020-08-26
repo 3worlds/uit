@@ -56,6 +56,8 @@ public interface Point extends Dimensioned, Cloneable {
 	public default double z() {
 		return Double.NaN;
 	}
+	
+	public double[] asArray();
 
 	/** instantiate a new Point. NB: only this method should be used to instantiate Points */
 	public static Point newPoint(double...x1) {

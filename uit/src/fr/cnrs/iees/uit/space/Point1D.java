@@ -75,5 +75,12 @@ public class Point1D implements Point {
 			return (x==((Point1D)other).x);
 		return false;
 	}
+
+	@Override
+	public double[] asArray() {
+		double[] result = new double[1];
+		result[0] = x;
+		return result;
+	}
 	
 }

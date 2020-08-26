@@ -98,4 +98,9 @@ public class PointND implements Point {
 		}
 		return false;
 	}
+
+	@Override
+	public double[] asArray() {		
+		return x.clone();
+	}
 }
