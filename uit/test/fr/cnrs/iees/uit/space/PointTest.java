@@ -107,6 +107,17 @@ class PointTest {
 		String s = String.valueOf(p.x())+','+p.y()+','+p.z();
 		assertEquals(s,"4.5,46.0,69.7");
 	}
+	
+	@Test
+	void testAddPointDoubleInt() {
+		Point p = Point.add(p3, 12.0, 2);
+		String s = String.valueOf(p.x())+','+p.y()+','+p.z();
+		assertEquals(s,"3.5,45.0,80.7");
+		p = Point.add(p3, 12.0, 1);
+		s = String.valueOf(p.x())+','+p.y()+','+p.z();
+		assertEquals(s,"3.5,57.0,68.7");
+	}
+
 
 	@Test
 	void testDim() {

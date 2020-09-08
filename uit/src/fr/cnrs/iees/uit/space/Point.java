@@ -77,19 +77,27 @@ public interface Point extends Dimensioned, Cloneable {
 	public static Point add(Point A, Point B)  {
 		if (A.dim()!=B.dim())
 			throw new UitException("Invalid operation: addition of points of different dimensions");
-		int dim = A.dim();
-		double[] x = new double[dim];
-		for (int i=0; i<dim; i++)
-			x[i] = A.coordinate(i) + B.coordinate(i);
+		double[] x = A.asArray();
+		for (int i=0; i<x.length; i++)
+			x[i] += B.coordinate(i);
 		return Point.newPoint(x);
 	}
 
 	/** return a new Point with a scalar added to every coordinate */
 	public static Point add(Point A, double scalar) {
-		int dim = A.dim();
-		double[] x = new double[dim];
-		for (int i=0; i<dim; i++)
-			x[i] = A.coordinate(i) + scalar;
+		double[] x = A.asArray();
+		for (int i=0; i<x.length; i++)
+			x[i] += scalar;
+		return Point.newPoint(x);
+	}
+	
+	/** return a new Point with a scalar added to coordinate i */
+	public static Point add(Point A, double scalar, int i) {
+		double[] x = A.asArray();
+		if ((i>=0)&&(i<x.length))
+			x[i] += scalar;
+		else
+			throw new UitException("Invalid operation: coordinate index out of range");
 		return Point.newPoint(x);
 	}
 
