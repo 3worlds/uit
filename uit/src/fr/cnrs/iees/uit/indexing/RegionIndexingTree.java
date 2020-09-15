@@ -321,6 +321,13 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		return sb.toString();
 	}
 
+	public Box region() {
+		if (root!=null)
+			return root.region();
+		else
+			return null;
+	}
+
 }
 
 

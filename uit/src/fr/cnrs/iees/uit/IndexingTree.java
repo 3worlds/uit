@@ -101,5 +101,5 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	 * @return
 	 */
 	public abstract Iterable<T> getAllItems();
-
+	
 }
