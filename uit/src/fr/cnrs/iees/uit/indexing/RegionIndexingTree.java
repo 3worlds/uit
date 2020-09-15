@@ -300,7 +300,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("RegionIndexingTree\n");
+		sb.append(getClass().getSimpleName()+"\n");
 		sb.append(nodeToString(root,0,false));
 		return sb.toString();
 	}
@@ -311,7 +311,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	 */
 	public String toShortString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("RegionIndexingTree\n");
+		sb.append(getClass().getSimpleName()+"\n");
 		if (root!=null) {
 			sb.append("region = ");
 			sb.append(root.region().toString());
