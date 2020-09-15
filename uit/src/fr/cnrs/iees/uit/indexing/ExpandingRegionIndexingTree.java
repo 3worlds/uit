@@ -53,10 +53,18 @@ import fr.cnrs.iees.uit.space.Point;
  */
 public class ExpandingRegionIndexingTree<T> extends RegionIndexingTree<T> {
 
+	// instantiate a completely empty expanding tree
     public ExpandingRegionIndexingTree(int dim) {
     	super(dim);
     }
 
+    // instantiate an empty indexing tree with a region to start with
+    public ExpandingRegionIndexingTree(Box domain) {
+    	super(domain.dim());
+    	Box reg = Box.boundingCube(domain.lowerBounds(),domain.upperBounds());
+    	root = new RegionIndexingNode<T>(null,reg,this);
+    }
+    
 	@Override
 	public void insert(T item, Point at) {
         if (root == null) {

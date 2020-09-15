@@ -33,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Point;
 
 class ExpandingRegionIndexingTreeTest {
@@ -41,11 +42,12 @@ class ExpandingRegionIndexingTreeTest {
 	
 	@BeforeEach
 	private void init() {
+		Box limits = Box.boundingBox(Point.newPoint(0,0),Point.newPoint(3,4));
 		// extreme (4D, not square) testing
 		tree = new ExpandingRegionIndexingTree<>(4);
 		tree.setOptimisation(true);
 		// a simpler (2D) case
-		tree2 = new ExpandingRegionIndexingTree<>(2);
+		tree2 = new ExpandingRegionIndexingTree<>(limits);
 		tree2.setOptimisation(true);
 	}
 
@@ -129,21 +131,24 @@ class ExpandingRegionIndexingTreeTest {
 	
 	@Test
 	void testRemove() {
+		// region as per constructor
+		assertEquals(tree2.root.region().toString(),"[[0.0,0.0],[4.0,4.0]]");
 		for (int i=0; i<1000000; i++)
 			tree2.insert(i, Point.newPoint(Math.random()*16,Math.random()*16));
 		assertEquals(tree2.size(),1000000);
-		// region is now 
-		System.out.println(tree2.root.region());
+		// region expands to fit locations
+		assertEquals(tree2.root.region().toString(),"[[0.0,0.0],[16.0,16.0]]");
 		for (int i=0; i<500000; i++)
 			tree2.remove(i);
 		assertEquals(tree2.size(),500000);
 		// region didnt shrink (same as before)
-		System.out.println(tree2.root.region());
+		assertEquals(tree2.root.region().toString(),"[[0.0,0.0],[16.0,16.0]]");
 		for (int i=500000; i<1000000; i++)
 			tree2.remove(i);
 		assertEquals(tree2.size(),0);
 		// region never shrinks
-		System.out.println(tree2.root.region());
+//		System.out.println(tree2.root.region());
+		assertEquals(tree2.root.region().toString(),"[[0.0,0.0],[16.0,16.0]]");
 	}
 
 	@Test
@@ -152,7 +157,7 @@ class ExpandingRegionIndexingTreeTest {
 		assertNull(tree.root);
 		assertEquals(tree.dim,4);
 		assertNotNull(tree2);
-		assertNull(tree2.root);
+		assertNotNull(tree2.root);
 		assertEquals(tree2.dim,2);
 		System.out.println(tree.toShortString());
 		System.out.println(tree2.toShortString());
