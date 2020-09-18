@@ -3,13 +3,13 @@
  *                                                                        *
  *  Copyright 2018: Jacques Gignoux & Ian D. Davies                       *
  *       jacques.gignoux@upmc.fr                                          *
- *       ian.davies@anu.edu.au                                            * 
+ *       ian.davies@anu.edu.au                                            *
  *                                                                        *
  *  UIT is a generalisation and re-implementation of QuadTree and Octree  *
  *  implementations by Paavo Toivanen as downloaded on 27/8/2018 on       *
  *  <https://dev.solita.fi/2015/08/06/quad-tree.html>                     *
  *                                                                        *
- **************************************************************************                                       
+ **************************************************************************
  *  This file is part of UIT (Universal Indexing Tree).                   *
  *                                                                        *
  *  UIT is free software: you can redistribute it and/or modify           *
@@ -20,7 +20,7 @@
  *  UIT is distributed in the hope that it will be useful,                *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *  GNU General Public License for more details.                          *                         
+ *  GNU General Public License for more details.                          *
  *                                                                        *
  *  You should have received a copy of the GNU General Public License     *
  *  along with UIT.  If not, see <https://www.gnu.org/licenses/gpl.html>. *
@@ -39,7 +39,7 @@ import fr.cnrs.iees.uit.space.Point;
 class ExpandingRegionIndexingTreeTest {
 
 	private ExpandingRegionIndexingTree<Integer> tree, tree2;
-	
+
 	@BeforeEach
 	private void init() {
 		Box limits = Box.boundingBox(Point.newPoint(0,0),Point.newPoint(3,4));
@@ -73,9 +73,9 @@ class ExpandingRegionIndexingTreeTest {
 		p = Point.newPoint(6,4,3,5); 		tree.insert(9, p);
 		p = Point.newPoint(6,4,3,7); 		tree.insert(10, p);
 		// this is the max number of items that can be contained in a single node
-		assertEquals(tree.toShortString(),"ExpandingRegionIndexingTree\n" + 
-				"region = [[4.0,4.0,3.0,5.0],[6.0,6.0,5.0,7.0]]\n" + 
-				"items={1,2,3,4,5,6,7,8,9,10}\n" + 
+		assertEquals(tree.toShortString(),"ExpandingRegionIndexingTree\n" +
+				"region = [[4.0,4.0,3.0,5.0],[6.0,6.0,5.0,7.0]]\n" +
+				"items={1,2,3,4,5,6,7,8,9,10}\n" +
 				"");
 		p = Point.newPoint(6,4,5,5); 		tree.insert(11, p);
 		p = Point.newPoint(6,4,5,7); 		tree.insert(12, p);
@@ -86,24 +86,24 @@ class ExpandingRegionIndexingTreeTest {
 		// region has not expanded
 		assertEquals(tree.root.region().toString(),"[[4.0,4.0,3.0,5.0],[6.0,6.0,5.0,7.0]]");
 		// now there must be only one item in each node
-		assertEquals(tree.toShortString(),"ExpandingRegionIndexingTree\n" + 
-				"region = [[4.0,4.0,3.0,5.0],[6.0,6.0,5.0,7.0]]\n" + 
-				"items={}\n" + 
-				"--items={1}\n" + 
-				"--items={2}\n" + 
-				"--items={3}\n" + 
-				"--items={4}\n" + 
-				"--items={5}\n" + 
-				"--items={6}\n" + 
-				"--items={7}\n" + 
-				"--items={8}\n" + 
-				"--items={9}\n" + 
-				"--items={10}\n" + 
-				"--items={11}\n" + 
-				"--items={12}\n" + 
-				"--items={13}\n" + 
-				"--items={14}\n" + 
-				"--items={15}\n" + 
+		assertEquals(tree.toShortString(),"ExpandingRegionIndexingTree\n" +
+				"region = [[4.0,4.0,3.0,5.0],[6.0,6.0,5.0,7.0]]\n" +
+				"items={}\n" +
+				"--items={1}\n" +
+				"--items={2}\n" +
+				"--items={3}\n" +
+				"--items={4}\n" +
+				"--items={5}\n" +
+				"--items={6}\n" +
+				"--items={7}\n" +
+				"--items={8}\n" +
+				"--items={9}\n" +
+				"--items={10}\n" +
+				"--items={11}\n" +
+				"--items={12}\n" +
+				"--items={13}\n" +
+				"--items={14}\n" +
+				"--items={15}\n" +
 				"--items={16}\n");
 		// this point is out of the Box and should cause region expansion
 		p = Point.newPoint(7,8,9,10);	tree.insert(17, p);
@@ -113,9 +113,9 @@ class ExpandingRegionIndexingTreeTest {
 		// adding a large number (one million) of items
 		int N = 1000000;
 		for (int i=tree.size(); i<=N; i++) {
-			p = Point.newPoint(Math.random()*tree.root.region().sideLength(0)+tree.root.region().lowerBound(0), 
-					Math.random()*tree.root.region().sideLength(1)+tree.root.region().lowerBound(1), 
-					Math.random()*tree.root.region().sideLength(2)+tree.root.region().lowerBound(2), 
+			p = Point.newPoint(Math.random()*tree.root.region().sideLength(0)+tree.root.region().lowerBound(0),
+					Math.random()*tree.root.region().sideLength(1)+tree.root.region().lowerBound(1),
+					Math.random()*tree.root.region().sideLength(2)+tree.root.region().lowerBound(2),
 					Math.random()*tree.root.region().sideLength(3)+tree.root.region().lowerBound(3));
 			tree.insert(i,p);
 		}
@@ -128,7 +128,7 @@ class ExpandingRegionIndexingTreeTest {
 		// region expanded by 4 (sidelength) in dim 1, other dimensions unchanged
 		assertEquals(tree.root.region().toString(),"[[0.0,4.0,3.0,5.0],[8.0,8.0,11.0,13.0]]");
 	}
-	
+
 	@Test
 	void testRemove() {
 		// region as per constructor
@@ -150,7 +150,6 @@ class ExpandingRegionIndexingTreeTest {
 //		System.out.println(tree2.root.region());
 		assertEquals(tree2.root.region().toString(),"[[0.0,0.0],[16.0,16.0]]");
 	}
-
 	@Test
 	void testExpandingRegionIndexingTree() {
 		assertNotNull(tree);
@@ -162,5 +161,42 @@ class ExpandingRegionIndexingTreeTest {
 		System.out.println(tree.toShortString());
 		System.out.println(tree2.toShortString());
 	}
-	
+
+//	@Test
+//	void testExpansion() {
+//		// NB this test must be run with RegionIndexingNode.LEAF_MAX_ITEMS=2
+//		assertEquals(tree2.toShortString(),"ExpandingRegionIndexingTree\n" +
+//			"region = [[0.0,0.0],[4.0,4.0]]\n" +
+//			"items={}\n");
+//		tree2.insert(1,Point.newPoint(1,1));
+//		tree2.insert(2,Point.newPoint(3,1));
+//		assertEquals(tree2.toShortString(),"ExpandingRegionIndexingTree\n" +
+//			"region = [[0.0,0.0],[4.0,4.0]]\n" +
+//			"items={1,2}\n");
+//		tree2.insert(3,Point.newPoint(3,3));
+//		// here, region gets split
+//		assertEquals(tree2.toShortString(),"ExpandingRegionIndexingTree\n" +
+//			"region = [[0.0,0.0],[4.0,4.0]]\n" +
+//			"items={}\n" +
+//			"--items={1}\n" +
+//			"--items={}\n" +
+//			"--items={2}\n" +
+//			"--items={3}\n");
+//		// this works fine --> doubling of the base region (now rectangular ???)
+//		tree2.insert(4,Point.newPoint(5,3));
+//		System.out.println(tree2.toShortString());
+//		tree2.insert(5,Point.newPoint(3,5));
+//		System.out.println(tree2.toShortString());
+//		tree2.remove(5);
+//		tree2.remove(4);
+////		tree2.remove(3);
+////		tree2.remove(2);
+////		tree2.remove(1);
+//		System.out.println(tree2.toShortString()); // tree doesnt shrink
+//		tree2.insert(4,Point.newPoint(50,30));
+//		System.out.println(tree2.toShortString());
+//	}
+
+
+
 }
