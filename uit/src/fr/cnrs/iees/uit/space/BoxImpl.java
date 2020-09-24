@@ -117,4 +117,9 @@ public class BoxImpl implements Box {
 		return size;
 	}
 	
+	public static Box valueOf(String s) {
+		return Box.valueOf(s);
+	}
+
+	
 }

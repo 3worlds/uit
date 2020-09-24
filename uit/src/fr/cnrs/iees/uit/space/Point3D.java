@@ -50,4 +50,9 @@ public class Point3D extends PointND {
 	public Point3D clone() {
 		return new Point3D(x(),y(),z());
 	}
+	
+	public static Point valueOf(String s) {
+		return Point.valueOf(s);
+	}
+
 }

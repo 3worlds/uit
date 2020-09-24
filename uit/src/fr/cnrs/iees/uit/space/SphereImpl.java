@@ -92,5 +92,8 @@ public class SphereImpl implements Sphere {
 		return "["+centre.toString()+","+radius+"]";
 	}
 
+	public static Sphere valueOf(String s) {
+		return Sphere.valueOf(s);
+	}
 	
 }

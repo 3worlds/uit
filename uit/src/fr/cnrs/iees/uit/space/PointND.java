@@ -103,4 +103,9 @@ public class PointND implements Point {
 	public double[] asArray() {		
 		return x.clone();
 	}
+	
+	public static Point valueOf(String s) {
+		return Point.valueOf(s);
+	}
+
 }

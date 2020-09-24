@@ -56,4 +56,8 @@ public class Point2D extends PointND {
 		return new Point2D(x(),y());
 	}
 	
+	public static Point valueOf(String s) {
+		return Point.valueOf(s);
+	}
+
 }

@@ -83,4 +83,8 @@ public class Point1D implements Point {
 		return result;
 	}
 	
+	public static Point valueOf(String s) {
+		return Point.valueOf(s);
+	}
+
 }
