@@ -64,7 +64,7 @@ public class ExpandingRegionIndexingTree<T> extends RegionIndexingTree<T> {
     	Box reg = Box.boundingCube(domain.lowerBounds(),domain.upperBounds());
     	root = new RegionIndexingNode<T>(null,reg,this);
     }
-    
+
 	@Override
 	public void insert(T item, Point at) {
         if (root == null) {
@@ -73,11 +73,12 @@ public class ExpandingRegionIndexingTree<T> extends RegionIndexingTree<T> {
         }
         while (!root.region().contains(at))
         	root = root.expandRootRegion(at);
-        super.insert(item, at);
+//        super.insert(item, at); //to fix rare bug ?
         if (root.parent!=null)
         	root = root.parent;
         if (root.parent!=null)
         	throw new UitException("CRITICAL - Problem in indexing tree expansion");
+        super.insert(item, at);
 	}
 
 }

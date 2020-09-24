@@ -54,6 +54,7 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 
 	/** the storage capacity of leaf nodes - may be made dynamic*/
 	protected static int LEAF_MAX_ITEMS = 10;
+//	protected static int LEAF_MAX_ITEMS = 2; // for testing only
 
 	private Box region;
 
@@ -160,6 +161,15 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 		}
 		for (int i=0; i<dim; i++)
 			index += ix[i]*(1<<(dim-i-1));
+
+		// debug
+		// this is a very rarely occurring bug: index out of range
+		if ((index<0)||(index>(1<<dim))) {
+			System.out.println("RARE BUG occurring!");
+			System.out.println("for point "+loc.toString()+" in region "+region.toString());
+		}
+		// debug
+
 		return index;
 	}
 
