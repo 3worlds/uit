@@ -28,6 +28,10 @@
  **************************************************************************/
 package fr.cnrs.iees.uit;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import fr.cnrs.iees.uit.indexing.IndexingNode;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Dimensioned;
@@ -74,12 +78,14 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	 */
 	public abstract T getNearestItem(Point at);
 
-//	/**
-//	 * Get the item closest to location
-//	 * @param at the location
-//	 * @return the item closest to this location
-//	 */
-//	public abstract Collection<T> getNearestItems(Point at);
+	/**
+	 * Get the item closest to location
+	 * @param at the location
+	 * @return the item closest to this location
+	 */
+	public default Collection<T> getNearestItems(Point at) {
+		return null;
+	}
 
 	/**
 	 * Remove item at location and adapts the tree structure to the removal if needed.

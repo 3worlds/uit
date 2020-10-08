@@ -14,9 +14,11 @@ import fr.cnrs.iees.uit.space.Point;
 public class LocatorFactory implements Dimensioned {
 	
 	// grain of the locators
-	private int grain;
+	private double precision;
 	// dimension of this factory
 	private int dim = 0;
+	
+	Box limits;
 	
 	/**
 	 * This constructor checks that precision*maxDistance is smaller than the longest possible Long,
@@ -35,8 +37,14 @@ public class LocatorFactory implements Dimensioned {
 				p = p*10.0;
 			// issue warning "Space too large for required precision - precision adjusted to ..."
 		}
-		grain = (int) Math.round(1.0/p);
+		this.limits = limits;
+		this.precision = precision; 
 		dim = limits.dim();
+	}
+	
+	// converts a double coordinate into a long
+	public long convert(double coord, int dim) {
+		return Math.round((coord-limits.lowerBound(dim))/precision);
 	}
 	
 	/**
@@ -52,7 +60,7 @@ public class LocatorFactory implements Dimensioned {
 			throw new UitException("Invalid operation: argument must have the same dimension as factory");
 		long[] L = new long[dim];
 		for (int i=0; i<P.dim(); i++)
-			L[i] = Math.round(P.coordinate(i)*grain);
+			L[i] = convert(P.coordinate(i),i);
 		return newLocator(L);
 	}
 	
@@ -80,18 +88,14 @@ public class LocatorFactory implements Dimensioned {
 	public Point toPoint(Locator L) {
 		double[] P = new double[L.dim()];
 		for (int i=0; i<L.dim(); i++)
-			P[i] = L.coordinate(i)*1.0/grain;
+			P[i] = L.coordinate(i)*precision;
 		return Point.newPoint(P);
 	}
 	
-	public int grain() {
-		return grain;
+	public double precision() {
+		return precision;
 	}
 	
-	public double precision() {
-		return 1.0/grain;
-	}
-
 	@Override
 	public int dim() {
 		return dim;
