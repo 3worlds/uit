@@ -74,6 +74,13 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	 */
 	public abstract T getNearestItem(Point at);
 
+//	/**
+//	 * Get the item closest to location
+//	 * @param at the location
+//	 * @return the item closest to this location
+//	 */
+//	public abstract Collection<T> getNearestItems(Point at);
+
 	/**
 	 * Remove item at location and adapts the tree structure to the removal if needed.
 	 * @param item the item to remove

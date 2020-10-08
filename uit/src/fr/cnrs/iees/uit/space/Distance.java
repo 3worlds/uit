@@ -41,6 +41,8 @@ import fr.cnrs.iees.uit.UitException;
 // tested OK with version 0.0.1 on 21/11/2018
 public class Distance {
 	
+	// to prevent any instantiation
+	private Distance() {}
 	
 	/** utility: square */
 	public static double sqr(double a) {
@@ -84,8 +86,7 @@ public class Distance {
 	
 	/** euclidian distance in 2D */
 	public static double euclidianDistance(double x1, double y1, double x2, double y2) {
-//		return Math.hypot(x2-x1,y2-y1); // possible alternative with no inner overflow error
-		return Math.sqrt(squaredEuclidianDistance(x1,y1,x2,y2));
+		return Math.hypot(x2-x1,y2-y1);
 	}
 
 	/** euclidian distance in 3D */
