@@ -29,6 +29,7 @@
 package fr.cnrs.iees.uit.indexing;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +92,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
     }
 
     /**
-     * <p>Setting this to <strong>true</strong></p> will balance the tree depth and size following P. Tovainen's
+     * <p>Setting this to <strong>true</strong> will balance the tree depth and size following P. Tovainen's
      * benchmarking which shows that a relatively general solution exists which enables to keep performance
      * constant when the tree grows. Basically, it adapts the storage capacity of leaf nodes to the tree size
      * so that the average number of searches to find a particular node is kept reasonably low.</p>
@@ -127,7 +128,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
     }
 
     // maybe this should not be public? it's a helper method
-	protected Iterable<RegionIndexingNode<T>> getNodesWithin(Box limits) {
+	protected Collection<RegionIndexingNode<T>> getNodesWithin(Box limits) {
 		List<RegionIndexingNode<T>> nodes = new ArrayList<RegionIndexingNode<T>>();
 		collectOverlappingNodes(limits,root,nodes);
 		return nodes;
@@ -184,7 +185,7 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 			// excluding those in node (already tested)
 			Sphere s = new SphereImpl(at,dist);
 			Box b = Box.boundingBox(s);
-			Iterable<RegionIndexingNode<T>> list = getNodesWithin(b);
+			Collection<RegionIndexingNode<T>> list = getNodesWithin(b);
 			T item = null;
 			for (RegionIndexingNode<T> n:list)
 				if (n!=node)
@@ -245,9 +246,9 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
     }
 
     @Override
-	public Iterable<T> getItemsWithin(Box limits) {
+	public Collection<T> getItemsWithin(Box limits) {
     	// get all nodes overlapping limits (including children)
-		Iterable<RegionIndexingNode<T>> blist = getNodesWithin(limits);
+		Collection<RegionIndexingNode<T>> blist = getNodesWithin(limits);
 		List<T> extraItems = new ArrayList<>();
 		QuickListOfLists<T> result = new QuickListOfLists<T>();
 		// search node list for items
@@ -265,9 +266,9 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 	}
 
     // works exactly as above
-	@Override
-	public Iterable<T> getItemsWithin(Sphere limits) {
-		Iterable<RegionIndexingNode<T>> blist = getNodesWithin(Box.boundingBox(limits));
+ 	@Override
+	public Collection<T> getItemsWithin(Sphere limits) {
+		Collection<RegionIndexingNode<T>> blist = getNodesWithin(Box.boundingBox(limits));
 		List<T> extraItems = new ArrayList<>();
 		QuickListOfLists<T> result = new QuickListOfLists<T>();
 		for (RegionIndexingNode<T> n:blist)

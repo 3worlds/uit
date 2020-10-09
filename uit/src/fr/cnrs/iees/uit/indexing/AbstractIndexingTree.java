@@ -28,6 +28,9 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import fr.cnrs.iees.uit.IndexingTree;
 import fr.cnrs.iees.uit.space.Box;
 
@@ -87,8 +90,8 @@ public abstract class AbstractIndexingTree<T,N extends IndexingNode<T,N>> implem
 	}
 	
 	@Override
-	public Iterable<T> getAllItems() {
-		return root.items();
+	public Collection<T> getAllItems() {
+		return Collections.unmodifiableCollection(root.items());
 	}
 		
 }

@@ -28,6 +28,7 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -125,7 +126,7 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 	}
 
 	// recursive
-	@Override
+	
 	public RegionIndexingNode<T> insert(T item, Point loc) {
 		// do not insert same item twice at the same location
 		if (!items.containsKey(item)) {
@@ -256,7 +257,7 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 	}
 
 	@Override
-	public final Iterable<T> items() {
+	public final Collection<T> items() {
 		QuickListOfLists<T> list = new QuickListOfLists<T>();
 		getAllItems(list,this);
 		return list;

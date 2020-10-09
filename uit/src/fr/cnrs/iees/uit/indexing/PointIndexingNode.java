@@ -28,6 +28,8 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class PointIndexingNode<T> extends IndexingNode<T,PointIndexingNode<T>> {
 		children = new PointIndexingNode[1<<location.dim()]; // #children = 2^dim
 	}
 
-	@Override
+	
 	public PointIndexingNode<T> insert(T item, Point loc) {
 		location = loc;
 		this.item = item;
@@ -64,10 +66,10 @@ public class PointIndexingNode<T> extends IndexingNode<T,PointIndexingNode<T>> {
 	}
 
 	@Override
-	public Iterable<T> items() {
+	public Collection<T> items() {
 		List<T> l = new LinkedList<T>();
 		l.add(item);
-		return l;
+		return Collections.unmodifiableCollection(l);
 	}
 
 	@Override

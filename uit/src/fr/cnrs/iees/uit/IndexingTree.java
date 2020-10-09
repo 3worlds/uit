@@ -28,10 +28,7 @@
  **************************************************************************/
 package fr.cnrs.iees.uit;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-
 import fr.cnrs.iees.uit.indexing.IndexingNode;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Dimensioned;
@@ -100,19 +97,19 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	 * @param limits the Box in which to search for items
 	 * @return the list of items contained in the Box
 	 */
-	public abstract Iterable<T> getItemsWithin(Box limits);
+	public abstract Collection<T> getItemsWithin(Box limits);
 
 	/**
 	 * Get all items within a {@linkplain Sphere spherical region}.
 	 * @param limits the Sphere in which to search for items
 	 * @return the list of items contained in the Sphere
 	 */
-	public abstract Iterable<T> getItemsWithin(Sphere limits);
+	public abstract Collection<T> getItemsWithin(Sphere limits);
 
 	/**
 	 * Get all items of this tree in a flat list
 	 * @return
 	 */
-	public abstract Iterable<T> getAllItems();
+	public abstract Collection<T> getAllItems();
 	
 }

@@ -28,7 +28,7 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing;
 
-import fr.cnrs.iees.uit.space.Point;
+import java.util.Collection;
 
 /**
  * <p>This class is both a wrapper used to store items in the tree and the node  type used to build
@@ -50,14 +50,14 @@ public abstract class IndexingNode<T,N> {
 	 */
 	protected N[] children = null;
 
-	/**
-	 * Store an item into this node.
-	 *
-	 * @param item the item to store
-	 * @param loc the location (in space) where it should go
-	 * @return the node where the item was inserted, null if not inserted
-	 */
-	public abstract N insert(T item, Point loc);
+//	/**
+//	 * Store an item into this node. ---> moved to descendants
+//	 *
+//	 * @param item the item to store
+//	 * @param loc the location (in space) where it should go
+//	 * @return the node where the item was inserted, null if not inserted
+//	 */
+//	public abstract N insert(T item, Point loc);
 
 	/**
 	 * Will throw an Exception if more than one item is present in the node.
@@ -69,7 +69,7 @@ public abstract class IndexingNode<T,N> {
 	 * CAUTION: this returns <em>all</em> items starting at this node, including all those of its children nodes.
 	 * @return the list of items contained in the sub-tree starting at this node.
 	 */
-	public abstract Iterable<T> items();
+	public abstract Collection<T> items();
 
 	/** removes all items contained in this node */
 	public abstract void clear();

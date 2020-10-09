@@ -187,7 +187,7 @@ class BoundedRegionIndexingTreeTest {
 		p = Point.newPoint(6,4,3,5); 		tree.insert(9, p);
 		p = Point.newPoint(6,4,3,7); 		tree.insert(10, p);
 		// this is the max number of items that can be contained in a single node
-		assertEquals(tree.toShortString(),"RegionIndexingTree\n" +
+		assertEquals(tree.toShortString(),"BoundedRegionIndexingTree\n" +
 				"region = [[0.0,0.0,0.0,0.0],[10.0,10.0,8.0,12.0]]\n" +
 				"items={1,2,3,4,5,6,7,8,9,10}\n");
 		p = Point.newPoint(6,4,5,5); 		tree.insert(11, p);
@@ -197,7 +197,7 @@ class BoundedRegionIndexingTreeTest {
 		p = Point.newPoint(6,6,5,5); 		tree.insert(15, p);
 		p = Point.newPoint(6,6,5,7); 		tree.insert(16, p);
 		// now there must be only one item in each node
-		assertEquals(tree.toShortString(),"RegionIndexingTree\n" +
+		assertEquals(tree.toShortString(),"BoundedRegionIndexingTree\n" +
 				"region = [[0.0,0.0,0.0,0.0],[10.0,10.0,8.0,12.0]]\n" +
 				"items={}\n" +
 				"--items={1}\n" +
@@ -231,7 +231,7 @@ class BoundedRegionIndexingTreeTest {
 		p = Point.newPoint(0,5,5,12); 		tree.insert(25, p);
 		p = Point.newPoint(0,5,8,6); 		tree.insert(26, p);
 		p = Point.newPoint(0,0,0,6); 		tree.insert(27, p);
-		assertEquals(tree.toShortString(),"RegionIndexingTree\n" +
+		assertEquals(tree.toShortString(),"BoundedRegionIndexingTree\n" +
 				"region = [[0.0,0.0,0.0,0.0],[10.0,10.0,8.0,12.0]]\n" +
 				"items={}\n" +
 				"--items={1,18}\n" +
@@ -259,7 +259,7 @@ class BoundedRegionIndexingTreeTest {
 		p = Point.newPoint(2,1,7,10); 		tree.insert(33, p);
 		p = Point.newPoint(2,2,6,9); 		tree.insert(34, p);
 		p = Point.newPoint(4,2,6,10); 		tree.insert(35, p);
-		assertEquals(tree.toShortString(),"RegionIndexingTree\n" +
+		assertEquals(tree.toShortString(),"BoundedRegionIndexingTree\n" +
 				"region = [[0.0,0.0,0.0,0.0],[10.0,10.0,8.0,12.0]]\n" +
 				"items={}\n" +
 				"--items={1,18}\n" +
@@ -279,7 +279,7 @@ class BoundedRegionIndexingTreeTest {
 				"--items={15}\n" +
 				"--items={16,17,19}\n");
 		p = Point.newPoint(4,2,6,10); 		tree.insert(36, p);
-		assertEquals(tree.toShortString(),"RegionIndexingTree\n" +
+		assertEquals(tree.toShortString(),"BoundedRegionIndexingTree\n" +
 				"region = [[0.0,0.0,0.0,0.0],[10.0,10.0,8.0,12.0]]\n" +
 				"items={}\n" +
 				"--items={1,18}\n" +
@@ -547,7 +547,7 @@ class BoundedRegionIndexingTreeTest {
 	@Test
 	void testToString() {
 		fillTree();
-		assertEquals(tree.toString(),"RegionIndexingTree\n" +
+		assertEquals(tree.toString(),"BoundedRegionIndexingTree\n" +
 				"region=[[0.0,0.0,0.0,0.0]-[10.0,10.0,8.0,12.0]], items={}\n" +
 				"--region=[[0.0,0.0,0.0,0.0]-[5.0,5.0,4.0,6.0]], items={1@[4.0,4.0,3.0,5.0],18@[0.0,0.0,0.0,0.0]}\n" +
 				"--region=[[0.0,0.0,0.0,6.0]-[5.0,5.0,4.0,12.0]], items={2@[4.0,4.0,3.0,7.0],22@[0.0,0.0,0.0,12.0],27@[0.0,0.0,0.0,6.0]}\n" +
@@ -586,7 +586,7 @@ class BoundedRegionIndexingTreeTest {
 	@Test
 	void testToShortString() {
 		fillTree();
-		assertEquals(tree.toShortString(),"RegionIndexingTree\n" +
+		assertEquals(tree.toShortString(),"BoundedRegionIndexingTree\n" +
 				"region = [[0.0,0.0,0.0,0.0],[10.0,10.0,8.0,12.0]]\n" +
 				"items={}\n" +
 				"--items={1,18}\n" +
