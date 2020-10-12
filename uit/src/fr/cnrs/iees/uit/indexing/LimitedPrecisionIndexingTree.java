@@ -3,6 +3,7 @@ package fr.cnrs.iees.uit.indexing;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -64,7 +65,7 @@ public class LimitedPrecisionIndexingTree<T>
 		long[] init = new long[dim];
 		Arrays.fill(init,0L);
 		Locator lowerBounds = factory.newLocator(init);
-		root = new LimitedPrecisionIndexingNode<T>(null,maxSideLength,lowerBounds,this,0);
+		root = new LimitedPrecisionIndexingNode<T>(null,maxSideLength,lowerBounds,this,1);
 	}
 
     /**
@@ -163,13 +164,25 @@ public class LimitedPrecisionIndexingTree<T>
 		return node;
 	}
 
-	// CHECK THIS: entirely new!!!
 	@Override
 	public Collection<T> getNearestItems(Point at) {
+		return getNearestItems(at,1);
+	}
+	
+	/**
+	 * Returns nearest items up to rank, e.g. if rank = 3 return the nearest items, 
+	 * the 2nd nearest items and the 3rd nearest item as a flat list.
+	 * QUESTION: should we also return the distance ? It may be useful in many cases...
+	 * 
+	 * @param at
+	 * @param rank
+	 * @return
+	 */
+	public Collection<T> getNearestItems(Point at, int rank) {
 		Locator atloc = factory.newLocator(at);
 		// find box enclosing the point
 		LimitedPrecisionIndexingNode<T> node = getNearestNode(atloc);
-//		long dist2 = Long.MAX_VALUE;
+		long dist2 = Long.MAX_VALUE;
 		SortedMap<Long,List<T>> foundItems = new TreeMap<>();
 		// find the item closest to the point
 		for (T item: node.items.keySet()) {
@@ -182,7 +195,8 @@ public class LimitedPrecisionIndexingTree<T>
 //				dist2 = d;
 //			}
 		} 
-		long dist2 = foundItems.firstKey(); // the shortest squared distance found
+		if (!foundItems.isEmpty())
+			dist2 = foundItems.firstKey(); // the shortest squared distance found
 		// if the distance of the item to the point is larger than the distance
 		// of the point to the box edges, the item may be in the enclosing box
 		double dist = Math.sqrt(dist2);
@@ -205,7 +219,19 @@ public class LimitedPrecisionIndexingTree<T>
 						foundItems.get(d).add(it);
 			}
 		}
-		return foundItems.get(foundItems.firstKey());
+		if (rank==1)
+			return foundItems.get(foundItems.firstKey());
+		else {
+			int r = 1;
+			List<T> result = new ArrayList<>();
+			for (long key: foundItems.keySet()) {
+				result.addAll(foundItems.get(key));
+				if (r==rank)
+					return Collections.unmodifiableCollection(result);
+				r++;
+			}
+		}
+		return null;
 	}
 
     // recursive

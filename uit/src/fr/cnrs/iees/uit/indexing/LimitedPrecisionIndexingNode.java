@@ -56,7 +56,7 @@ public class LimitedPrecisionIndexingNode<T>
 		int index=0;
 		for (int i=0; i<dim; i++) {
 			int nn = -1;
-			if (loc.coordinate(i)<sideLength/2)
+			if (loc.coordinate(i)-lowerBounds.coordinate(i)<sideLength/2)
 				nn=0;
 			else // if (loc.coordinate(i)>=sideLength/2)
 				nn=1;
