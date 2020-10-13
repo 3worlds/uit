@@ -329,6 +329,13 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 			return null;
 	}
 
+	@Override
+	public void clear() {
+		itemToNodeMap.clear();
+		root.items.clear();
+		root.children = null;
+	}
+
 }
 
 

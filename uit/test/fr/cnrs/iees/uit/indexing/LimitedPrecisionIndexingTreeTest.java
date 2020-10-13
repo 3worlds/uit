@@ -196,7 +196,7 @@ class LimitedPrecisionIndexingTreeTest {
 		double precision = 0.000001;
 		tree2 = new LimitedPrecisionIndexingTree<>(limits2,precision);
 		Random rng = new Random();
-		int aVeryLargeNumber = 100000000;
+		int aVeryLargeNumber = 1000000;
 //		
 //		for (int i=0; i<100; i++)
 //		for (int j=0; j<100; j++)
@@ -256,6 +256,11 @@ class LimitedPrecisionIndexingTreeTest {
 			System.out.print(tree2.getItemsWithin(S).size()+" ");
 		}	
 		System.out.println("\n...done in "+(System.currentTimeMillis()-t0)+" ms.");
+		
+		System.out.println("clearing tree");
+		t0 =System.currentTimeMillis();
+		tree2.clear();
+		System.out.println("...done in "+(System.currentTimeMillis()-t0)+" ms.");
 	}
 
 }

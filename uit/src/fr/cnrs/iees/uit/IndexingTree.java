@@ -112,4 +112,9 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	 */
 	public abstract Collection<T> getAllItems();
 	
+	/**
+	 * empties this tree
+	 */
+	public abstract void clear();
+	
 }

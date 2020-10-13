@@ -254,7 +254,7 @@ public class LimitedPrecisionIndexingTree<T>
 		return nodes;
 	}
 	
-	private boolean regionContainsLocator(Locator regionLows, Locator regionUps, Locator loc) {
+	protected boolean regionContainsLocator(Locator regionLows, Locator regionUps, Locator loc) {
 		for (int i=0; i<dim; i++)
 			if ((loc.coordinate(i)>regionUps.coordinate(i)) || 
 				(loc.coordinate(i)<regionLows.coordinate(i)) )
@@ -370,5 +370,11 @@ public class LimitedPrecisionIndexingTree<T>
 		return sb.toString();
 	}
 
+	@Override
+	public void clear() {
+		itemToNodeMap.clear();
+		root.items.clear();
+		root.children = null;
+	}
 
 }

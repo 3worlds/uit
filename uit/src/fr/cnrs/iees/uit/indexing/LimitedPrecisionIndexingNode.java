@@ -6,6 +6,7 @@ import java.util.Map;
 
 import au.edu.anu.rscs.aot.collections.QuickListOfLists;
 import fr.cnrs.iees.uit.indexing.location.Locator;
+import fr.cnrs.iees.uit.space.Point;
 
 /**
  * Difference with RegionIndexingNode: items may share the same location
@@ -227,6 +228,33 @@ public class LimitedPrecisionIndexingNode<T>
 			sb.deleteCharAt(sb.length()-1);
 		sb.append("}\n");
 		return sb.toString();
+	}
+
+	public LimitedPrecisionIndexingNode<T> expandRootRegion(Point at) {
+		// if there is no parent, make one (NB this means I am the root and this parent is going to replace me)
+		if (parent==null) {
+			// work out the new region boundaries
+			long[] newlows = new long[dim];
+			for (int i=0; i<dim; i++)
+				newlows[i] = lowerBounds.coordinate(i);
+			long[] newups = new long[dim];
+			for (int i=0; i<dim; i++)
+				newups[i] = upperBounds.coordinate(i);
+			Locator loc = tree.factory.newLocator(at);
+			for (int i=0; i<dim; i++) {
+				if (loc.coordinate(i)<lowerBounds.coordinate(i))
+					newlows[i] =  lowerBounds.coordinate(i)-sideLength;
+				if (loc.coordinate(i)>upperBounds.coordinate(i))
+					newups[i] = upperBounds.coordinate(i)+sideLength;
+			}
+			Locator lower = tree.factory.newLocator(newlows);
+			parent = new LimitedPrecisionIndexingNode<T>(null,sideLength*2,lower,tree,mydepth-1);
+			parent.makeChildren(); // this creates empty children in the parent
+			// place me in my parent's children
+			Locator centre = Locator.add(lowerBounds,sideLength/2);
+			parent.children[parent.childIndex(centre)] = this;
+		}
+		return parent;
 	}
 
 
