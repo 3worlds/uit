@@ -30,6 +30,9 @@ import fr.cnrs.iees.uit.space.SphereImpl;
 public class LimitedPrecisionIndexingTree<T> 
 		extends AbstractIndexingTree<T,LimitedPrecisionIndexingNode<T>> {
 
+	// stupid optimisation
+	static private final long sqrtMax = Math.round(Math.sqrt(Long.MAX_VALUE));
+	
 	/** The factory for locator, making sure they all have the same precision */
 	protected LocatorFactory factory = null;
 	
@@ -275,7 +278,11 @@ public class LimitedPrecisionIndexingTree<T>
 			long x = loc.coordinate(i)-centre.coordinate(i);
 			rsq += x*x;
 		}
-		return (rsq<=radius);
+		// stupid optimisation
+		if (radius<sqrtMax)
+			return (rsq<=radius*radius);
+		else
+			return (Math.sqrt(rsq)<=radius);
 	}
 
 	@Override
