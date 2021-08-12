@@ -30,6 +30,7 @@ package fr.cnrs.iees.uit.space;
 
 /**
  * <p>An interface for geometric objects that have a dimension in space</p>
+ * 
  * @author Jacques Gignoux - 07-08-2018 
  *
  */

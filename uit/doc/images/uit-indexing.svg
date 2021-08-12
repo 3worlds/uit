@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="66cm" height="47cm" viewBox="360 285 1301 930" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="Arrière-plan">
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #bfbfbf" x="1164.43" y="286.836" width="127.55" height="28"/>
+      <text font-size="16" style="fill: #bfbfbf; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="1228.2" y="305.836">Dimensioned</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #bfbfbf" x="1164.43" y="314.836" width="127.55" height="20"/>
+      <text font-size="12.8" style="fill: #bfbfbf; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1167.43" y="328.836">+dim(): int</text>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="999.8" y="399.036" width="456.8" height="42"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="1228.2" y="418.036">IndexingTree&lt;T&gt;</text>
+      <text font-size="11.2" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:normal" x="1228.2" y="433.536">a generalization of a QuadTree to n dimensions</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="999.8" y="441.036" width="456.8" height="100"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1002.8" y="455.036">+depth(): int</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1002.8" y="471.036">+root(): T</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1002.8" y="487.036">+insert(node:T,at:Point)</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1002.8" y="503.036">+getNodesWithin(lowers:Point[],uppers:Point[]): Iterable&lt;T&gt;</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1002.8" y="519.036">+getNearestNode(at:Point): T</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1002.8" y="535.036">+remove(node:T,at:Point): boolean</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #bfbfbf" points="1228.2,354.078 1228.2,374.935 1228.2,374.935 1228.2,398.027 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #bfbfbf" fill-rule="evenodd" points="1236.2,354.078 1228.2,338.078 1220.2,354.078 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="512.077" y="587.746" width="189.65" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="606.902" y="606.746">IndexingNode&lt;T,N&gt;</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="512.077" y="615.746" width="189.65" height="36"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="515.077" y="629.746">#parent: N</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="515.077" y="645.746">#children: N[]</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="512.077" y="651.746" width="189.65" height="68"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="515.077" y="665.746">+clear()</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="515.077" y="681.746">+insert(item:T,at:Point)</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="515.077" y="697.746">+item(): T</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="515.077" y="713.746">+items(): Collection&lt;T&gt;</text>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1098.93" y="603.746" width="258.55" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="1228.2" y="622.746">AbstractIndexingTree&lt;T,N&gt;</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1098.93" y="631.746" width="258.55" height="36"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1101.93" y="645.746">#dim: int</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1101.93" y="661.746">#root: N</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1098.93" y="667.746" width="258.55" height="36"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1101.93" y="681.746">+dim(): int</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1101.93" y="697.746">+root(): T</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="1228.2,560.281 1228.2,580.392 1228.2,580.392 1228.2,602.74 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="1236.2,560.281 1228.2,544.281 1220.2,560.281 "/>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="702.733,653.746 900.325,653.746 900.325,653.746 1097.92,653.746 "/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="900.325" y="650.546"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="706.733" y="650.546"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="1093.92" y="650.546"/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="637.178" y="839.836" width="235.2" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="754.778" y="858.836">RegionIndexingNode&lt;T&gt;</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="637.178" y="867.836" width="235.2" height="68"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="640.178" y="881.836">+clear()()</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="640.178" y="897.836">+insert(item:T,at:Point)</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="640.178" y="913.836">+item(): T</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="640.178" y="929.836">+items(): Collection&lt;T&gt;</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="606.902,738.99 606.902,787.792 754.778,787.792 754.778,838.83 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="614.902,738.99 606.902,722.99 598.902,738.99 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="915.8" y="838.836" width="314.05" height="42"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="1072.83" y="857.836">RegionIndexingTree&lt;T,N&gt;</text>
+      <text font-size="11.2" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:normal" x="1072.83" y="873.336">a generalized region-based quadtree</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="915.8" y="880.836" width="314.05" height="116"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="918.8" y="894.836">+insert(item:T,at:Point)</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="918.8" y="910.836">+remove(item:T): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="918.8" y="926.836">+getItemsWithin(limits:Box): Collection&lt;T&gt;</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="918.8" y="942.836">+getItemsWithin(limits:Sphere): Collection&lt;T&gt;</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="918.8" y="958.836">+getNearestItem(at:Point): T</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="918.8" y="974.836">+size(): int</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="918.8" y="990.836">+setOptimisation(enabled:boolean)</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="1228.2,722.988 1228.2,779.289 1072.83,779.289 1072.83,837.826 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="1236.2,722.988 1228.2,706.988 1220.2,722.988 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1055.58" y="1164.55" width="345.25" height="42"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="1228.2" y="1183.55">BoundedRegionIndexingTree&lt;T&gt;</text>
+      <text font-size="11.2" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:normal" x="1228.2" y="1199.05">a generalized region quadtree initialised with a fixed region</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1055.58" y="1206.55" width="345.25" height="8"/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="736.3" y="1086.55" width="409.3" height="42"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="940.95" y="1105.55">ExpandingRegionIndexingTree&lt;T&gt;</text>
+      <text font-size="11.2" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:normal" x="940.95" y="1121.05">a generalized region quadtree building its region from the items added</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="736.3" y="1128.55" width="409.3" height="20"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="739.3" y="1142.55">+insert(item:T,at:Point)</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="1072.83,1015.07 1072.83,1049.69 940.95,1049.69 940.95,1086.55 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="1080.83,1015.07 1072.83,999.072 1064.83,1015.07 "/>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="1072.83,1015.07 1072.83,1048.84 1228.2,1048.84 1228.2,1163.56 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="1080.83,1015.07 1072.83,999.072 1064.83,1015.07 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="361.1" y="839.836" width="220" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="471.1" y="858.836">PointIndexingNode&lt;T&gt;</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="361.1" y="867.836" width="220" height="68"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="364.1" y="881.836">+clear()()</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="364.1" y="897.836">+insert(item:T,at:Point)</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="364.1" y="913.836">+item(): T</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="364.1" y="929.836">+items(): Collection&lt;T&gt;</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="606.902,737.982 606.902,787.288 471.1,787.288 471.1,838.83 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="614.902,737.982 606.902,721.982 598.902,737.982 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="445.452" y="959.636" width="323.4" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="607.152" y="978.636">LimitedPrecisionIndexingNode&lt;T&gt;</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="445.452" y="987.636" width="323.4" height="68"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="448.452" y="1001.64">+clear()</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="448.452" y="1017.64">+insert(item:T,at:Locator)</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="448.452" y="1033.64">+item(): T</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="448.452" y="1049.64">+items(): Collection&lt;T&gt;</text>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1249.45" y="1074.55" width="410.15" height="42"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="1454.53" y="1093.55">ExpandingLimitedPrecisionIndexingTree&lt;T&gt;</text>
+      <text font-size="11.2" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:normal" x="1454.53" y="1109.05">a discrete coordinate region of theExpandingRegionIndexingTree</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1249.45" y="1116.55" width="410.15" height="20"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1252.45" y="1130.55">+insert(item:T,at:Point)</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="1228.2,722.988 1228.2,779.794 1454.53,779.794 1454.53,838.836 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="1236.2,722.988 1228.2,706.988 1220.2,722.988 "/>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="1454.53,1048.08 1454.53,1059.69 1454.53,1059.69 1454.53,1073.54 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="1462.53,1048.08 1454.53,1032.08 1446.53,1048.08 "/>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="606.902,738.99 606.902,847.692 607.152,847.692 607.152,958.63 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="614.902,738.99 606.902,722.99 598.902,738.99 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1267.15" y="838.836" width="374.75" height="42"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="1454.53" y="857.836">LimitedPrecisionIndexingTree&lt;T,N&gt;</text>
+      <text font-size="11.2" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:normal" x="1454.53" y="873.336">a discrete coordinate version of the BoundedRegionIndexingTree</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1267.15" y="880.836" width="374.75" height="148"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1270.15" y="894.836">+insert(item:T,at:Point)</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1270.15" y="910.836">+remove(item:T): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1270.15" y="926.836">+getItemsWithin(limits:Box): Collection&lt;T&gt;</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1270.15" y="942.836">+getItemsWithin(limits:Sphere): Collection&lt;T&gt;</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1270.15" y="958.836">+getNearestItem(at:Point): T</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1270.15" y="974.836">+getNearestItems(at:Point): Collection&lt;T&gt;</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1270.15" y="990.836">+getNearestItems(at:Point,rank:int): Collection&lt;T&gt;</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1270.15" y="1006.84">+size(): int</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1270.15" y="1022.84">+setOptimisation(enabled:boolean)</text>
+    </g>
+  </g>
+</svg>

@@ -39,7 +39,7 @@ import fr.cnrs.iees.uit.space.BoxImpl;
 import fr.cnrs.iees.uit.space.Point;
 
 /**
- * <p>{@linkplain IndexingNode} used in region-based {@linkplain IndexingTree}</p>
+ * <p>{@linkplain IndexingNode} used in region-based {@link fr.cnrs.iees.uit.IndexingTree IndexingTree}</p>
  *
  *  <p><strong> NOTE</strong>: This implementation is a re-coding of the inner Quad class in
  *  the QuadTree class

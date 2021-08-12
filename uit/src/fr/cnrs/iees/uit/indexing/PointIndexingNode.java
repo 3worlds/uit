@@ -36,7 +36,8 @@ import java.util.List;
 import fr.cnrs.iees.uit.space.Point;
 
 /**
- * {@linkplain IndexingNode} used in <em>point-based</em> {@linkplain IndexingTree}s.
+ * {@linkplain IndexingNode} used in <em>point-based</em> 
+ * {@link fr.cnrs.iees.uit.IndexingTree IndexingTree}s.
  *
  * @author Jacques Gignoux - 10-09-2018
  *

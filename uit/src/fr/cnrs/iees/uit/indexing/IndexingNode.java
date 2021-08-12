@@ -32,7 +32,7 @@ import java.util.Collection;
 
 /**
  * <p>This class is both a wrapper used to store items in the tree and the node  type used to build
- * the {@linkplain IndexingTree}.</p>
+ * the {@link fr.cnrs.iees.uit.IndexingTree IndexingTree}.</p>
  *
  * @author Jacques Gignoux - 07-08-2018
  *

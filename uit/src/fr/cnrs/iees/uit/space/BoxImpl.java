@@ -31,7 +31,7 @@ package fr.cnrs.iees.uit.space;
 import fr.cnrs.iees.uit.UitException;
 
 /**
- * <p>An straightforward implementation of {@linkplain Box}.</p>
+ * <p>A straightforward implementation of {@link Box}.</p>
  * 
  * @author Jacques Gignoux - 07-08-2018 
  *
@@ -63,6 +63,11 @@ public class BoxImpl implements Box {
 		}
 	}
 	
+	/**
+	 * WARNING: This constructor should never be used - use the static factory methods of {@link Box} instead.
+	 * @param lower
+	 * @param upper
+	 */
 	public BoxImpl(Point lower, Point upper) {
 		this(lower,upper,true);
 	}

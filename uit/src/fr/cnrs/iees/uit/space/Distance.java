@@ -31,10 +31,12 @@ package fr.cnrs.iees.uit.space;
 import fr.cnrs.iees.uit.UitException;
 
 /**
- * Various ways of computing a distance
+ * <p>Various ways of computing an <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidian distance</a> 
+ * (static methods).</p>
  * 
- * NOTE: given the effect of rounding errors on number comparisons, it would be worth implementing
- * a precision for comparisons / computations.
+ * <p>NOTE: given the effect of rounding errors on number comparisons, we implemented a discrete
+ * version of this using {@code long}s (cf. {@link fr.cnrs.iees.uit.indexing.location.IntDistance IntDistance}).</p>
+ * 
  * @author Jacques Gignoux - 07-08-2018 
  *
  */
@@ -44,32 +46,67 @@ public class Distance {
 	// to prevent any instantiation
 	private Distance() {}
 	
-	/** utility: square */
+	/** utility: square 
+	 * 
+	 * @param a the number to square
+	 * @return a²
+	 */
 	public static double sqr(double a) {
 		return a*a;
 	}
 	
-	/** quick computation of distance in one dimension */
+	/** quick computation of distance in one dimension
+	 * 
+	 * @param x1 coordinate of first point
+	 * @param x2 coordinate of second point
+	 * @return the distance between the points
+	 */
 	public static double distance1D(double x1,double x2) {
 		return Math.abs(x1-x2);
 	}
 
-	/** squared euclidian distance in 1D */
+	/** squared euclidian distance in 1D 
+	 * 
+	 * @param x1 coordinate of first point
+	 * @param x2 coordinate of second point
+	 * @return the square of the distance between the points
+	 */
 	public static double squaredEuclidianDistance(double x1, double x2) {
 		return sqr(distance1D(x1,x2));
 	}
 	
-	/** squared euclidian distance in 2D */
+	/** squared euclidian distance in 2D 
+	 * 
+	 * @param x1 first coordinate of first point
+	 * @param y1 second coordinate of first point
+	 * @param x2 first coordinate of second point
+	 * @param y2 second coordinate of second point
+	 * @return the square of the distance between the points
+	 */
 	public static double squaredEuclidianDistance(double x1, double y1, double x2, double y2) {
 		return sqr(x1-x2)+sqr(y1-y2);
 	}
 
-	/** squared euclidian distance in 3D */
+	/** squared euclidian distance in 3D 
+	 * 
+	 * @param x1 first coordinate of first point
+	 * @param y1 second coordinate of first point
+	 * @param z1 third coordinate of first point
+	 * @param x2 first coordinate of second point
+	 * @param y2 second coordinate of second point
+	 * @param z2 third coordinate of second point
+	 * @return the square of the distance between the points
+	 */
 	public static double squaredEuclidianDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
 		return sqr(x1-x2)+sqr(y1-y2)+sqr(z1-z2);
 	}
 
-	/** squared euclidian distance in nD using Point */
+	/** squared euclidian distance in n dimensions using {@link Point} 
+	 * 
+	 * @param p1 the first point
+	 * @param p2 the second point 
+	 * @return the square of the distance between the points
+	 */
 	public static double squaredEuclidianDistance(Point p1, Point p2) {
 		if (p1.dim()!=p2.dim())
 			throw new UitException("squaredEuclidianDistance: Arguments of different dimensions");
@@ -79,22 +116,48 @@ public class Distance {
 		return dist;
 	}
 
-	/** euclidian distance in 1D */
+	/** euclidian distance in 1D. (Note: same as {@link Distance#distance1D distance1D(...)})
+	 * 
+	 * @param x1 coordinate of first point
+	 * @param x2 coordinate of second point
+	 * @return the distance between the points
+	 */
 	public static double euclidianDistance(double x1, double x2) {
 		return distance1D(x1,x2);
 	}
 	
-	/** euclidian distance in 2D */
+	/** euclidian distance in 2D 
+	 * 
+	 * @param x1 first coordinate of first point
+	 * @param y1 second coordinate of first point
+	 * @param x2 first coordinate of second point
+	 * @param y2 second coordinate of second point
+	 * @return the distance between the points
+	 */
 	public static double euclidianDistance(double x1, double y1, double x2, double y2) {
 		return Math.hypot(x2-x1,y2-y1);
 	}
 
-	/** euclidian distance in 3D */
+	/** euclidian distance in 3D 
+	 * 
+	 * @param x1 first coordinate of first point
+	 * @param y1 second coordinate of first point
+	 * @param z1 third coordinate of first point
+	 * @param x2 first coordinate of second point
+	 * @param y2 second coordinate of second point
+	 * @param z2 third coordinate of second point
+	 * @return the distance between the points
+	 */
 	public static double euclidianDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
 		return Math.sqrt(squaredEuclidianDistance(x1,y1,z1,x2,y2,z2));
 	}
 
-	/** euclidian distance in nD using Point */
+	/** euclidian distance in  n dimensions using {@link Point}
+	 * 
+	 * @param p1 the first point
+	 * @param p2 the second point 
+	 * @return the distance between the points
+	 */
 	public static double euclidianDistance(Point p1, Point p2) {
 		return Math.sqrt(squaredEuclidianDistance(p1,p2));
 	}
@@ -146,7 +209,7 @@ public class Distance {
 	 * <li>If the point is inside the box, then it returns the
 	 * <strong>perpendicular distance</strong> to the closest edge.</li>
 	 * <li>If the point is outside the box but a perpendicular distance can be drawn to
-	 * one or more edges (meaning that in some dimensions the point falls within the box):
+	 * one or more edges (meaning that in some dimensions the point falls within the box side width):
 	 *   <ul>
 	 *   <li>"Inner" distances are ignored.</li>
 	 *   <li>The returned distance is the <strong>square root of the sum of the squared perpendicular 
@@ -161,7 +224,7 @@ public class Distance {
 	 * </ul>
 	 * @param p the point
 	 * @param b the box
-	 * @return
+	 * @return the distance
 	 */
 	public static double distanceToClosestEdge(Point p, Box b) {
 		if (p.dim()!=b.dim())

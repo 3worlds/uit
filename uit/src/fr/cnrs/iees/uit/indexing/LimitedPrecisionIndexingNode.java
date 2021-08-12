@@ -230,7 +230,7 @@ public class LimitedPrecisionIndexingNode<T>
 		return sb.toString();
 	}
 
-	public LimitedPrecisionIndexingNode<T> expandRootRegion(Point at) {
+	protected LimitedPrecisionIndexingNode<T> expandRootRegion(Point at) {
 		// if there is no parent, make one (NB this means I am the root and this parent is going to replace me)
 		if (parent==null) {
 			// work out the new region boundaries

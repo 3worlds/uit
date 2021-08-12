@@ -39,8 +39,8 @@ import fr.cnrs.iees.uit.space.Box;
  * of any dimension (strictly speaking,  <a href="https://en.wikipedia.org/wiki/K-d_tree"><em>k</em>-d trees</a>),
  * e.g. a binary tree for dim=1, a quadtree for dim=2, and an octree for dim=3.</p>
  * 
- * <p>The implementation proposed is generic, i.e. the tree dimension is inferred from the dimension of the {@linkplain Point}s
- * used to build the tree.</p> 
+ * <p>The implementation proposed is generic, i.e. the tree dimension is inferred from the 
+ * dimension of the {@link fr.cnrs.iees.uit.space.Point Point}s used to build the tree.</p> 
  * 
  * <p>Implementations are provided for <a href="https://en.wikipedia.org/wiki/Quadtree#Point_quadtree">point-based</a> and 
  * <a href="https://en.wikipedia.org/wiki/Quadtree#Region_quadtree">region-based</a> trees.</p>  
@@ -48,7 +48,7 @@ import fr.cnrs.iees.uit.space.Box;
  * @author Jacques Gignoux - 29-08-2018 
  *
  * @param <T> the type of objects indexed
- * @param <N> the type of {@linkplain IndexingNode node} used to build this tree
+ * @param <N> the type of {@link IndexingNode node} used to build this tree
  */
 // Tested OK with version 0.0.1 on 24/11/2018
 public abstract class AbstractIndexingTree<T,N extends IndexingNode<T,N>> implements IndexingTree<T,N> {
@@ -59,7 +59,7 @@ public abstract class AbstractIndexingTree<T,N extends IndexingNode<T,N>> implem
 	protected N root = null;
 	
 	/**
-	 * <p>Constructor to build an {@linkplain IndexingTree} with <em>no</em> initial spatial domain (the
+	 * <p>Constructor to build an {@link IndexingTree} with <em>no</em> initial spatial domain (the
 	 * spatial domain is worked out from the first points inserted in the tree following the procedure
 	 * developed by <a href="https://dev.solita.fi/2015/08/06/quad-tree.html"><strong>Paavo Toivanen</strong></a>).</p>
 	 * 
@@ -71,9 +71,9 @@ public abstract class AbstractIndexingTree<T,N extends IndexingNode<T,N>> implem
 	}
 	
 	/**
-	 * <p>Constructor to build an {@linkplain IndexingTree} with an initial spatial domain. All points are going
+	 * <p>Constructor to build an {@link IndexingTree} with an initial spatial domain. All points are going
 	 * to be located within this domain, which is used to create the root node of the IndexingTree in region-based trees.
-	 * @param domain
+	 * @param domain the region of space where all items will lie
 	 */
 	protected AbstractIndexingTree(Box domain) {
 		this(domain.dim());

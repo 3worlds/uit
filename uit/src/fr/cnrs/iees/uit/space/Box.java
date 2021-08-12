@@ -35,7 +35,7 @@ import fr.cnrs.iees.uit.UitException;
  *
  * <p>This was designed to manipulate the concept of a finite block of space independent of
  * the space dimension. If dim=1, this will represent a segment, if dim=2 a rectangle, if dim=3
- * a rectangular cuboid.<p>
+ * a rectangular cuboid, etc.<p>
  *
  * <p>The assumption of alignment with the coordinate axes allows important optimisations and
  * should not be released</p>
@@ -63,6 +63,7 @@ public interface Box extends Dimensioned {
 	public abstract Point upperBounds();
 
 	/**
+	 * Access to the coordinates of the lower bound of the box.
 	 *
 	 * @param i the index of the coordinate requested
 	 * @return the i<sup>th</sup> coordinate of the lower bound of this box
@@ -70,6 +71,7 @@ public interface Box extends Dimensioned {
 	public abstract double lowerBound(int i);
 
 	/**
+	 * Access to the coordinates of the upper bound of the box.
 	 *
 	 * @param i the index of the coordinate requested
 	 * @return the i<sup>th</sup> coordinate of the upper bound of this box
@@ -77,8 +79,9 @@ public interface Box extends Dimensioned {
 	public abstract double upperBound(int i);
 
 	/**
-	 * <p>Tests for strict overlapping, i.e. boxes with a common edge are considered not
-	 * overlapping. In topological terms, returns true if the closed sets represented by
+	 * <p>Test for strict overlapping, i.e. boxes with a common edge are considered not
+	 * overlapping. In <a href="https://en.wikipedia.org/wiki/Topology">topological</a> terms, 
+	 * returns {@code true} if the closed sets represented by
 	 * the boxes overlap.</p>
 	 * @param other a box to test for overlap with this one
 	 * @return {@code true} if this Box overlaps the one passed as argument
@@ -94,10 +97,11 @@ public interface Box extends Dimensioned {
 	}
 
 	/**
-	 * <p>Tests for wide containement, i.e. a point is considered inside the box if
-	 * it lies on the box edges. In topological terms, returns true if the point
+	 * <p>Tests for wide containement, i.e. a point lying on the box edges
+	 * is considered inside the box. In <a href="https://en.wikipedia.org/wiki/Topology">topological</a>
+	 * terms, returns {@code true} if the point
 	 * is in the open set represented by this box.</p>
-	 * @param p a Point to test for falling into this box
+	 * @param p a point to test for falling into this box
 	 * @return {@code true} if this box contains the point passed as argument
 	 */
 	public default boolean contains(Point p) {
@@ -108,9 +112,9 @@ public interface Box extends Dimensioned {
 	}
 
 	/**
-	 * Tests if a point is on the border of a Box
-	 * @param p
-	 * @return
+	 * Tests if a point is on the border of a box
+	 * @param p a point to test for falling on the edge of the box
+	 * @return {@code true} if the point is on the edge
 	 */
 	public default boolean isPointOnBorder(Point p) {
 		if (contains(p)) {
@@ -122,17 +126,20 @@ public interface Box extends Dimensioned {
 	}
 
 	/**
-	 *
+	 * Test if a box is fully contained in this one (wide containment, cf. 
+	 * {@link Box#contains(Point) contains(Point)}).
+	 * 
 	 * @param b a Box to test for fully being contained into this one
-	 * @return {@code true} if this box contains the Box passed as argument
+	 * @return {@code true} if this box contains the box passed as argument
 	 */
 	public default boolean contains(Box b) {
 		return contains(b.lowerBounds()) && contains(b.upperBounds());
 	}
 
 	/**
+	 *	Compute the centroid of this box.
 	 *
-	 * @return the centroid of this Box.
+	 * @return the centroid of this box.
 	 */
 	public default Point centre() {
 		int dim = lowerBounds().dim();
@@ -142,12 +149,17 @@ public interface Box extends Dimensioned {
 		return Point.newPoint(c);
 	}
 
-	/** @return the length / surface / volume / hypervolume (according to dimension) of this box */
+	/** 
+	 * Compute the length / surface / volume / hypervolume (according to dimension) of this box.
+	 * 
+	 * @return the box size relevant to its space  
+	 * */
 	public abstract double size();
 
 	/**
-	 * Build the smallest Box containing two points. Use this method to build a Box without checking if the
-	 * Points suitably contain lower and upper values only.
+	 * Build the smallest box containing two points. Use this method to build a {@code Box} 
+	 * without checking if the {@code Point}s suitably contain lower and upper values only.
+	 * Of course the points must be of the same dimension, otherwise an Exception is thrown.
 	 *
 	 * @param A a Point
 	 * @param B another Point
@@ -167,9 +179,11 @@ public interface Box extends Dimensioned {
 	}
 
 	/**
+	 * Test if a {@code Sphere} is fully contained in this box (wide containment, cf. 
+	 * {@link Box#contains(Point) contains(Point)}).
 	 *
 	 * @param s a Sphere to test for fully being contained into this one
-	 * @return {@code true} if this box contains the Sphere passed as argument
+	 * @return {@code true} if this box contains the sphere passed as argument
 	 */
 	public default boolean contains(Sphere s) {
 		for (int i=0; i<dim(); i++)
@@ -192,6 +206,8 @@ public interface Box extends Dimensioned {
 	/**
 	 * Build the smallest <em>(hyper)cubic</em> Box containing a Sphere. By <em>cubic</em> we mean a Box
 	 * having the same side length in all dimensions.
+	 * <p>Note: yes, this is returning the same result as {@link Box#boundingBox(Sphere) boundingBox(Sphere)}.
+	 * Thank you for your careful reading.</p>
 	 *
 	 * @param s the Sphere to wrap into a Box
 	 * @return the smallest Box containing Sphere s
@@ -217,6 +233,7 @@ public interface Box extends Dimensioned {
 	}
 
 	/**
+	 * Access to the length of any side of the box.
 	 *
 	 * @param i the index of the requested side length
 	 * @return the length of the side of the box in i<sup>th</sup> dimension
@@ -226,8 +243,12 @@ public interface Box extends Dimensioned {
 	}
 
 	/**
-	 * A hypercube is a generalisation of a cube to n>3 dimensions. NB: this method always returns {@code true}
-	 * in dimension 1.
+	 * Test if this box is (hyper)cubic, i.e. if all its side lengths are equal.
+	 * A hypercube is a generalisation of a cube to n&gt;3 dimensions. 
+	 * 
+	 * <p>NB: as you noticed it, this method always returns {@code true}
+	 * in dimension 1.</p>
+	 * 
 	 * @return {@code true} if this Box is a square, cube or hypercube.
 	 */
 	public default boolean isCube() {

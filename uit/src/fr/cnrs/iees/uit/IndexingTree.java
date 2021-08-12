@@ -37,6 +37,7 @@ import fr.cnrs.iees.uit.space.Sphere;
 import fr.ens.biologie.generic.Sizeable;
 
 /**
+ * <p>The base interface for an indexing tree.</p>
  * <p>Classes implementing this interface are meant to index objects in space using a tree structure, like binary trees,
  * quad-trees and octrees. This interface is the root of the hierarchy.  </p>
  *
@@ -56,17 +57,8 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	 * <p>Insert an object in the tree at a given location</p>
 	 * @param item the object to insert
 	 * @param at the location where to insert it.
-	 * @return true if successfully inserted
 	 */
 	public abstract void insert(T item, Point at);
-
-//	/**
-//	 * Get the node closest to location
-//	 * @param at the location
-//	 * @return the closest node
-//	 */
-//	FLAW - this is a bad idea - it shouldnt be public but should be a utility for descendants
-//	public abstract N getNearestNode(Point at);
 
 	/**
 	 * Get the item closest to location
@@ -87,7 +79,6 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	/**
 	 * Remove item at location and adapts the tree structure to the removal if needed.
 	 * @param item the item to remove
-	 * @param at the location
 	 * @return true if item successfully removed
 	 */
 	public abstract boolean remove(T item);

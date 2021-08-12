@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="45cm" height="29cm" viewBox="471 162 886 571" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs/>
+  <g id="Arrière-plan">
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="472.5" y="323" width="229.65" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="587.325" y="342">Point</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="472.5" y="351" width="229.65" height="132"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="475.5" y="365">+coordinate(i:int): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="475.5" y="381">+x(): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="475.5" y="397">+y(): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="475.5" y="413">+z(): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="475.5" y="429">+clone(): Point</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="475.5" y="445">+add(A:Point,B:Point): Point</text>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 1; stroke: #000000" x1="475.5" y1="446.6" x2="654" y2="446.6"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="475.5" y="461">+add(A:Point,scalar:double): Point</text>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 1; stroke: #000000" x1="475.5" y1="462.6" x2="695.15" y2="462.6"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="475.5" y="477">+newPoint(x1...:double): Point</text>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 1; stroke: #000000" x1="475.5" y1="478.6" x2="670.45" y2="478.6"/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="880.374" y="163.8" width="127.55" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="944.149" y="182.8">Dimensioned</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="880.374" y="191.8" width="127.55" height="20"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="883.374" y="205.8">+dim(): int</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="944.149,230.036 944.149,274.895 587.325,274.895 587.325,321.99 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="952.149,230.036 944.149,214.036 936.149,230.036 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="804.4" y="355" width="279.5" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="944.15" y="374">Box</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="804.4" y="383" width="279.5" height="276"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700" x="807.4" y="397">+lowerBound(i:int): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700" x="807.4" y="413">+upperBound(i:int): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700" x="807.4" y="429">+lowerBounds(): Point</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700" x="807.4" y="445">+upperBounds(): Point</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:normal" x="807.4" y="461">+centre(): Point</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:normal" x="807.4" y="477">+size(): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:normal" x="807.4" y="493">+sideLength(): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:normal" x="807.4" y="509">+overlaps(other:Box): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:normal" x="807.4" y="525">+overlaps(other:Sphere): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:normal" x="807.4" y="541">+contains(p:Point): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:normal" x="807.4" y="557">+contains(s:Sphere): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:normal" x="807.4" y="573">+contains(b:Box): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:italic;font-weight:normal" x="807.4" y="589">+isCube(): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="807.4" y="605">+boundingBox(A:Point,B:Point): Box</text>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 1; stroke: #000000" x1="807.4" y1="606.6" x2="1069.2" y2="606.6"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="807.4" y="621">+boundingBox(s:Sphere): Box</text>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 1; stroke: #000000" x1="807.4" y1="622.6" x2="1015.3" y2="622.6"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="807.4" y="637">+boundingCube(A:Point,B:Point): Box</text>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 1; stroke: #000000" x1="807.4" y1="638.6" x2="1076.9" y2="638.6"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="807.4" y="653">+boundingCube(s:Sphere): Box</text>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 1; stroke: #000000" x1="807.4" y1="654.6" x2="1023" y2="654.6"/>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="779.228,409 746.275,409 746.275,409 702.15,409 "/>
+      <polygon style="fill: #000000; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="804.4,409 790.4,413.8 776.4,409 790.4,404.2 "/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="746.275" y="405.8"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="772.4" y="405.8"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="706.15" y="405.8">2</text>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="591.488" y="553.36" width="84" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="633.488" y="572.36">PointND</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="587.325,501.236 587.325,525.676 633.488,525.676 633.488,552.353 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="595.325,501.236 587.325,485.236 579.325,501.236 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="902.624" y="704.21" width="83.05" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="944.149" y="723.21">BoxImpl</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="944.15,678.245 944.15,689.606 944.149,689.606 944.149,703.203 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="952.15,678.245 944.15,662.245 936.15,678.245 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1127.33" y="323" width="229" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700" x="1241.83" y="342">Sphere</text>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1127.33" y="351" width="229" height="116"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1130.33" y="365">+centre(): Point</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1130.33" y="381">+radius(): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:700" x="1130.33" y="397">+size(): double</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1130.33" y="413">+overlaps(other:Box): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1130.33" y="429">+overlaps(other:Sphere): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1130.33" y="445">+contains(p:Point): boolean</text>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:italic;font-weight:normal" x="1130.33" y="461">+contains(s:Sphere): boolean</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="944.149,231.042 944.149,275.399 1241.83,275.399 1241.83,321.991 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="952.149,231.042 944.149,215.042 936.149,231.042 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="1185.08" y="528.51" width="113.5" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="1241.83" y="547.51">SphereImpl</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="1241.83,486.245 1241.83,505.756 1241.83,505.756 1241.83,527.503 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="1249.83,486.245 1241.83,470.245 1233.83,486.245 "/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="490.928" y="553.36" width="81.75" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="531.803" y="572.36">Point1D</text>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="543.928" y="638.86" width="81.75" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="584.803" y="657.86">Point2D</text>
+    </g>
+    <g>
+      <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="641.614" y="638.86" width="81.75" height="28"/>
+      <text font-size="16" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="682.489" y="657.86">Point3D</text>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke-dasharray: 8; stroke: #000000" points="587.325,502.246 587.325,526.685 531.803,526.685 531.803,553.36 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="595.325,502.246 587.325,486.246 579.325,502.246 "/>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="633.488,600.603 633.488,618.11 682.489,618.11 682.489,637.853 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="641.488,600.603 633.488,584.603 625.488,600.603 "/>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="633.488,599.596 633.488,618.11 584.803,618.11 584.803,638.86 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="641.488,599.596 633.488,583.596 625.488,599.596 "/>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="1102.16,337 907.739,337 907.739,337 702.15,337 "/>
+      <polygon style="fill: #000000; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="1127.33,337 1113.33,341.8 1099.33,337 1113.33,332.2 "/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="907.739" y="333.8"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="1095.33" y="333.8"/>
+      <text font-size="12.8" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="706.15" y="333.8"/>
+    </g>
+    <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #ffffff" x="939.67" y="333.578" width="8.66461" height="8.66461" rx="0" ry="0"/>
+    <g>
+      <polyline style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" points="944.149,231.042 944.149,291.903 944.15,291.903 944.15,355 "/>
+      <polygon style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="952.149,231.042 944.149,215.042 936.149,231.042 "/>
+    </g>
+  </g>
+</svg>

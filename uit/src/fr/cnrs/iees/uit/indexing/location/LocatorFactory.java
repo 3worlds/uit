@@ -52,7 +52,6 @@ public class LocatorFactory implements Dimensioned {
 	 * to 1/precision and transformed into longs).
 	 * 
 	 * @param P the point to convert
-	 * @param precision the precision to use
 	 * @return the Locator matching P
 	 */
 	public Locator newLocator(Point P) {
@@ -82,7 +81,6 @@ public class LocatorFactory implements Dimensioned {
 	 * Converts a Locator to a Point
 	 * 
 	 * @param L
-	 * @param precision
 	 * @return
 	 */
 	public Point toPoint(Locator L) {
