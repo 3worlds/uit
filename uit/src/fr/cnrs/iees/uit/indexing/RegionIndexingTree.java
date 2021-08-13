@@ -39,17 +39,16 @@ import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Distance;
 import fr.cnrs.iees.uit.space.Point;
 import fr.cnrs.iees.uit.space.Sphere;
-import fr.cnrs.iees.uit.space.SphereImpl;
 
 /**
  * <p>Implementation of a region-based <em>k</em>-d tree.</p>
  *
  *  <p><strong> NOTE</strong>: This implementation is a re-coding of the QuadTree and Octtree classes
  *  written by <a href="https://dev.solita.fi/2015/08/06/quad-tree.html"><strong>Paavo Toivanen</strong></a>.
- *  Compared to his work, we have</p>
+ *  Compared to his work, we have:</p>
  *  <ul>
  *  <li>generalised the QuadTree and Octree classes to the n-dimensional case into a single class (this one);</li>
- *  <li>rewritten in generic terms using the {@linkplain Point}, {@linkplain Box} and {@linkplain Sphere}
+ *  <li>rewritten in generic terms using the {@link Point}, {@link Box} and {@link Sphere}
  *  classes the spatial tests used to put newcomers into the proper spatial regions;</li>
  *  <li>implemented a more efficient subclass for the case where the initial root region size is known.</li>
  *  </ul>
@@ -183,7 +182,8 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		if (dist > Distance.distanceToClosestEdge(at, node.region())) {
 			// search the sphere for items at distance dist from point at
 			// excluding those in node (already tested)
-			Sphere s = new SphereImpl(at,dist);
+//			Sphere s = new SphereImpl(at,dist);
+			Sphere s = Sphere.newSphere(at,dist);
 			Box b = Box.boundingBox(s);
 			Collection<RegionIndexingNode<T>> list = getNodesWithin(b);
 			T item = null;

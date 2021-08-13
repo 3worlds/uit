@@ -32,13 +32,16 @@ import java.util.Collection;
 
 /**
  * <p>This class is both a wrapper used to store items in the tree and the node  type used to build
- * the {@link fr.cnrs.iees.uit.IndexingTree IndexingTree}.</p>
+ * the {@link fr.cnrs.iees.uit.indexing.IndexingTree IndexingTree}.</p>
+ * 
+ * <p>This class and its subclasses are only internally used by {@link IndexingTree} implementations, 
+ * so their visibility is limited to this package.</p>
  *
  * @author Jacques Gignoux - 07-08-2018
  *
  * @param <T> the type of objects indexed, ie stored in these nodes
  */
-public abstract class IndexingNode<T,N> {
+abstract class IndexingNode<T,N> {
 
 	/** The parent node, i.e. the node immediately above in the tree.*/
 	protected N parent = null;

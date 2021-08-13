@@ -29,7 +29,6 @@
 package fr.cnrs.iees.uit.indexing;
 
 import fr.cnrs.iees.uit.space.Box;
-import fr.cnrs.iees.uit.space.BoxImpl;
 import fr.cnrs.iees.uit.space.Point;
 
 /**
@@ -128,7 +127,7 @@ public class QuadTest {
     	for (int i=0; i<(1<<dim); i++) {
     		Point lower = Point.newPoint(mins[i]);
     		Point upper = Point.newPoint(maxs[i]);
-    		Box reg = new BoxImpl(lower, upper); 
+    		Box reg = Box.boundingBox(lower, upper); 
     		children[i] = new QuadTest(this,reg);
     	}
     }
@@ -139,7 +138,7 @@ public class QuadTest {
 		System.out.println("3D tree (octree)");
 		Point A = Point.newPoint(1,4,7);
 		Point B = Point.newPoint(3,6,9);
-		QuadTest q = new QuadTest(null,new BoxImpl(A,B));
+		QuadTest q = new QuadTest(null,Box.boundingBox(A,B));
 		q.initQuad();
 		for (int i=0; i<1<<q.dim; i++)
 			System.out.println(q.children[i].region.toString());

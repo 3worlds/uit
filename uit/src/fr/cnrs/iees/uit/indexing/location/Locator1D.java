@@ -29,13 +29,13 @@
 package fr.cnrs.iees.uit.indexing.location;
 
 /**
- * An optimised implementation of a Point in dimension 1.
+ * An optimised implementation of a Locator in dimension 1.
  * 
  * @author Jacques Gignoux - 10-09-2018 
  *
  */
 //Tested OK on version 0.0.1 on 21/11/2018
-public class Locator1D implements Locator {
+class Locator1D implements Locator {
 
 	private long x = 0L;
 	private LocatorFactory factory;

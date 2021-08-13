@@ -202,10 +202,13 @@ public class Distance {
 	/**
 	 * <p>Computes the distance of a {@link Point} to the closest edge of a {@link Box}.</p>
 	 * <p>This is not as trivial as it seems. Each edge is a finite segment in its dimension, so that if
-	 * the distance is computed as a perpendicular distance (the intuitive way) only if this
+	 * the distance can be computed as a perpendicular distance (the intuitive way) only if a
 	 * perpendicular line can be drawn between that point and the segment that represents the 
 	 * box edge. In other words,</p>
-	 * <ul> 
+	 * 
+	 * <img src="{@docRoot}/../doc/images/distance-to-closest-edge.svg" align="right" width="200" 
+	 	alt="the space classes"/>
+	 * <ol> 
 	 * <li>If the point is inside the box, then it returns the
 	 * <strong>perpendicular distance</strong> to the closest edge.</li>
 	 * <li>If the point is outside the box but a perpendicular distance can be drawn to
@@ -214,6 +217,7 @@ public class Distance {
 	 *   <li>"Inner" distances are ignored.</li>
 	 *   <li>The returned distance is the <strong>square root of the sum of the squared perpendicular 
 	 * "outer" distances</strong>.</li>
+	 *   <em>NB: this complexity arises in dimensions &gt;2</em>
 	 *   </ul>
 	 * </li> 
 	 * <li>
@@ -221,7 +225,8 @@ public class Distance {
 	 * also outside the box, the returned distance is <strong>square root of the sum of the squared perpendicular 
 	 * distances to all edges.</strong>.
 	 * </li>
-	 * </ul>
+	 * </ol>
+	 * 
 	 * @param p the point
 	 * @param b the box
 	 * @return the distance

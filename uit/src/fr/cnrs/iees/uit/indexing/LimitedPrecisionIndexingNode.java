@@ -15,7 +15,7 @@ import fr.cnrs.iees.uit.space.Point;
  *
  * @param <T>
  */
-public class LimitedPrecisionIndexingNode<T> 
+class LimitedPrecisionIndexingNode<T> 
 		extends IndexingNode<T, LimitedPrecisionIndexingNode<T>> {
 
 	private int mydepth = 0;

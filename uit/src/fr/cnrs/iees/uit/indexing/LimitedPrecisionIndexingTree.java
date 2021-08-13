@@ -19,10 +19,10 @@ import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Distance;
 import fr.cnrs.iees.uit.space.Point;
 import fr.cnrs.iees.uit.space.Sphere;
-import fr.cnrs.iees.uit.space.SphereImpl;
 
 /**
- * a discrete coordinate version of the RegionIndexingTree
+ * As a {@link BoundedRegionIndexingTree}, but using discrete coordinates internally instead
+ * of continuous ones.
  * 
  * @author Jacques Gignoux - 8 oct. 2020
  *
@@ -48,10 +48,15 @@ public class LimitedPrecisionIndexingTree<T>
     private long maxSideLength = 0;
 
 	/**
-	 * Constructor - always provide an initial region
+	 * Constructor from a box. All items indexed by this tree will stay inside this box.
+	 * The precision argument is used to scale the
+	 * coordinates internally: all coordinate values are multiplied by 1/precision and truncated 
+	 * to {@code long}s, so that exact comparison of locations becomes possible. In this system, 
+	 * two or more items can have exactly the same location.
 	 * 
-	 * @param domain the initial region
-	 * @param precision the precision of distance measurements
+	 * @param domain the initial domain to start the tree with
+	 * @param precision the precision of coordinates - a distance smaller than precision is considered 
+	 * equal to zero
 	 */
 	public LimitedPrecisionIndexingTree(Box domain, double precision) {
 		super(domain);
@@ -173,14 +178,14 @@ public class LimitedPrecisionIndexingTree<T>
 	}
 	
 	/**
-	 * Returns nearest items up to rank, e.g. if rank = 3 return the nearest items, 
-	 * the 2nd nearest items and the 3rd nearest item as a flat list.
-	 * QUESTION: should we also return the distance ? It may be useful in many cases...
+	 * <p>Returns nearest items up to rank, e.g. if rank = 3 return the nearest items, 
+	 * the 2nd nearest items and the 3rd nearest item as a flat list.</p>
 	 * 
-	 * @param at
-	 * @param rank
-	 * @return
+	 * @param at the location which neighbours are searched
+	 * @param rank the rank of the  neighbour wanted (1 = neares neighbour, 2 = second nearest, etc.)
+	 * @return the rank<sup>th</sup> nearest item to the point argument
 	 */
+	// QUESTION: should we also return the distance ? It may be useful in many cases...
 	public Collection<T> getNearestItems(Point at, int rank) {
 		Locator atloc = factory.newLocator(at);
 		// find box enclosing the point
@@ -208,7 +213,8 @@ public class LimitedPrecisionIndexingTree<T>
 		if (dist > Distance.distanceToClosestEdge(at,reg)) {
 			// search the sphere for items at distance dist from point at
 			// excluding those in node (already tested)
-			Sphere s = new SphereImpl(at,dist);
+//			Sphere s = new SphereImpl(at,dist);
+			Sphere s = Sphere.newSphere(at,dist);
 			Box b = Box.boundingBox(s);
 			Locator lows = factory.newLocator(b.lowerBounds());
 			Locator ups = factory.newLocator(b.upperBounds());

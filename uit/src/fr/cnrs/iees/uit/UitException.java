@@ -29,6 +29,7 @@
 package fr.cnrs.iees.uit;
 
 /**
+ * A class for {@link Exception}s originating from the <strong>uit</strong> library.
  * 
  * @author Jacques Gignoux - 04-10-2018 
  *

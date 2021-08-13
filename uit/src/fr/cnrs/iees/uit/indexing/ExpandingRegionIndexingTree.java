@@ -30,7 +30,6 @@ package fr.cnrs.iees.uit.indexing;
 
 import fr.cnrs.iees.uit.UitException;
 import fr.cnrs.iees.uit.space.Box;
-import fr.cnrs.iees.uit.space.BoxImpl;
 import fr.cnrs.iees.uit.space.Point;
 
 /**
@@ -53,12 +52,21 @@ import fr.cnrs.iees.uit.space.Point;
  */
 public class ExpandingRegionIndexingTree<T> extends RegionIndexingTree<T> {
 
-	// instantiate a completely empty expanding tree
+	/** 
+	 * Instantiate a completely empty expanding tree
+	 * 
+	 * @param dim the dimension of the space indexed
+	 */
     public ExpandingRegionIndexingTree(int dim) {
     	super(dim);
     }
 
-    // instantiate an empty indexing tree with a region to start with
+    /** 
+     * Instantiate an empty indexing tree with a region ({@code Box}) to start with. This box can be later enlarged to fit
+	 * items located outside the initial box. 
+     * 
+     * @param domain the initial region.
+     */
     public ExpandingRegionIndexingTree(Box domain) {
     	super(domain.dim());
     	Box reg = Box.boundingCube(domain.lowerBounds(),domain.upperBounds());
@@ -68,7 +76,8 @@ public class ExpandingRegionIndexingTree<T> extends RegionIndexingTree<T> {
 	@Override
 	public void insert(T item, Point at) {
         if (root == null) {
-        	Box reg = new BoxImpl(at.clone(),at.clone());
+//        	Box reg = new BoxImpl(at.clone(),at.clone());
+        	Box reg = Box.boundingBox(at.clone(),at.clone());
             root = new RegionIndexingNode<T>(null,reg,this);
         }
         while (!root.region().contains(at))

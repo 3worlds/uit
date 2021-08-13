@@ -1,5 +1,6 @@
 /**
- * <p>Various implementations of the {@link fr.cnrs.iees.uit.IndexingTree IndexingTree} interface.</p>
+ * <p>The {@link fr.cnrs.iees.uit.indexing.IndexingTree IndexingTree} interface (representing 
+ * a generic <em>k</em>-d tree) and different kinds of implementation.</p>
  * 
  * <p><em>k</em>-d trees partition space as a binary tree, so that searching for nearby points
  * based on their locations reduces to refine the region of space in which they lie (= going deeper
@@ -8,7 +9,7 @@
  * Partitioning can be based on <em>points</em> or on <em>regions</em>. <strong>We have only fully
  * implemented <em>region-based</em> trees here.</strong></p>
  * 
- * <p>The {@lcode IndexingTree} interface groups methods that are expected for any indexing tree:
+ * <p>The {@link IndexingTree} interface groups methods that are expected for any indexing tree:
  * finding nearest neighbours, finding items in a small region. Any kind of object can be stored
  * in an {@code IndexingTree} ({@code T} parameter). Implementations of {@code IndexingTree}
  * differ in important details:</p>
@@ -29,8 +30,8 @@
  * </ul>
  * 
  * <p>The {@link IndexingNode} hierarchy represent the nodes of the various indexing tree 
- * implementations. They are not meant to be used directly by the end-user: only locations and
- * items are manipulated.</p>
+ * implementations. {@code IndexingNode} and its subclasses are only internally used by 
+ * {@code IndexingTree} implementations, so their visibility is limited to this package.</p>
  * 
  * <img src="{@docRoot}/../doc/images/uit-indexing.svg" align="middle" width="1200" 
  * alt="the indexing tree hierarchy"/>

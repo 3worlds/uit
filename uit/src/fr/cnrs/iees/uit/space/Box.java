@@ -100,7 +100,7 @@ public interface Box extends Dimensioned {
 	 * <p>Tests for wide containement, i.e. a point lying on the box edges
 	 * is considered inside the box. In <a href="https://en.wikipedia.org/wiki/Topology">topological</a>
 	 * terms, returns {@code true} if the point
-	 * is in the open set represented by this box.</p>
+	 * is in the open set represented by this box.</p>Instantiate
 	 * @param p a point to test for falling into this box
 	 * @return {@code true} if this box contains the point passed as argument
 	 */
@@ -258,8 +258,13 @@ public interface Box extends Dimensioned {
 		return true;
 	}
 
-	/** reads a Box value from a String - assumes the Box has been saved with the toString()
-	 * method of a Box implementation */
+	/**
+	 * Builds a {@code Box} instance from a {@link String} - assumes the String has been produced 
+	 * previously with a call to {@code toString()} method of a {@code Box} implementation 
+	 * 
+	 * @param s the string to parse
+	 * @return the new {@code Box} instance
+	 */
 	public static Box valueOf(String s) {
 		if (s.trim().isEmpty())
 			return null;

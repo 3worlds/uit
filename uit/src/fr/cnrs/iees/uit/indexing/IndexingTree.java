@@ -26,10 +26,10 @@
  *  along with UIT.  If not, see <https://www.gnu.org/licenses/gpl.html>. *
  *                                                                        *
  **************************************************************************/
-package fr.cnrs.iees.uit;
+package fr.cnrs.iees.uit.indexing;
 
 import java.util.Collection;
-import fr.cnrs.iees.uit.indexing.IndexingNode;
+
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Dimensioned;
 import fr.cnrs.iees.uit.space.Point;
@@ -61,37 +61,43 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 	public abstract void insert(T item, Point at);
 
 	/**
-	 * Get the item closest to location
+	 * <p>Get the item closest to location.</p> 
+	 * <p>CAUTION: will pick the first item encountered if two or more items are
+	 * found exactly at the same distance of the argument.</p>
 	 * @param at the location
 	 * @return the item closest to this location
 	 */
 	public abstract T getNearestItem(Point at);
 
 	/**
-	 * Get the item closest to location
+	 * <p>Get the items closest to location.</p>
+	 * <p>Will pick all the items found at exactly the same distance of the argument.</p>
 	 * @param at the location
-	 * @return the item closest to this location
+	 * @return the list of items closest to this location
 	 */
 	public default Collection<T> getNearestItems(Point at) {
 		return null;
 	}
 
 	/**
-	 * Remove item at location and adapts the tree structure to the removal if needed.
+	 * Remove item and adapts the tree structure to the removal if needed.
+	 * 
 	 * @param item the item to remove
 	 * @return true if item successfully removed
 	 */
 	public abstract boolean remove(T item);
 
 	/**
-	 * Get all items within a {@linkplain Box}.
+	 * Get all items within a {@linkplain Box} contained in the tree space.
+	 * 
 	 * @param limits the Box in which to search for items
 	 * @return the list of items contained in the Box
 	 */
 	public abstract Collection<T> getItemsWithin(Box limits);
 
 	/**
-	 * Get all items within a {@linkplain Sphere spherical region}.
+	 * Get all items within a {@linkplain Sphere spherical region} contained in the tree space.
+	 * 
 	 * @param limits the Sphere in which to search for items
 	 * @return the list of items contained in the Sphere
 	 */
@@ -99,7 +105,7 @@ public interface IndexingTree<T,N extends IndexingNode<T,N>> extends Dimensioned
 
 	/**
 	 * Get all items of this tree in a flat list
-	 * @return
+	 * @return the list of all items contained in the tree
 	 */
 	public abstract Collection<T> getAllItems();
 	

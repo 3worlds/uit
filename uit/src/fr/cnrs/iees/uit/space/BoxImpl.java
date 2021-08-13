@@ -37,7 +37,7 @@ import fr.cnrs.iees.uit.UitException;
  *
  */
 //Tested OK with version 0.0.1 on 23/11/2018
-public class BoxImpl implements Box {
+class BoxImpl implements Box {
 	
 	private Point upper = null;
 	private Point lower = null;
@@ -68,7 +68,7 @@ public class BoxImpl implements Box {
 	 * @param lower
 	 * @param upper
 	 */
-	public BoxImpl(Point lower, Point upper) {
+	protected BoxImpl(Point lower, Point upper) {
 		this(lower,upper,true);
 	}
 	

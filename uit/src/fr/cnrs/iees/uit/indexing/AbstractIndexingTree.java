@@ -31,13 +31,14 @@ package fr.cnrs.iees.uit.indexing;
 import java.util.Collection;
 import java.util.Collections;
 
-import fr.cnrs.iees.uit.IndexingTree;
 import fr.cnrs.iees.uit.space.Box;
 
 /**
  * <p>An abstract ancestor for 'generalised QuadTrees'. By <em>generalised</em> we mean indexing trees
  * of any dimension (strictly speaking,  <a href="https://en.wikipedia.org/wiki/K-d_tree"><em>k</em>-d trees</a>),
- * e.g. a binary tree for dim=1, a quadtree for dim=2, and an octree for dim=3.</p>
+ * e.g. a <a href="https://en.wikipedia.org/wiki/Binary_tree">binary tree</a> for dim=1, 
+ * a <a href="https://en.wikipedia.org/wiki/Quadtree">quadtree</a> for dim=2, 
+ * and an <a href="https://en.wikipedia.org/wiki/Octree">octree</a> for dim=3.</p>
  * 
  * <p>The implementation proposed is generic, i.e. the tree dimension is inferred from the 
  * dimension of the {@link fr.cnrs.iees.uit.space.Point Point}s used to build the tree.</p> 

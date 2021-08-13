@@ -32,7 +32,7 @@ import fr.cnrs.iees.uit.UitException;
 
 /**
  * <p>A generalised sphere in <em>n</em>-dimensional space (also called
- * <a href="https://en.wikipedia.org/wiki/N-sphere"><em>n</em>-sphere</a>. Basically, it represents a
+ * <a href="https://en.wikipedia.org/wiki/N-sphere"><em>n</em>-sphere</a>). Basically, it represents a
  * set of points within a constant distance of a central point.
  * Immutable.</p>
  */
@@ -52,28 +52,39 @@ public interface Sphere extends Dimensioned {
 	 */
 	public abstract double radius();
 
-	/** returns the length / surface / volume / hypervolume (according to dimension) of this sphere */
+	/** 
+	 * <p>Compute the length / surface / volume / hypervolume (according to dimension) of this sphere.</p>
+	 * <p><strong>WARNING</strong>: works for dimension &lt;4 only.
+	 * <a href="https://en.wikipedia.org/wiki/Volume_of_an_n-ball">Here</a> is the reason why.</p>
+	 * 
+	 * @return the size of the sphere for dimension &lt;4 - throws an Exception for dimension &gt;3
+	 */
 	public abstract double size();
 
 	/**
+	 * Test for wide containement, i.e. a point lying on the perimeter
+	 * is considered inside the sphere.
 	 *
-	 * @param p a Point to test for being inside the Sphere
-	 * @return {@code true} if the Point is contained in the Sphere
+	 * @param p a point to test for falling inside the sphere
+	 * @return {@code true} if the point is contained in the sphere
 	 */
 	public default boolean contains(Point p) {
 		return Distance.squaredEuclidianDistance(p,centre()) <= Distance.sqr(radius());
 	}
 
 	/**
-	 *
-	 * @param b a Box to test for being fully contained in the Sphere
-	 * @return {@code true} if the Point is contained in the Sphere
+	 * Test if a box is fully contained in this sphere (wide containment, cf. 
+	 * {@link Sphere#contains(Point) contains(Point)}).	 *
+	 * @param b a box to test for being fully contained in the sphere
+	 * @return {@code true} if the point is contained in the sphere
 	 */
 	public default boolean contains(Box b) {
 		return contains(b.upperBounds()) && contains(b.lowerBounds());
 	}
 
 	/**
+	 * Test for overlapping with another sphere. This is not strict overlapping, i.e. two 
+	 * tangent spheres (sharing only one point of their perimeter) will be considered overlapping.
 	 *
 	 * @param s another Sphere to test for overlap with this one
 	 * @return {@code true} if the two Spheres overlap
@@ -84,6 +95,8 @@ public interface Sphere extends Dimensioned {
 
 
 	/**
+	 * <p>Test for overlapping with a box.</p>
+	 * <p><strong>WARNING</strong>: this method is unfinished! do not use.</p>
 	 *
 	 * @param b a Box to test for overlap with this one
 	 * @return {@code true} if this Sphere overlaps the Box
@@ -132,12 +145,24 @@ public interface Sphere extends Dimensioned {
 		return new SphereImpl(b.centre(),radius);
 	}
 
+	/**
+	 * Build a {@code Sphere} instance from a point and a radius. 
+	 * 
+	 * @param centre the point to use as the centre
+	 * @param radius the radius
+	 * @return the new {@code Sphere} instance
+	 */
 	public static Sphere newSphere(Point centre, double radius) {
 		return new SphereImpl(centre,radius);
 	}
 
-	/** reads a Sphere value from a String - assumes the Sphere has been saved with the toString()
-	 * method of a Sphere implementation */
+	/**
+	 * Builds a {@code Sphere} instance from a {@link String} - assumes the String has been produced 
+	 * previously with a call to {@code toString()} method of a {@code Sphere} implementation 
+	 * 
+	 * @param s the string to parse
+	 * @return the new {@code Sphere} instance
+	 */
 	public static Sphere valueOf(String s) {
 		if (s.trim().isEmpty())
 			return null;

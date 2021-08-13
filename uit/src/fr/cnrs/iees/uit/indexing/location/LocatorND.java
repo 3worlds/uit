@@ -33,7 +33,7 @@ package fr.cnrs.iees.uit.indexing.location;
  * @author Jacques Gignoux - 07-08-2018 
  *
  */
-public class LocatorND implements Locator {
+class LocatorND implements Locator {
 	
 	private long[] x = null;
 	private LocatorFactory factory;

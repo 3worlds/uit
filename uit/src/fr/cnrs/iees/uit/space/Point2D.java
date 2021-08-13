@@ -35,7 +35,7 @@ package fr.cnrs.iees.uit.space;
  *
  */
 //Tested OK on version 0.0.1 on 21/11/2018
-public class Point2D extends PointND {
+class Point2D extends PointND {
 
 	protected Point2D(double x1, double x2) {
 		super(x1,x2);

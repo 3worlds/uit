@@ -1,5 +1,5 @@
 /**
- * <p>Basic geometric classes internally used by {@link fr.cnrs.iees.uit.IndexingTree IndexingTree}.</p>
+ * <p>Basic geometric classes internally used by {@link fr.cnrs.iees.uit.indexing.IndexingTree IndexingTree}.</p>
  * 
  * <p>The main concept behind this once-again implementation of geometric entities is that
  * we do not care about space dimension. All the classes here represent the same concept in a space
@@ -21,6 +21,8 @@
  * <p>All these interfaces can be used without overriding. The static factory methods they provide enable
  * you to completely ignore the implementation details, i.e. you should only manipulate the
  * interfaces, not the underlying classes.</p>
+ * 
+ * <p>For safety, the classes implementing these interfaces are only package-visible.</p>
  * 
  *  @author Jacques Gignoux - 12 août 2021
  */

@@ -11,3 +11,5 @@
  * @author Jacques Gignoux - 12 août 2021
  */
 package fr.cnrs.iees.uit;
+
+import fr.cnrs.iees.uit.indexing.IndexingTree;

@@ -36,7 +36,7 @@ import fr.cnrs.iees.uit.UitException;
  *
  */
 //Tested OK on version 0.0.1 on 21/11/2018
-public class SphereImpl implements Sphere {
+class SphereImpl implements Sphere {
 	
 	private Point centre = null;
 	private double radius = 0.0;

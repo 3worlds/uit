@@ -35,7 +35,7 @@ package fr.cnrs.iees.uit.space;
  *
  */
 //Tested OK on version 0.0.1 on 21/11/2018
-public class Point3D extends PointND {
+class Point3D extends PointND {
 	
 	@Override
 	public int dim() {

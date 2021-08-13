@@ -37,13 +37,13 @@ import fr.cnrs.iees.uit.space.Point;
 
 /**
  * {@linkplain IndexingNode} used in <em>point-based</em> 
- * {@link fr.cnrs.iees.uit.IndexingTree IndexingTree}s.
+ * {@link fr.cnrs.iees.uit.indexing.IndexingTree IndexingTree}s.
  *
  * @author Jacques Gignoux - 10-09-2018
  *
  * @param <T> the type of object stored in this node
  */
-public class PointIndexingNode<T> extends IndexingNode<T,PointIndexingNode<T>> {
+class PointIndexingNode<T> extends IndexingNode<T,PointIndexingNode<T>> {
 
 	protected Point location;
 	private T item;

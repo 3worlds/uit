@@ -36,7 +36,7 @@ import fr.cnrs.iees.uit.space.Box;
  * to initialise the tree root node.</p>
  *
  * <p><strong>NOTE</strong>: Compared to {@linkplain ExpandingRegionIndexingTree}, this implementation does not
- * make any assumption on the length of the indexed region in all dimensions. 'hyper-rectangular' domains can
+ * make any assumption on the length of the indexed region in all dimensions: 'hyper-rectangular' domains can
  * be used.</p>
  *
  * @author Jacques Gignoux - 06-09-2018
@@ -47,6 +47,11 @@ import fr.cnrs.iees.uit.space.Box;
 public class BoundedRegionIndexingTree<T> extends RegionIndexingTree<T> {
 
 
+	/**
+	 * This constructor assumes that no item will ever lie outside of the box passed as its argument.
+	 * 
+	 * @param domain the region indexed by this tree
+	 */
 	public BoundedRegionIndexingTree(Box domain) {
     	super(domain);
     	root = new RegionIndexingNode<T>(null,domain,this);

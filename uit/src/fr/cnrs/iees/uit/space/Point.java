@@ -39,27 +39,49 @@ import fr.cnrs.iees.uit.UitException;
 // Tested OK on version 0.0.1 on 21/11/2018
 public interface Point extends Dimensioned, Cloneable {
 
-	/** @return i<sup>th</sup> coordinate of the point*/
+	/** 
+	 * Accessor to coordinates of a point.
+	 * 
+	 * @param i a dimension index
+	 * @return i<sup>th</sup> coordinate of the point
+	 */
 	public abstract double coordinate(int i);
 
-	/** for convenience: returns the first coordinate as x */
+	/** For convenience: returns the first coordinate as x 
+	 * 
+	 * @return the first coordinate. 
+	 */
 	public default double x() {
 		return Double.NaN;
 	}
 
-	/** for convenience: returns the second coordinate as y */
+	/** For convenience: returns the second coordinate as y 
+	 * 
+	 * @return the second coordinate, {@code Double.NaN} if dimension &lt;2
+	 */
 	public default double y() {
 		return Double.NaN;
 	}
 
-	/** for convenience: returns the third coordinate as z */
+	/** for convenience: returns the third coordinate as z 
+	 * 
+	 * @return the third coordinate, {@code Double.NaN} if dimension &lt;3
+	 */
 	public default double z() {
 		return Double.NaN;
 	}
 	
+	/**
+	 * 
+	 * @return coordinates as an array of {@code double}s.
+	 */
 	public double[] asArray();
 
-	/** instantiate a new Point. NB: only this method should be used to instantiate Points */
+	/** instantiate a new Point. 
+	 * 
+	 * @param x1 coordinates. The point dimension will be set to the number of coordinates passed.
+	 * @return the new {@code Point} instance
+	 */
 	public static Point newPoint(double...x1) {
 		switch (x1.length) {
 		case 0: return null;
@@ -73,7 +95,12 @@ public interface Point extends Dimensioned, Cloneable {
 	/** clone a Point */
 	public abstract Point clone();
 
-	/** return a new point addition of the coordinates of two Points of same dimension */
+	/** Compute a new point by addition of the coordinates of two Points of same dimension 
+	 * 
+	 * @param A a point
+	 * @param B another point of same dimension as A
+	 * @return the new {@code Point} instance
+	 */
 	public static Point add(Point A, Point B)  {
 		if (A.dim()!=B.dim())
 			throw new UitException("Invalid operation: addition of points of different dimensions");
@@ -83,7 +110,12 @@ public interface Point extends Dimensioned, Cloneable {
 		return Point.newPoint(x);
 	}
 
-	/** return a new Point with a scalar added to every coordinate */
+	/** Compute a new Point with a scalar added to every coordinate 
+	 * 
+	 * @param A a point
+	 * @param scalar a value to add to every coordinate
+	 * @return the new {@code Point} instance
+	 */
 	public static Point add(Point A, double scalar) {
 		double[] x = A.asArray();
 		for (int i=0; i<x.length; i++)
@@ -91,7 +123,14 @@ public interface Point extends Dimensioned, Cloneable {
 		return Point.newPoint(x);
 	}
 	
-	/** return a new Point with a scalar added to coordinate i */
+	/** Compute a new point with a scalar added to coordinate <em>i</em> (translation
+	 * along axis <em>i</em>)
+	 * 
+	 * @param A a point
+	 * @param scalar a value to add to i<sup>th</sup> coordinate
+	 * @param i the dimension index of the coordinate to which the scalar is added
+	 * @return the new {@code Point} instance
+	 */
 	public static Point add(Point A, double scalar, int i) {
 		double[] x = A.asArray();
 		if ((i>=0)&&(i<x.length))
@@ -101,8 +140,13 @@ public interface Point extends Dimensioned, Cloneable {
 		return Point.newPoint(x);
 	}
 
-	/** reads a Point value from a String - assumes the Point has been saved with the toString()
-	 * method of a Point implementation */
+	/**
+	 * Builds a {@code Point} instance from a {@link String} - assumes the String has been produced 
+	 * previously with a call to {@code toString()} method of a {@code Point} implementation 
+	 * 
+	 * @param s the string to parse
+	 * @return the new {@code Point} instance
+	 */
 	public static Point valueOf(String s) {
 		if (s.trim().isEmpty())
 			return null;

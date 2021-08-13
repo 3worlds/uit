@@ -36,7 +36,6 @@ import org.junit.jupiter.api.Test;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Point;
 import fr.cnrs.iees.uit.space.Sphere;
-import fr.cnrs.iees.uit.space.SphereImpl;
 
 class BoundedRegionIndexingTreeTest {
 
@@ -531,15 +530,15 @@ class BoundedRegionIndexingTreeTest {
 	void testGetItemsWithinSphere() {
 		fillTree();
 		// this is a small region overlapping all quadrants, only node 17 is in there.
-		Sphere s = new SphereImpl(Point.newPoint(5,5,4,6),1);
+		Sphere s = Sphere.newSphere(Point.newPoint(5,5,4,6),1);
 		Iterable<Integer> items = tree.getItemsWithin(s);
 		assertEquals(showList("testGetItemsWithinSphere",items),1);
 		// this is a larger region overlapping all quadrants, nodes 1-17 are in there.
-		s = new SphereImpl(Point.newPoint(5,5,4,6),2);
+		s = Sphere.newSphere(Point.newPoint(5,5,4,6),2);
 		items = tree.getItemsWithin(s);
 		assertEquals(showList("testGetItemsWithinSphere",items),17);
 		// this sphere is empty
-		s = new SphereImpl(Point.newPoint(0.5,0.5,0.5,0.5), 0.1);
+		s = Sphere.newSphere(Point.newPoint(0.5,0.5,0.5,0.5), 0.1);
 		items = tree.getItemsWithin(s);
 		assertEquals(showList("testGetItemsWithinSphere",items),0);
 	}

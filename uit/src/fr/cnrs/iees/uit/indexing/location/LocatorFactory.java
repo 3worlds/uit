@@ -7,6 +7,8 @@ import fr.cnrs.iees.uit.space.Distance;
 import fr.cnrs.iees.uit.space.Point;
 
 /**
+ * A factory for {@link Locator}s. Since locators use limited precision coordinates, a 
+ * same precision must be used to generate comparable locator coordinates.
  * 
  * @author Jacques Gignoux - 8 oct. 2020
  *
@@ -21,10 +23,10 @@ public class LocatorFactory implements Dimensioned {
 	Box limits;
 	
 	/**
-	 * This constructor checks that precision*maxDistance is smaller than the longest possible Long,
+	 * <p>This constructor checks that precision*maxDistance is smaller than {@code Long.MAX_VALUE},
 	 * to prevent any arithmetic overflow. maxDistance is computed as the diagonal length of the 
-	 * Box passed as argument
-	 * 
+	 * Box passed as argument. Precision is re-adjusted if needed.</p>
+	 *  
 	 * @param precision the precision at which coordinates are truncated (eg 0.001 or 10.0)
 	 * @param limits the size of the space this factory is going to work with
 	 */
@@ -42,7 +44,17 @@ public class LocatorFactory implements Dimensioned {
 		dim = limits.dim();
 	}
 	
-	// converts a double coordinate into a long
+	/** 
+	 * <p>converts a double coordinate into a long locator coordinate</p>
+	 * 
+	 * <p>Locator coordinates are computed (1) using the lower bound value of the factory limits
+	 * as the zero for every dimension, and (2) so that a long value of 1 equals the precision
+	 * on the original coordinate scale.</p>
+	 * 
+	 * @param coord the continuous, {@code double} coordinate
+	 * @param dim the index of the dimension of the coordinate 
+	 * @return the locator coordinate as {@code long}
+	 */
 	public long convert(double coord, int dim) {
 		return Math.round((coord-limits.lowerBound(dim))/precision);
 	}
@@ -66,8 +78,8 @@ public class LocatorFactory implements Dimensioned {
 	/**
 	 * instantiate a new locator with long coordinates
 	 * 
-	 * @param x1
-	 * @return
+	 * @param x1 coordinate values
+	 * @return a new {@code Locator} instance
 	 */
 	public Locator newLocator(long...x1) {
 		switch (x1.length) {
@@ -80,8 +92,8 @@ public class LocatorFactory implements Dimensioned {
 	/**
 	 * Converts a Locator to a Point
 	 * 
-	 * @param L
-	 * @return
+	 * @param L the locator
+	 * @return the point
 	 */
 	public Point toPoint(Locator L) {
 		double[] P = new double[L.dim()];
@@ -90,6 +102,11 @@ public class LocatorFactory implements Dimensioned {
 		return Point.newPoint(P);
 	}
 	
+	/**
+	 * Accessor to precision of coordinates
+	 * 
+	 * @return the precision
+	 */
 	public double precision() {
 		return precision;
 	}

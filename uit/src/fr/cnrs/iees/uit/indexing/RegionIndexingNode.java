@@ -35,11 +35,10 @@ import java.util.Map;
 import au.edu.anu.rscs.aot.collections.QuickListOfLists;
 import fr.cnrs.iees.uit.UitException;
 import fr.cnrs.iees.uit.space.Box;
-import fr.cnrs.iees.uit.space.BoxImpl;
 import fr.cnrs.iees.uit.space.Point;
 
 /**
- * <p>{@linkplain IndexingNode} used in region-based {@link fr.cnrs.iees.uit.IndexingTree IndexingTree}</p>
+ * <p>{@linkplain IndexingNode} used in region-based {@link fr.cnrs.iees.uit.indexing.IndexingTree IndexingTree}</p>
  *
  *  <p><strong> NOTE</strong>: This implementation is a re-coding of the inner Quad class in
  *  the QuadTree class
@@ -51,7 +50,7 @@ import fr.cnrs.iees.uit.space.Point;
  *
  * @param <T> the type of object stored in this tree
  */
-public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>> {
+class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>> {
 
 	/** the storage capacity of leaf nodes - may be made dynamic*/
 	protected static int LEAF_MAX_ITEMS = 10;
@@ -115,8 +114,10 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
 					if (loc.coordinate(i)>region.upperBound(i))
 						newups[i] = region.upperBound(i)+region.sideLength(i);
 				}
+//				parent = new RegionIndexingNode<T>(null,
+//					new BoxImpl(Point.newPoint(newlows),Point.newPoint(newups)),tree);
 				parent = new RegionIndexingNode<T>(null,
-					new BoxImpl(Point.newPoint(newlows),Point.newPoint(newups)),tree);
+					Box.boundingBox(Point.newPoint(newlows),Point.newPoint(newups)),tree);
 				parent.makeChildren(); // this creates empty children in the parent
 				// place me in my parent's children
 				parent.children[parent.childIndex(region.centre())] = this;
@@ -225,7 +226,8 @@ public class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>>
     	for (int i=0; i<(1<<dim); i++) {
     		Point lower = Point.newPoint(mins[i]);
     		Point upper = Point.newPoint(maxs[i]);
-    		Box reg = new BoxImpl(lower, upper);
+//    		Box reg = new BoxImpl(lower, upper);
+    		Box reg = Box.boundingBox(lower, upper);
     		children[i] = new RegionIndexingNode<T>(this,reg,tree);
     	}
     	// spread the extant items into the child nodes
