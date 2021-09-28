@@ -1,0 +1,17 @@
+= The UIT Library
+
+**U**niversal **I**ndexing **T**ree. Implements classes to to provide efficient searching of spatial data. The base class is an `IndexingTree`. It is a generalisation of a https://en.wikipedia.org/wiki/Quadtree[QuadTree], more accurately called a https://en.wikipedia.org/wiki/K-d_tree[__k__-d tree]. 
+
+It is based on work by Paavo Toivanen found https://dev.solita.fi/2015/08/06/quad-tree.html[here]. 
+
+Contains:
+
+* the `IndexingTree` interface, which represents a __k__-d tree of any dimension.
+* a few implementations of the above; some are incomplete. Any help is welcome.
+* basic geometric classes needed by `IndexingTree`: __k__-dimensional point, box and sphere, with distance methods.
+
+See the link:uit/javadoc/index.html[javadoc]
+
+TODO: make the above point to a real javadoc page.
+
+Depends on https://gitlab.iscpif.fr/threeworlds/omhtk[omhtk]
