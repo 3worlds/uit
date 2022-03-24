@@ -54,6 +54,41 @@ public class Distance {
 	public static double sqr(double a) {
 		return a*a;
 	}
+
+	/** utility: square 
+	 * 
+	 * @param a the number to square
+	 * @return a²
+	 */
+	public static long sqr(long a) {
+		return a*a;
+	}
+
+	/**
+	 * utility: sum of squares
+	 * 
+	 * @param a the numbers to square and sum
+	 * @return sum of a²'s
+	 */
+	public static double sumOfSquares(double... a) {
+		double sum = 0.0;
+		for (int i=0; i<a.length; i++)
+			sum += a[i]*a[i];
+		return sum;
+	}
+
+	/**
+	 * utility: sum of squares
+	 * 
+	 * @param a the numbers to square and sum
+	 * @return sum of a²'s
+	 */
+	public static double sumOfSquares(long... a) {
+		long sum = 0L;
+		for (int i=0; i<a.length; i++)
+			sum += a[i]*a[i];
+		return sum;
+	}
 	
 	/** quick computation of distance in one dimension
 	 * 

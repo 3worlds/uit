@@ -40,6 +40,13 @@ class DistanceTest {
 		// this fails because of rounding error on doubles.
 		// Distance.sqr(Math.sqrt(3.0)) = 2.9999999999999996
 //		assertEquals(Distance.sqr(Math.sqrt(3.0)),3.0);
+		assertEquals(Distance.sqr(5),25);
+	}
+	
+	@Test
+	void testSumOfSquares() {
+		assertEquals(Distance.sumOfSquares(1.0,2.5,3.0),16.25);
+		assertEquals(Distance.sumOfSquares(57,986,235),1030670);
 	}
 
 	@Test
