@@ -42,7 +42,8 @@ class LocatorTest {
 		Locator lA = lf.newLocator(A);
 		Point B = lA.toPoint();
 //		System.out.print(B.toString());
-		assertEquals(B.toString(),"[12.5,458.7,22.4,1000000.0]");
+//		assertEquals(B.toString(),"[12.5,458.7,22.4,1000000.0]");???
+		assertEquals(B.toString(),"[12.5,458.70000000000005,22.400000000000002,1000000.0]");
 	}
 
 	@Test

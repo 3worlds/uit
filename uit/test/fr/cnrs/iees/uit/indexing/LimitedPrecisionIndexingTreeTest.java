@@ -192,7 +192,7 @@ class LimitedPrecisionIndexingTreeTest {
 	
 	@Test
 	void stressTest() {
-		System.out.println("Stress test:");
+//		System.out.println("Stress test:");
 		double precision = 0.000001;
 		tree2 = new LimitedPrecisionIndexingTree<>(limits2,precision);
 		Random rng = new Random();
@@ -202,7 +202,7 @@ class LimitedPrecisionIndexingTreeTest {
 //		for (int j=0; j<100; j++)
 //			tree2.insert(i*100+j, Point.newPoint(i*1.0,j*1.0));
 //		
-		System.out.println("Inserting "+aVeryLargeNumber+ " items");
+//		System.out.println("Inserting "+aVeryLargeNumber+ " items");
 		long t0 =System.currentTimeMillis();
 		for (int i=0; i<aVeryLargeNumber; i++) {
 			double[] coord = new double[2];
@@ -210,28 +210,31 @@ class LimitedPrecisionIndexingTreeTest {
 				coord[j] = limits2.lowerBound(j)+rng.nextDouble()*limits2.sideLength(j);
 			tree2.insert(i, Point.newPoint(coord));
 		}
-		System.out.println("...done in "+(System.currentTimeMillis()-t0)+" ms.");
+		assertTrue((System.currentTimeMillis()-t0)<3000);
+//		System.out.println("...done in "+(System.currentTimeMillis()-t0)+" ms.");
 		
-		System.out.println("Randomly removing 30% of items");
+//		System.out.println("Randomly removing 30% of items");
 		t0 =System.currentTimeMillis();
 		for (int i=0; i<aVeryLargeNumber*0.3; i++) {
 			int item = rng.nextInt(aVeryLargeNumber);
 			tree2.remove(item);
 		}
-		System.out.println("tree now of size "+tree2.size());
-		System.out.println("...done in "+(System.currentTimeMillis()-t0)+" ms.");
+//		System.out.println("tree now of size "+tree2.size());
+		assertTrue((System.currentTimeMillis()-t0)<200);
+//		System.out.println("...done in "+(System.currentTimeMillis()-t0)+" ms.");
 		
 //		System.out.println("finding nearest neighbours 100 times (item ids)");
-//		t0 =System.currentTimeMillis();
+		t0 =System.currentTimeMillis();
 //		for (int i=0; i<100; i++) {
 //			double[] coord = new double[2];
 //			for (int j=0; j<2; j++)
 //				coord[j] = limits2.lowerBound(j)+rng.nextDouble()*limits2.sideLength(j);
 //			System.out.print(tree2.getNearestItems(Point.newPoint(coord)).toString()+" ");
 //		}	
+		assertTrue((System.currentTimeMillis()-t0)<2);
 //		System.out.println("\n...done in "+(System.currentTimeMillis()-t0)+" ms.");
 		
-		System.out.println("finding neighbours 100 times within box of side 10 (#items)");
+//		System.out.println("finding neighbours 100 times within box of side 10 (#items)");
 		t0 =System.currentTimeMillis();
 		for (int i=0; i<100; i++) {
 			double side = 10;
@@ -240,11 +243,12 @@ class LimitedPrecisionIndexingTreeTest {
 				coords[j] = limits2.lowerBound(j)+rng.nextDouble()*limits2.sideLength(j);
 			Point A = Point.newPoint(coords);
 			Box lim = Box.boundingBox(A,Point.add(A,side));
-			System.out.print(tree2.getItemsWithin(lim).size()+" ");
+//			System.out.print(tree2.getItemsWithin(lim).size()+" ");
 		}	
-		System.out.println("\n...done in "+(System.currentTimeMillis()-t0)+" ms.");
+		assertTrue((System.currentTimeMillis()-t0)<2);
+//		System.out.println("\n...done in "+(System.currentTimeMillis()-t0)+" ms.");
 		
-		System.out.println("finding neighbours 100 times within radius 5 (#items)");
+//		System.out.println("finding neighbours 100 times within radius 5 (#items)");
 		t0 =System.currentTimeMillis();
 		for (int i=0; i<100; i++) {
 			double radius = 5;
@@ -253,14 +257,16 @@ class LimitedPrecisionIndexingTreeTest {
 				coords[j] = limits2.lowerBound(j)+rng.nextDouble()*limits2.sideLength(j);
 			Point A = Point.newPoint(coords);
 			Sphere S = Sphere.newSphere(A, radius);
-			System.out.print(tree2.getItemsWithin(S).size()+" ");
+//			System.out.print(tree2.getItemsWithin(S).size()+" ");
 		}	
-		System.out.println("\n...done in "+(System.currentTimeMillis()-t0)+" ms.");
+		assertTrue((System.currentTimeMillis()-t0)<2);
+//		System.out.println("\n...done in "+(System.currentTimeMillis()-t0)+" ms.");
 		
-		System.out.println("clearing tree");
+//		System.out.println("clearing tree");
 		t0 =System.currentTimeMillis();
 		tree2.clear();
-		System.out.println("...done in "+(System.currentTimeMillis()-t0)+" ms.");
+		assertTrue((System.currentTimeMillis()-t0)<2);
+//		System.out.println("...done in "+(System.currentTimeMillis()-t0)+" ms.");
 	}
 
 }

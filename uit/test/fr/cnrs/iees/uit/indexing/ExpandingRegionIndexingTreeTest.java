@@ -158,8 +158,8 @@ class ExpandingRegionIndexingTreeTest {
 		assertNotNull(tree2);
 		assertNotNull(tree2.root);
 		assertEquals(tree2.dim,2);
-		System.out.println(tree.toShortString());
-		System.out.println(tree2.toShortString());
+//		System.out.println(tree.toShortString());
+//		System.out.println(tree2.toShortString());
 	}
 
 //	@Test

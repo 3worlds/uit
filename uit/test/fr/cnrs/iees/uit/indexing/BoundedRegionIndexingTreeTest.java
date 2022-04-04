@@ -492,12 +492,12 @@ class BoundedRegionIndexingTreeTest {
 	// utility for below
 	private int showList(String message,Iterable<?> list) {
 		int count=0;
-		System.out.print(message+": list = {");
+//		System.out.print(message+": list = {");
 		for (Object i:list) {
-			System.out.print(i+" ");
+//			System.out.print(i+" ");
 			count++;
 		}
-		System.out.println("}");
+//		System.out.println("}");
 		return count;
 	}
 
