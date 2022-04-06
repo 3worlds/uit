@@ -10,8 +10,6 @@ Contains:
 * a few implementations of the above; some are incomplete. Any help is welcome.
 * basic geometric classes needed by `IndexingTree`: __k__-dimensional point, box and sphere, with distance methods.
 
-See the link:uit/javadoc/index.html[javadoc]
+See the https://3worlds.github.io/uit/uit/javadoc/index.html[javadoc]
 
-TODO: make the above point to a real javadoc page.
-
-Depends on https://gitlab.iscpif.fr/threeworlds/omhtk[omhtk]
+Depends on https://github.com/3worlds/omhtk[omhtk]
