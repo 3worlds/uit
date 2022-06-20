@@ -28,8 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Point;
 
