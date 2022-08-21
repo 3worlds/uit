@@ -322,6 +322,9 @@ public abstract class RegionIndexingTree<T> extends AbstractIndexingTree<T,Regio
 		return sb.toString();
 	}
 
+	/**
+	 * @return The {@link Box} region.
+	 */
 	public Box region() {
 		if (root!=null)
 			return root.region();

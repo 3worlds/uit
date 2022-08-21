@@ -57,7 +57,7 @@ public interface Locator extends Dimensioned, Cloneable {
 	 */
 	public abstract long coordinate(int i);
 
-	/** clone a Locator */
+	/** @return clone of the Locator */
 	public abstract Locator clone();
 
 	/** Compute a new Locator by addition of the coordinates of two Locators of same dimension 
@@ -114,6 +114,9 @@ public interface Locator extends Dimensioned, Cloneable {
 	 */
 	public LocatorFactory factory();
 	
+	/**
+	 * @return This locator as a {@link Point}.
+	 */
 	public default Point toPoint() {
 		return factory().toPoint(this);
 	}

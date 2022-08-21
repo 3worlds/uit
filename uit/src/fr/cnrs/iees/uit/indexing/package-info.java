@@ -33,7 +33,7 @@
  * implementations. {@code IndexingNode} and its subclasses are only internally used by 
  * {@code IndexingTree} implementations, so their visibility is limited to this package.</p>
  * 
- * <img src="{@docRoot}/../doc/images/uit-indexing.svg" align="middle" width="1200" 
+ * <img src="{@docRoot}/../doc/images/uit-indexing.svg" width="1200" 
  * alt="the indexing tree hierarchy"/>
  * 
  * <p>We welcome any contribution to improve these implementations and to propose new ones 

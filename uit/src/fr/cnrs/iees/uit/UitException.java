@@ -29,9 +29,10 @@
 package fr.cnrs.iees.uit;
 
 /**
- * A class for {@link Exception}s originating from the <strong>uit</strong> library.
+ * A class for {@link Exception}s originating from the <strong>uit</strong>
+ * library.
  * 
- * @author Jacques Gignoux - 04-10-2018 
+ * @author Jacques Gignoux - 04-10-2018
  *
  */
 //NB: this was previously AotException
@@ -42,14 +43,28 @@ public class UitException extends RuntimeException {
 
 	private static final long serialVersionUID = 5911525855011647174L;
 
+	/**
+	 * Instantiate an exception with a message
+	 * 
+	 * @param message the error message
+	 */
 	public UitException(String message) {
 		super("[" + message + "]");
 	}
 
+	/**
+	 * Exception wrapper.
+	 * @param e the exception to wrap
+	 */
 	public UitException(Exception e) {
 		super(e);
 	}
 
+	/**
+	 * Exception wrapper with additional information
+	 * @param message the error message
+	 * @param e the exception to wrap
+	 */
 	public UitException(String message, Exception e) {
 		super("[" + message + "]\n[original exception: " + e.getMessage() + "]");
 	}

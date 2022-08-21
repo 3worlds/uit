@@ -92,7 +92,7 @@ public interface Point extends Dimensioned, Cloneable {
 		return new PointND(x1);
 	}
 
-	/** clone a Point */
+	/** @return clone a {@link Point}. */
 	public abstract Point clone();
 
 	/** Compute a new point by addition of the coordinates of two Points of same dimension 

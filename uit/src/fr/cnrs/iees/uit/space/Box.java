@@ -35,7 +35,7 @@ import fr.cnrs.iees.uit.UitException;
  *
  * <p>This was designed to manipulate the concept of a finite block of space independent of
  * the space dimension. If dim=1, this will represent a segment, if dim=2 a rectangle, if dim=3
- * a rectangular cuboid, etc.<p>
+ * a rectangular cuboid, etc.</p>
  *
  * <p>The assumption of alignment with the coordinate axes allows important optimisations and
  * should not be released</p>

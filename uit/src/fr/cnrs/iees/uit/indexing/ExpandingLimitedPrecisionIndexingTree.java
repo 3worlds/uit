@@ -37,7 +37,7 @@ import fr.cnrs.iees.uit.space.Point;
  * 
  * @author Jacques Gignoux - 13 oct. 2020
  *
- * @param <T>
+ * @param <T> the type of objects indexed
  */
 public class ExpandingLimitedPrecisionIndexingTree<T> extends LimitedPrecisionIndexingTree<T> {
 

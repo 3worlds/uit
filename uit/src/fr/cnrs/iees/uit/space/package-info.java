@@ -15,7 +15,7 @@
  * is made through static factory methods in each class. All instances are <em>immutable</em>, i.e. cannot
  * be modified once constructed. The {@link Dimensioned} superclass handles the dimension information.</p>
  * 
- * <img src="{@docRoot}/../doc/images/uit-space.svg" align="middle" width="800" 
+ * <img src="{@docRoot}/../doc/images/uit-space.svg"  width="800" 
  * alt="the space classes"/>
  * 
  * <p>All these interfaces can be used without overriding. The static factory methods they provide enable

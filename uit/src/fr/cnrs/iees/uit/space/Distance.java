@@ -241,7 +241,7 @@ public class Distance {
 	 * perpendicular line can be drawn between that point and the segment that represents the 
 	 * box edge. In other words,</p>
 	 * 
-	 * <img src="{@docRoot}/../doc/images/distance-to-closest-edge.svg" align="right" width="200" 
+	 * <img src="{@docRoot}/../doc/images/distance-to-closest-edge.svg" width="200" 
 	 	alt="the space classes"/>
 	 * <ol> 
 	 * <li>If the point is inside the box, then it returns the
