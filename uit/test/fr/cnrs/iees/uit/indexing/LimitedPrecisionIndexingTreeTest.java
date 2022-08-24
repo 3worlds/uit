@@ -218,6 +218,7 @@ class LimitedPrecisionIndexingTreeTest {
 		assertEquals(tree.getAllItems().size(),38);
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	void stressTest() {
 //		System.out.println("Stress test:");

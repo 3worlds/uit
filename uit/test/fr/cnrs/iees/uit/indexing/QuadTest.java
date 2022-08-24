@@ -73,6 +73,7 @@ public class QuadTest {
 			recurse(depth + 1, itbase + itmax, result);
 	}
 
+	@SuppressWarnings("unused")
 	public void index(Point p) {
 		int[] ix = new int[dim];
 		if (children != null) {

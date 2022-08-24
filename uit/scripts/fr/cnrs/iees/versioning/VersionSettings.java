@@ -83,7 +83,7 @@ public class VersionSettings {
 	 *
 	 */
 	protected static String[][] DEPS = {
-		{"fr.ens.biologie", "generics", "[0.3.1,)", null},
+		{"fr.ens.biologie", "generics", "[0.4.0,)", null},
 		//{"org.graphstream", "gs-ui", "1.3", null} // too heavy, removed
 	};
 

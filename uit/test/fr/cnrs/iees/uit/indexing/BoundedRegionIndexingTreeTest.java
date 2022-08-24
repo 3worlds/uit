@@ -490,6 +490,7 @@ class BoundedRegionIndexingTreeTest {
 	}
 
 	// utility for below
+	@SuppressWarnings("unused")
 	private int showList(String message,Iterable<?> list) {
 		int count=0;
 //		System.out.print(message+": list = {");
