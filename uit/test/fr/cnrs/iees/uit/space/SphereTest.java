@@ -33,7 +33,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.cnrs.iees.uit.UitException;
 
 class SphereTest {
 
@@ -72,7 +71,7 @@ class SphereTest {
 			s1.contains(Point.newPoint(1,1));
 			fail("Wrong dimension exception not thrown");
 		}
-		catch (UitException e) {
+		catch (IllegalArgumentException e) {
 			// OK - exception was thrown.
 		}
 	}

@@ -28,8 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing.location;
 
-import fr.cnrs.iees.uit.UitException;
-
 /**
  * <p>Distance computations for Locators, ie based on {@code long}s.</p>
  * <p>NOTE: Methods returning  a <em>squared</em> distances always return an exact value
@@ -107,7 +105,7 @@ public class IntDistance {
 	 */
 	public static long squaredEuclidianDistance(Locator p1, Locator p2) {
 		if (p1.dim()!=p2.dim())
-			throw new UitException("squaredEuclidianDistance: Arguments of different dimensions");
+			throw new IllegalArgumentException("squaredEuclidianDistance: Arguments of different dimensions");
 		long dist = 0L;
 		for (int i=0; i<p1.dim(); i++)
 			dist += sqr(p1.coordinate(i)-p2.coordinate(i));

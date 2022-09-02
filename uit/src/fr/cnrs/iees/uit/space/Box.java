@@ -28,8 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
-import fr.cnrs.iees.uit.UitException;
-
 /**
  * <p>A rectangular box in a <em>n</em>-dimensional space, aligned on coordinate axes.</p>
  *
@@ -167,7 +165,7 @@ public interface Box extends Dimensioned {
 	 */
 	public static Box boundingBox(Point A, Point B) {
 		if (A.dim()!=B.dim())
-			throw new UitException("Invalid operation: boundingBox() on points of different dimensions");
+			throw new IllegalArgumentException("Invalid operation: boundingBox() on points of different dimensions");
 		int dim = A.dim();
 		double[] ups = new double[dim];
 		double[] lows = new double[dim];

@@ -33,8 +33,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.cnrs.iees.uit.UitException;
-
 class PointTest {
 
 	Point p1;
@@ -95,7 +93,7 @@ class PointTest {
 
 	@Test
 	void testAddPointPoint() {
-		assertThrows(UitException.class,()->Point.add(p1,p2) );
+		assertThrows(IllegalArgumentException.class,()->Point.add(p1,p2) );
 		Point p = Point.add(p3, Point.newPoint(1,1,1));
 		String s = String.valueOf(p.x())+','+p.y()+','+p.z();
 		assertEquals(s,"4.5,46.0,69.7");

@@ -28,8 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
-import fr.cnrs.iees.uit.UitException;
-
 /**
  * A straightforward implementation of a {@linkplain Sphere}.
  * @author Jacques Gignoux - 06-09-2018 
@@ -72,7 +70,7 @@ class SphereImpl implements Sphere {
 			return 2*radius;
 		//veeery complicated in other cases ! cf wikpedia: https://en.wikipedia.org/wiki/Volume_of_an_n-ball
 		// TODO
-		throw new UitException("sphere volume not implemented for dim>3");
+		throw new UnsupportedOperationException("sphere volume not implemented for dim>3");
 	}
 
 	@Override

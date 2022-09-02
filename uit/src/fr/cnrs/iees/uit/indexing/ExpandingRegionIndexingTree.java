@@ -28,7 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing;
 
-import fr.cnrs.iees.uit.UitException;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Point;
 
@@ -86,7 +85,7 @@ public class ExpandingRegionIndexingTree<T> extends RegionIndexingTree<T> {
         if (root.parent!=null)
         	root = root.parent;
         if (root.parent!=null)
-        	throw new UitException("CRITICAL - Problem in indexing tree expansion");
+        	throw new NullPointerException("CRITICAL - Problem in indexing tree expansion: root.parent is null.");
         super.insert(item, at);
 	}
 

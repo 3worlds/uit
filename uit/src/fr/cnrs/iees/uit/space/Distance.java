@@ -28,8 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
-import fr.cnrs.iees.uit.UitException;
-
 /**
  * <p>Various ways of computing an <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidian distance</a> 
  * (static methods).</p>
@@ -144,7 +142,7 @@ public class Distance {
 	 */
 	public static double squaredEuclidianDistance(Point p1, Point p2) {
 		if (p1.dim()!=p2.dim())
-			throw new UitException("squaredEuclidianDistance: Arguments of different dimensions");
+			throw new IllegalArgumentException("squaredEuclidianDistance: Arguments of different dimensions");
 		double dist = 0.0;
 		for (int i=0; i<p1.dim(); i++)
 			dist += sqr(p1.coordinate(i)-p2.coordinate(i));
@@ -268,7 +266,7 @@ public class Distance {
 	 */
 	public static double distanceToClosestEdge(Point p, Box b) {
 		if (p.dim()!=b.dim())
-			throw new UitException("distanceToClosestEdge: Arguments of different dimensions");
+			throw new IllegalArgumentException("distanceToClosestEdge: Arguments of different dimensions");
 		double dist = Math.min(Distance.distance1D(p.coordinate(0),b.lowerBound(0)), 
 				Distance.distance1D(p.coordinate(0),b.upperBound(0)));
 		if ((p.coordinate(0)<b.lowerBound(0))||(p.coordinate(0)>b.upperBound(0)))

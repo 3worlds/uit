@@ -28,7 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing.location;
 
-import fr.cnrs.iees.uit.UitException;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Dimensioned;
 import fr.cnrs.iees.uit.space.Distance;
@@ -96,7 +95,7 @@ public class LocatorFactory implements Dimensioned {
 	 */
 	public Locator newLocator(Point P) {
 		if (P.dim()!=dim)
-			throw new UitException("Invalid operation: argument must have the same dimension as factory");
+			throw new IllegalArgumentException("Invalid operation: argument must have the same dimension as factory");
 		long[] L = new long[dim];
 		for (int i=0; i<P.dim(); i++)
 			L[i] = convert(P.coordinate(i),i);

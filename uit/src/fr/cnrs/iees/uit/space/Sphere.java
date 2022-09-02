@@ -28,8 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
-import fr.cnrs.iees.uit.UitException;
-
 /**
  * <p>A generalised sphere in <em>n</em>-dimensional space (also called
  * <a href="https://en.wikipedia.org/wiki/N-sphere"><em>n</em>-sphere</a>). Basically, it represents a
@@ -103,7 +101,7 @@ public interface Sphere extends Dimensioned {
 	 */
 	public default boolean overlaps(Box b) {
 		if (b.dim()!=dim())
-			throw new UitException("overlaps: Arguments of different dimensions");
+			throw new IllegalArgumentException("overlaps: Arguments of different dimensions");
 		// if the centre is within the box, there is overlap
 		if (b.contains(centre()))
 			return true;

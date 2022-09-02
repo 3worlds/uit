@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import au.edu.anu.rscs.aot.collections.QuickListOfLists;
-import fr.cnrs.iees.uit.UitException;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Point;
 
@@ -246,7 +245,7 @@ class RegionIndexingNode<T> extends IndexingNode<T,RegionIndexingNode<T>> {
 			return null;
 		if (items.size()==1)
 			return items.keySet().iterator().next();
-		throw new UitException("Item list contains more than one item - use items() to get them.");
+		throw new UnsupportedOperationException("Item list contains more than one item - use items() to get them.");
 	}
 
 	// recursive

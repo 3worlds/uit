@@ -28,7 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing.location;
 
-import fr.cnrs.iees.uit.UitException;
 import fr.cnrs.iees.uit.space.Dimensioned;
 import fr.cnrs.iees.uit.space.Point;
 
@@ -68,7 +67,7 @@ public interface Locator extends Dimensioned, Cloneable {
 	 */
 	public static Locator add(Locator A, Locator B)  {
 		if (A.factory()!=B.factory())
-			throw new UitException("Invalid operation: addition of locators of different origins");
+			throw new IllegalArgumentException("Invalid operation: addition of locators from different origins");
 		long[] x = new long[A.dim()];
 		for (int i=0; i<x.length; i++)
 			x[i] += A.coordinate(i)+B.coordinate(i);

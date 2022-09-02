@@ -28,8 +28,6 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
-import fr.cnrs.iees.uit.UitException;
-
 /**
  * <p>A straightforward implementation of {@link Box}.</p>
  * 
@@ -56,10 +54,10 @@ class BoxImpl implements Box {
 		this.lower = lower;
 		if (check) {
 			if (lower.dim()!=upper.dim())
-				throw new UitException("Error creating Box: upper and lower bounds must have the same dimension");
+				throw new IllegalArgumentException("Error creating Box: upper and lower bounds must have the same dimension");
 			for (int i=0; i<upper.dim(); i++)
 				if (upper.coordinate(i)<lower.coordinate(i))
-					throw new UitException("Error creating Box: upper bouds smaller than lower bounds");
+					throw new IllegalArgumentException("Error creating Box: upper bouds smaller than lower bounds");
 		}
 	}
 	

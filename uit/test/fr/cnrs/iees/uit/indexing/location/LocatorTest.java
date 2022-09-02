@@ -33,7 +33,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.cnrs.iees.uit.UitException;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Point;
 
@@ -82,7 +81,7 @@ class LocatorTest {
 		assertEquals(lB.toString(),"[125,4587,224,10000000]");
 		assertTrue(lA.equals(lB));
 		Point C = Point.newPoint(651311357662.65412357);
-		assertThrows(UitException.class,()->lf.newLocator(C));
+		assertThrows(IllegalArgumentException.class,()->lf.newLocator(C));
 	}
 
 	@Test
@@ -93,7 +92,7 @@ class LocatorTest {
 		Locator lB = lf.newLocator(B);
 		Locator lC = Locator.add(lA,lB);
 		assertEquals(lC.toString(),"[130,2540087003604587,100,10000001]");
-		assertThrows(UitException.class,()->lf.newLocator(Point.newPoint(0.5)));
+		assertThrows(IllegalArgumentException.class,()->lf.newLocator(Point.newPoint(0.5)));
 	}
 
 	@Test
