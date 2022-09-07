@@ -85,7 +85,7 @@ public class ExpandingRegionIndexingTree<T> extends RegionIndexingTree<T> {
         if (root.parent!=null)
         	root = root.parent;
         if (root.parent!=null)
-        	throw new NullPointerException("CRITICAL - Problem in indexing tree expansion: root.parent is null.");
+        	throw new NullPointerException("CRITICAL - Problem in indexing tree expansion: root.parent is not null.");
         super.insert(item, at);
 	}
 
