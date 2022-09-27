@@ -55,7 +55,6 @@ class PointIndexingNode<T> extends IndexingNode<T,PointIndexingNode<T>> {
 		children = new PointIndexingNode[1<<location.dim()]; // #children = 2^dim
 	}
 
-	
 	public PointIndexingNode<T> insert(T item, Point loc) {
 		location = loc;
 		this.item = item;

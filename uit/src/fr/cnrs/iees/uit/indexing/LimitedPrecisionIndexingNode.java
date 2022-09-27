@@ -37,7 +37,8 @@ import fr.cnrs.iees.uit.indexing.location.Locator;
 import fr.cnrs.iees.uit.space.Point;
 
 /**
- * Difference with RegionIndexingNode: items may share the same location
+ * The difference between this class and RegionIndexingNode is that items may
+ * share the same location
  * 
  * @author Jacques Gignoux - 8 oct. 2020
  *

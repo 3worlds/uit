@@ -72,7 +72,7 @@ public class LocatorFactory implements Dimensioned {
 	}
 	
 	/** 
-	 * <p>converts a double coordinate into a long locator coordinate</p>
+	 * <p>Converts a double coordinate into a long locator coordinate</p>
 	 * 
 	 * <p>Locator coordinates are computed (1) using the lower bound value of the factory limits
 	 * as the zero for every dimension, and (2) so that a long value of 1 equals the precision
@@ -103,7 +103,7 @@ public class LocatorFactory implements Dimensioned {
 	}
 	
 	/**
-	 * instantiate a new locator with long coordinates
+	 * Instantiate a new locator with long coordinates
 	 * 
 	 * @param x1 coordinate values
 	 * @return a new {@code Locator} instance

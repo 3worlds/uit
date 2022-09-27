@@ -32,18 +32,27 @@ import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Point;
 
 /**
- * <p>A region-based <em>k</em>-d tree where the size of the initial region is unknown.</p>
+ * <p>
+ * A region-based <em>k</em>-d tree where the size of the initial region is
+ * unknown.
+ * </p>
  *
- * <p>The root node region size (which must contain all the points of the tree) is worked out
- * from the points inserted in the tree. A smart algorithm by
- * <a href="https://dev.solita.fi/2015/08/06/quad-tree.html"><strong>Paavo Toivanen</strong></a>)
- * enables the tree to grow 'upwards' by enlarging the root node region (and consequently re-rooting the tree)
- * as required to enclose the newly arriving points.</p>
+ * <p>
+ * The root node region size (which must contain all the points of the tree) is
+ * determined by the points inserted in the tree. A smart algorithm by
+ * <a href="https://dev.solita.fi/2015/08/06/quad-tree.html"><strong>Paavo
+ * Toivanen</strong></a> enables the tree to grow 'upwards' by enlarging the
+ * root node region (and consequently re-rooting the tree) as required to
+ * enclose the newly arriving points.
+ * </p>
  *
- * <p><strong>NOTE</strong>: a possibly strong restriction of this implementation is that the indexed space
- * <em>must have the same length in all dimensions</em>, i.e. it is a hypercube. This is the best assumption we can do
- * without additional information. Use {@linkplain BoundedRegionIndexingTree} if you need to relax this
- * assumption in your particular application.</p>
+ * <p>
+ * <strong>NOTE</strong>: a possibly important constraint of this implementation
+ * is that the indexed space <em>must have the same length in all
+ * dimensions</em>, i.e. it is a hypercube. This is the best assumption we can
+ * do without additional information. Use {@linkplain BoundedRegionIndexingTree}
+ * if you need to relax this assumption in your particular application.
+ * </p>
  *
  * @author Jacques Gignoux - 10-09-2018
  *

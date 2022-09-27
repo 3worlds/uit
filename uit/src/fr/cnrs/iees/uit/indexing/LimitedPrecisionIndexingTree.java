@@ -49,8 +49,8 @@ import fr.cnrs.iees.uit.space.Point;
 import fr.cnrs.iees.uit.space.Sphere;
 
 /**
- * As a {@link BoundedRegionIndexingTree}, but using discrete coordinates internally instead
- * of continuous ones.
+ * Similar to a {@link BoundedRegionIndexingTree}, but internally using discrete
+ * rather than continuous coordinates.
  * 
  * @author Jacques Gignoux - 8 oct. 2020
  *

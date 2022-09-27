@@ -37,9 +37,14 @@ import fr.cnrs.iees.uit.space.Sphere;
 import fr.ens.biologie.generic.Sizeable;
 
 /**
- * <p>The base interface for an indexing tree.</p>
- * <p>Classes implementing this interface are meant to index objects in space using a tree structure, like binary trees,
- * quad-trees and octrees. This interface is the root of the hierarchy.  </p>
+ * <p>
+ * The base interface for an indexing tree.
+ * </p>
+ * <p>
+ * Classes implementing this interface are must index objects in space using a
+ * tree structure, like binary trees, quad-trees and octrees. This interface is
+ * the root of the hierarchy.
+ * </p>
  *
  * @author Jacques Gignoux - 07-08-2018
  *

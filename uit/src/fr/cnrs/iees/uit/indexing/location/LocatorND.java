@@ -29,8 +29,9 @@
 package fr.cnrs.iees.uit.indexing.location;
 
 /**
- * An implementation of Locator in dimension <em>n</em>.
- * @author Jacques Gignoux - 07-08-2018 
+ * An implementation of Locator for <em>n</em> dimensions.
+ * 
+ * @author Jacques Gignoux - 07-08-2018
  *
  */
 class LocatorND implements Locator {

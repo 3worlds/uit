@@ -32,15 +32,23 @@ import fr.cnrs.iees.uit.space.Dimensioned;
 import fr.cnrs.iees.uit.space.Point;
 
 /**
- * <p>Locator is the limited-precision equivalent of {@link Point}.</p>
+ * <p>
+ * Locator is the limited-precision equivalent of {@link Point}.
+ * </p>
  * 
- * <p>It uses integer (long) coordinates
- * so that identical locations can be tested without ambiguity. Immutable.</p>
+ * <p>
+ * It uses integer (long) coordinates so that identical locations can be tested
+ * without ambiguity. This class is immutable.
+ * </p>
  * 
- * <p>This class should not be used outside <strong>uit</strong> and should not be saved to files. 
- * It should always be constructed from Points.</p>
+ * <p>
+ * This class should not be used outside <strong>uit</strong> and should not be
+ * saved to files. It should always be constructed from Points.
+ * </p>
  * 
- * <p>Caution: locators should only be added if they have the same dimension</p>
+ * <p>
+ * Caution: locators should only be added if they have the same dimension
+ * </p>
  * 
  * @author Jacques Gignoux - 8 oct. 2020
  *

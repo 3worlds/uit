@@ -19,7 +19,7 @@
  * assumes that no two items can be found at the same location.</li>
  * <li>There is a significant improvement in search performance when the region where items lie
  * is known <em>a priori</em>. We designed the {@link BoundedRegionIndexingTree} class for this purpose.</li>
- * <li>If the search region is unknown, it can be build on-the-fly from item locations using
+ * <li>If the search region is unknown, it can be built on-the-fly from item locations using
  * {@link ExpandingRegionIndexingTree}, but there is a performance cost induced by a possibly strongly
  * unbalanced tree in this case.</li>
  * <li>The two {@code LimitedPrecision}-prefixed classes ({@link LimitedPrecisionIndexingTree} and
