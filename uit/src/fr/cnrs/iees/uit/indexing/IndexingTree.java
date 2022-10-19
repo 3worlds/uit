@@ -34,7 +34,7 @@ import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Dimensioned;
 import fr.cnrs.iees.uit.space.Point;
 import fr.cnrs.iees.uit.space.Sphere;
-import fr.ens.biologie.generic.Sizeable;
+import fr.cnrs.iees.omhtk.Sizeable;
 
 /**
  * <p>
