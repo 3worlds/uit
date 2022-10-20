@@ -28,18 +28,9 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
-import au.edu.anu.rscs.aot.collections.QuickListOfLists;
+import au.edu.anu.omhtk.collections.QuickListOfLists;
 import fr.cnrs.iees.uit.indexing.location.IntDistance;
 import fr.cnrs.iees.uit.indexing.location.Locator;
 import fr.cnrs.iees.uit.indexing.location.LocatorFactory;

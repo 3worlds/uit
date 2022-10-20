@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import au.edu.anu.rscs.aot.collections.QuickListOfLists;
+import au.edu.anu.omhtk.collections.QuickListOfLists;
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Distance;
 import fr.cnrs.iees.uit.space.Point;

@@ -28,11 +28,9 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import au.edu.anu.rscs.aot.collections.QuickListOfLists;
+import au.edu.anu.omhtk.collections.QuickListOfLists;
 import fr.cnrs.iees.uit.indexing.location.Locator;
 import fr.cnrs.iees.uit.space.Point;
 
