@@ -83,7 +83,7 @@ public class VersionSettings {
 	 *
 	 */
 	protected static String[][] DEPS = {
-		{"fr.cnrs.iees.omhtk", "generics", "[0.4.0,)", null},
+		{"fr.cnrs.iees.omhtk", "generics", "[0.5.0,)", null},
 		//{"org.graphstream", "gs-ui", "1.3", null} // too heavy, removed
 	};
 
