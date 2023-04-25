@@ -28,6 +28,9 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing.location;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
  * An implementation of Locator for <em>n</em> dimensions.
  * 
@@ -71,25 +74,29 @@ class LocatorND implements Locator {
 		return new LocatorND(factory,x);
 	}
 	
-	// two locators are equal if their coordinates are equal
-	@Override
-	public boolean equals(Object other) {
-		if (other instanceof LocatorND) {
-			LocatorND p = (LocatorND) other;
-			if (p.factory()==factory)
-				if (x.length==p.dim()) {
-					for (int i=0; i<x.length; i++)
-						if (x[i]!=p.coordinate(i))
-							return false;
-					return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public LocatorFactory factory() {
 		return factory;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(x);
+		result = prime * result + Objects.hash(factory);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof LocatorND))
+			return false;
+		LocatorND other = (LocatorND) obj;
+		return factory == other.factory 
+			&& Arrays.equals(x, other.x);
 	}
 
 }

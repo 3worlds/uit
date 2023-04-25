@@ -28,6 +28,8 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
+import java.util.Objects;
+
 /**
  * An optimised implementation of a Point in dimension 1.
  * 
@@ -68,13 +70,6 @@ class Point1D implements Point {
 	public Point1D clone() {
 		return new Point1D(x);
 	}
-	
-	@Override
-	public boolean equals(Object other) {
-		if (Point1D.class.isAssignableFrom(other.getClass()))
-			return (x==((Point1D)other).x);
-		return false;
-	}
 
 	@Override
 	public double[] asArray() {
@@ -85,6 +80,21 @@ class Point1D implements Point {
 	
 	public static Point valueOf(String s) {
 		return Point.valueOf(s);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(x);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Point1D))
+			return false;
+		Point1D other = (Point1D) obj;
+		return Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x);
 	}
 
 }

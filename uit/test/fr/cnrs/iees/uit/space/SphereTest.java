@@ -39,7 +39,7 @@ class SphereTest {
 	private Sphere s1, s2, s3;
 
 	@BeforeEach
-	private void init() {
+	void init() {
 		Point p = Point.newPoint(1,1,1);
 		s1 = new SphereImpl(p,1);
 		p = Point.newPoint(3,2);

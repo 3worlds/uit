@@ -28,6 +28,8 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing.location;
 
+import java.util.Objects;
+
 /**
  * An optimised implementation of a Locator in dimension 1.
  * 
@@ -65,18 +67,26 @@ class Locator1D implements Locator {
 	public Locator1D clone() {
 		return new Locator1D(factory,x);
 	}
-	
-	@Override
-	public boolean equals(Object other) {
-		if (other instanceof Locator1D)
-			if (((Locator1D)other).factory()==factory)
-				return (x==((Locator1D)other).x);
-		return false;
-	}
 
 	@Override
 	public LocatorFactory factory() {
 		return factory;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(factory,x);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Locator1D))
+			return false;
+		Locator1D other = (Locator1D) obj;
+		return factory == other.factory // factories must be the same 
+			&& x == other.x;
 	}
 
 }

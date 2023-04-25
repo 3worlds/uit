@@ -28,6 +28,8 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
+import org.apache.commons.math3.util.FastMath;
+
 /**
  * <p>Various ways of computing an <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidian distance</a> 
  * (static methods).</p>
@@ -95,7 +97,7 @@ public class Distance {
 	 * @return the distance between the points
 	 */
 	public static double distance1D(double x1,double x2) {
-		return Math.abs(x1-x2);
+		return FastMath.abs(x1-x2);
 	}
 
 	/** squared euclidian distance in 1D 
@@ -168,7 +170,7 @@ public class Distance {
 	 * @return the distance between the points
 	 */
 	public static double euclidianDistance(double x1, double y1, double x2, double y2) {
-		return Math.hypot(x2-x1,y2-y1);
+		return FastMath.hypot(x2-x1,y2-y1);
 	}
 
 	/** euclidian distance in 3D 
@@ -182,7 +184,7 @@ public class Distance {
 	 * @return the distance between the points
 	 */
 	public static double euclidianDistance(double x1, double y1, double z1, double x2, double y2, double z2) {
-		return Math.sqrt(squaredEuclidianDistance(x1,y1,z1,x2,y2,z2));
+		return FastMath.sqrt(squaredEuclidianDistance(x1,y1,z1,x2,y2,z2));
 	}
 
 	/** euclidian distance in  n dimensions using {@link Point}
@@ -192,7 +194,7 @@ public class Distance {
 	 * @return the distance between the points
 	 */
 	public static double euclidianDistance(Point p1, Point p2) {
-		return Math.sqrt(squaredEuclidianDistance(p1,p2));
+		return FastMath.sqrt(squaredEuclidianDistance(p1,p2));
 	}
 
 	// helper for distanceToClosestEdge(Point,Box) - recursive
@@ -200,25 +202,25 @@ public class Distance {
 		if (in) { // coming from in
 			if ((p.coordinate(dim)<b.lowerBound(dim))||(p.coordinate(dim)>b.upperBound(dim))) {
 				// now out
-				double d = Math.min(Distance.distance1D(p.coordinate(dim),b.lowerBound(dim)), 
+				double d = FastMath.min(Distance.distance1D(p.coordinate(dim),b.lowerBound(dim)), 
 						Distance.distance1D(p.coordinate(dim),b.upperBound(dim)));
 				dist = d; 
 				in = false;
 			}
 			else { 
 				// now in
-				double d = Math.min(Distance.distance1D(p.coordinate(dim),b.lowerBound(dim)), 
+				double d = FastMath.min(Distance.distance1D(p.coordinate(dim),b.lowerBound(dim)), 
 						Distance.distance1D(p.coordinate(dim),b.upperBound(dim)));
-				dist = Math.min(d, dist);
+				dist = FastMath.min(d, dist);
 				in = true;
 			}
 		}
 		else { // coming from out
 			if ((p.coordinate(dim)<b.lowerBound(dim))||(p.coordinate(dim)>b.upperBound(dim))) {
 				// now out
-				double d = Math.min(Distance.distance1D(p.coordinate(dim),b.lowerBound(dim)), 
+				double d = FastMath.min(Distance.distance1D(p.coordinate(dim),b.lowerBound(dim)), 
 						Distance.distance1D(p.coordinate(dim),b.upperBound(dim)));
-				dist = Math.sqrt(dist*dist+d*d);
+				dist = FastMath.sqrt(dist*dist+d*d);
 				in = false;
 			}
 			else { 
@@ -267,7 +269,7 @@ public class Distance {
 	public static double distanceToClosestEdge(Point p, Box b) {
 		if (p.dim()!=b.dim())
 			throw new IllegalArgumentException("distanceToClosestEdge: Arguments of different dimensions");
-		double dist = Math.min(Distance.distance1D(p.coordinate(0),b.lowerBound(0)), 
+		double dist = FastMath.min(Distance.distance1D(p.coordinate(0),b.lowerBound(0)), 
 				Distance.distance1D(p.coordinate(0),b.upperBound(0)));
 		if ((p.coordinate(0)<b.lowerBound(0))||(p.coordinate(0)>b.upperBound(0)))
 			return distanceToClosestEdge(false,1,dist,p,b);

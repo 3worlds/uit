@@ -28,6 +28,8 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
+import java.util.Arrays;
+
 /**
  * An implementation of Point in dimension <em>n</em>.
  * @author Jacques Gignoux - 07-08-2018 
@@ -84,21 +86,6 @@ class PointND implements Point {
 		return new PointND(x);
 	}
 	
-	// two points are equal if their coordinates are equal
-	@Override
-	public boolean equals(Object other) {
-		if (Point.class.isAssignableFrom(other.getClass())) {
-			Point p = (Point) other;
-			if (x.length==p.dim()) {
-				for (int i=0; i<x.length; i++)
-					if (x[i]!=p.coordinate(i))
-						return false;
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public double[] asArray() {		
 		return x.clone();
@@ -106,6 +93,24 @@ class PointND implements Point {
 	
 	public static Point valueOf(String s) {
 		return Point.valueOf(s);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(x);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof PointND))
+			return false;
+		PointND other = (PointND) obj;
+		return Arrays.equals(x, other.x);
 	}
 
 }

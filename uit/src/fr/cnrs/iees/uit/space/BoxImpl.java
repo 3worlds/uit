@@ -28,6 +28,8 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
+import java.util.Objects;
+
 /**
  * <p>A straightforward implementation of {@link Box}.</p>
  * 
@@ -39,6 +41,8 @@ class BoxImpl implements Box {
 	
 	private Point upper = null;
 	private Point lower = null;
+	// hash code stored for faster tests
+	private int hash = 0;
 	
 	/**
 	 * This constructor is unsafe because the Points passed as arguments must satisfy the condition that
@@ -102,15 +106,6 @@ class BoxImpl implements Box {
 	}
 
 	@Override
-	public boolean equals(Object other) {
-		if (Box.class.isAssignableFrom(other.getClass())) {
-			Box b = (Box) other;
-			return (upper.equals(b.upperBounds()) && lower.equals(b.lowerBounds()));
-		}
-		return false;
-	}
-
-	@Override
 	public double size() {
 		if (lower.equals(upper))
 			return 0.0;
@@ -124,5 +119,22 @@ class BoxImpl implements Box {
 		return Box.valueOf(s);
 	}
 
+	@Override
+	public int hashCode() {
+		if (hash==0)
+			hash = Objects.hash(lower,upper);;
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Box))
+			return false;
+		Box other = (Box) obj;
+		return Objects.equals(lower, other.lowerBounds()) 
+			&& Objects.equals(upper, other.upperBounds());
+	}
 	
 }

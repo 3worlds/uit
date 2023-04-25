@@ -39,7 +39,7 @@ class BoxTest {
 	Point p1, p2, p3;
 
 	@BeforeEach
-	private void init() {
+	void init() {
 		p1 = Point.newPoint(0.5,1.0,7);
 		p2 = Point.newPoint(1.2,1.2,8);
 		p3 = Point.newPoint(0,0,5);

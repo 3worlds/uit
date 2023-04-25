@@ -28,6 +28,10 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.space;
 
+import java.util.Objects;
+
+import org.apache.commons.math3.util.FastMath;
+
 /**
  * A straightforward implementation of a {@linkplain Sphere}.
  * @author Jacques Gignoux - 06-09-2018 
@@ -38,6 +42,12 @@ class SphereImpl implements Sphere {
 	
 	private Point centre = null;
 	private double radius = 0.0;
+	// hash code stored for faster tests
+	private int hash = 0;
+	
+	private static final double PI2 = Math.PI*Math.PI;
+	private static final double PI3 = PI2*Math.PI;
+	private static final double PI4 = PI3*Math.PI;
 
 	public SphereImpl(Point centre, double radius) {
 		super();
@@ -60,30 +70,91 @@ class SphereImpl implements Sphere {
 		return radius;
 	}
 
+	/**
+	 * <p>Computes the volume of a (hyper)sphere up to dimension 8.</p>
+	 * <p>The general formula exists for n>8 but it unimplemented.</p>
+	 * <p>Values for volumes and surfaces as given by 
+	 * <a href="https://en.wikipedia.org/wiki/N-sphere">wikipedia</a>:</p>
+	 * 
+		<table border="1" style="text-align: center">
+			<tr>
+				<th>dimension</th>
+				<th>volume</th>
+				<th>surface</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>2r</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>πr<sup>2</sup></td>
+				<td>2πr</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>4πr<sup>3</sup>/3</td>
+				<td>4πr<sup>2</sup></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>π<sup>2</sup>r<sup>4</sup>/2</td>
+				<td>2π<sup>2</sup>r<sup>3</sup></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>8π<sup>2</sup>r<sup>5</sup>/15</td> 
+				<td>8π<sup>2</sup>r<sup>4</sup>/3</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>π<sup>3</sup>r<sup>6</sup>/6</td>
+				<td>π<sup>3</sup>r<sup>5</sup></td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>16π<sup>3</sup>r<sup>7</sup>/105</td>
+				<td>16π<sup>3</sup>r<sup>6</sup>/15</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>π<sup>4</sup>r<sup>8</sup>/24</td>
+				<td>π<sup>4</sup>r<sup>7</sup>/3</td>
+			</tr>
+			<tr>
+				<td>n = 2p+1</td>
+				<td>r<sup>2p+1</sup>2<sup>p+1</sup>π<sup>p</sup>/1.3.5....(2p+1)</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>n = 2p</td>
+				<td>r<sup>2p</sup>π<sup>p</sup>/p!</td>
+				<td></td>
+			</tr>
+		</table>
+	 *	<br/>
+	 */
 	@Override
 	public double size() {
 		if (dim()==2)
-			return Math.PI*radius*radius;
+			return Math.PI*FastMath.pow(radius,2);
 		if (dim()==3)
-			return Math.PI*4*radius*radius*radius/3;
+			return Math.PI*4.0*FastMath.pow(radius,3)/3.0;
 		if (dim()==1)
 			return 2*radius;
-		//veeery complicated in other cases ! cf wikpedia: https://en.wikipedia.org/wiki/Volume_of_an_n-ball
-		// TODO
-		throw new UnsupportedOperationException("sphere volume not implemented for dim>3");
+		if (dim()==4)
+			return PI2*FastMath.pow(radius,4)/2.0;
+		if (dim()==5)
+			return PI2*8.0*FastMath.pow(radius,5)/15.0;
+		if (dim()==6)
+			return PI3*FastMath.pow(radius,6)/6.0;
+		if (dim()==7)
+			return PI3*16.0*FastMath.pow(radius,7)/105.0;
+		if (dim()==8)
+			return PI4*FastMath.pow(radius,8)/24.0;
+		throw new UnsupportedOperationException("sphere volume not implemented for dim>8");
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (Sphere.class.isAssignableFrom(obj.getClass())) {
-			Sphere s = (Sphere) obj;
-			if (s.dim()!=dim())
-				return false;
-			return (s.centre().equals(centre) && (s.radius()==radius));
-		}
-		return false;
-	}
-
 
 	@Override
 	public String toString() {
@@ -92,6 +163,24 @@ class SphereImpl implements Sphere {
 
 	public static Sphere valueOf(String s) {
 		return Sphere.valueOf(s);
+	}
+
+	@Override
+	public int hashCode() {
+		if (hash==0)
+			hash = Objects.hash(centre, radius);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Sphere))
+			return false;
+		Sphere other = (Sphere) obj;
+		return Objects.equals(centre, other.centre())
+				&& Double.doubleToLongBits(radius) == Double.doubleToLongBits(other.radius());
 	}
 	
 }

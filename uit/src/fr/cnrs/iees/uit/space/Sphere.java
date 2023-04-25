@@ -52,10 +52,9 @@ public interface Sphere extends Dimensioned {
 
 	/** 
 	 * <p>Compute the length / surface / volume / hypervolume (according to dimension) of this sphere.</p>
-	 * <p><strong>WARNING</strong>: works for dimension &lt;4 only.
-	 * <a href="https://en.wikipedia.org/wiki/Volume_of_an_n-ball">Here</a> is the reason why.</p>
+	 * <p><strong>WARNING</strong>: works for dimension &lt;9 only.</p>
 	 * 
-	 * @return the size of the sphere for dimension &lt;4 - throws an Exception for dimension &gt;3
+	 * @return the size of the sphere for dimension &lt; 9 - throws an Exception for dimension &gt; 8
 	 */
 	public abstract double size();
 

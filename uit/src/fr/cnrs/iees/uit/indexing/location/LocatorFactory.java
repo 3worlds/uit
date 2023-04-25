@@ -28,6 +28,8 @@
  **************************************************************************/
 package fr.cnrs.iees.uit.indexing.location;
 
+import java.util.Objects;
+
 import fr.cnrs.iees.uit.space.Box;
 import fr.cnrs.iees.uit.space.Dimensioned;
 import fr.cnrs.iees.uit.space.Distance;
@@ -46,8 +48,10 @@ public class LocatorFactory implements Dimensioned {
 	private double precision;
 	// dimension of this factory
 	private int dim = 0;
-	
+	//
 	Box limits;
+	// hash code stored for performance
+	private int hash = 0;
 	
 	/**
 	 * <p>This constructor checks that precision*maxDistance is smaller than {@code Long.MAX_VALUE},
@@ -141,6 +145,25 @@ public class LocatorFactory implements Dimensioned {
 	@Override
 	public int dim() {
 		return dim;
+	}
+
+	@Override
+	public int hashCode() {
+		if (hash==0)
+			hash = Objects.hash(dim,limits,precision); 
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof LocatorFactory))
+			return false;
+		LocatorFactory other = (LocatorFactory) obj;
+		return dim == other.dim 
+			&& Objects.equals(limits,other.limits)
+			&& Double.doubleToLongBits(precision) == Double.doubleToLongBits(other.precision);
 	}
 	
 }
